@@ -1,0 +1,18 @@
+#container-mapa {
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+#img-mapa {
+	width: 100%;
+	height: auto;
+}
+
+.punto-rojo {
+	position: absolute;
+}
+.etiqueta-atraccion{	
+	height: 30px;
+	width: auto;
+}
