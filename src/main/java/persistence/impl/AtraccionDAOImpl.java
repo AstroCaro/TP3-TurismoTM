@@ -47,6 +47,85 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	@Override
+	public Integer getIdTipoAtraccion(String tipoAtraccion) {
+		try {
+			String sql = "SELECT id_tipoatraccion "
+					+ "FROM \"tipo atraccion\" "
+					+ "WHERE tipo_atraccion LIKE ?;";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, tipoAtraccion);
+			ResultSet resultado = statement.executeQuery();
+			
+			Integer id_tipoatraccion = null;
+			if (resultado.next()) {
+				id_tipoatraccion = resultado.getInt("id_tipoatraccion");
+			}
+
+			return id_tipoatraccion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+	@Override
+	public int insert(Atraccion atraccion) {
+		try {
+			String sql = "INSERT INTO atracciones (nombre, costo, tiempo, cupos_disponibles, fk_tipoatraccion) VALUES (?, ?, ?, ?, ?)";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, atraccion.getNombre());
+			statement.setInt(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getTiempo());
+			statement.setInt(4, atraccion.getCuposDisponibles());
+			statement.setInt(5, getIdTipoAtraccion(atraccion.getTipoAtraccion()));
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int update(Atraccion atraccion) {
+		try {
+			String sql = "UPDATE atracciones SET nombre = ?, costo = ?, tiempo = ?," 
+					+ "cupos_disponibles = ?, fk_tipoatraccion = ? WHERE id_atraccion = ?;";			
+			Connection conn = ConnectionProvider.getConnection();			 
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, atraccion.getNombre());
+			statement.setInt(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getTiempo());
+			statement.setInt(4, atraccion.getCuposDisponibles());
+			statement.setInt(5, getIdTipoAtraccion(atraccion.getTipoAtraccion()));
+			statement.setInt(6, atraccion.getId_atraccion());
+			int rows = statement.executeUpdate();
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int delete(Atraccion atraccion) {
+		try {
+			String sql = "DELETE FROM atracciones WHERE id_atraccion = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, atraccion.getId_atraccion());
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
 //BORRAR!!
 	@Override
 	public Atraccion findAtraccionPorNombre(String nombreAtraccion) {
@@ -72,7 +151,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		}
 	}
 	@Override
-	public Atraccion findAtraccionPorId(int id_atraccion) {
+	public Atraccion find(Integer id_atraccion) {
 		try {
 			String sql = "SELECT id_atraccion, nombre, costo, tiempo, cupos_disponibles, tipo_atraccion "
 					+ "FROM atracciones "

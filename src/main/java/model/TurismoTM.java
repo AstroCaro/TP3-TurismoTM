@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import persistence.AtraccionDAO;
-import persistence.ClienteDAO;
+import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 import persistence.ItinerarioDAO;
 import persistence.PromocionDAO;
@@ -14,11 +14,11 @@ public class TurismoTM {
 
 	ArrayList<Oferta> ofertasCopia = new ArrayList<Oferta>();
 
-	public ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+	public ArrayList<Usuario> clientes = new ArrayList<Usuario>();
 	public ArrayList<Oferta> ofertas = new ArrayList<Oferta>();
 	public ArrayList<Atraccion> atracciones = new ArrayList<Atraccion>();
 	public ArrayList<Promocion> promociones = new ArrayList<Promocion>();
-	ClienteDAO clienteDAO = DAOFactory.getClienteDAO();
+	UsuarioDAO clienteDAO = DAOFactory.getUsuarioDAO();
 	AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 	PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 
@@ -30,7 +30,7 @@ public class TurismoTM {
 		this.ofertas.addAll(promociones);
 	}
 
-	public ArrayList<Cliente> getClientes() {
+	public ArrayList<Usuario> getClientes() {
 		return clientes;
 	}
 
@@ -42,7 +42,7 @@ public class TurismoTM {
 
 		mensajeInicial();
 
-		for (Cliente unCliente : clientes) {
+		for (Usuario unCliente : clientes) {
 			boolean seguirOfreciendo = true;
 			Oferta unaOferta;
 			mensajeBienvenida(unCliente);
@@ -80,7 +80,7 @@ public class TurismoTM {
 
 	}
 
-	public boolean comprobarSiHayOferta(Cliente unCliente) {
+	public boolean comprobarSiHayOferta(Usuario unCliente) {
 		// Reiniciar la copia por cada nuevo cliente
 		ofertasCopia.removeAll(ofertasCopia);
 		for (Oferta unaOferta : ofertas) {
@@ -94,14 +94,14 @@ public class TurismoTM {
 		Collections.sort(ofertasCopia, new ComparadorDeOfertas(preferencia));
 	}
 
-	public boolean hayOfertaDisponible(Cliente unCliente) {
+	public boolean hayOfertaDisponible(Usuario unCliente) {
 		// ciclo que se repite cada vez que el cliente quiera seguir comprando
 		quitarOfertasQueNoPuedeComprar(unCliente);
 		quitarOfertasSinCupo();
 		return (ofertasCopia.size() > 0);
 	}
 
-	public void quitarOfertasQueNoPuedeComprar(Cliente unCliente) {
+	public void quitarOfertasQueNoPuedeComprar(Usuario unCliente) {
 		@SuppressWarnings("unchecked")
 		ArrayList<Oferta> copia = (ArrayList<Oferta>) ofertasCopia.clone();
 		for (Oferta ofertaImposible : copia) {
@@ -126,7 +126,7 @@ public class TurismoTM {
 		return ofertasCopia.get(0);
 	}
 
-	private void quitarOfertasDeItinerario(Cliente unCliente) {
+	private void quitarOfertasDeItinerario(Usuario unCliente) {
 		@SuppressWarnings("unchecked")
 		ArrayList<Oferta> copia = (ArrayList<Oferta>) ofertasCopia.clone();
 		for (Oferta unaOferta : unCliente.itinerario.ofertasCompradas) {
@@ -185,8 +185,8 @@ public class TurismoTM {
 		ofertasCopia.remove(0);
 	}
 
-	private void actualizarCupos(Cliente unCliente, Oferta unaOferta) {
-		ClienteDAO clienteDAO = DAOFactory.getClienteDAO();
+	private void actualizarCupos(Usuario unCliente, Oferta unaOferta) {
+		UsuarioDAO clienteDAO = DAOFactory.getUsuarioDAO();
 		clienteDAO.update(unCliente);
 		if (unaOferta instanceof Promocion) {
 			Promocion unaPromocion = (Promocion) unaOferta;
@@ -211,25 +211,25 @@ public class TurismoTM {
 		atraccionDAO.updateCupo(unaAtraccion);
 	}
 
-	private void cargarItinerario(Cliente unCliente) {
+	private void cargarItinerario(Usuario unCliente) {
 		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
-		unCliente.itinerario.ofertasCompradas = itinerarioDAO.findItinerarioPorCliente(unCliente.id_cliente);
+		unCliente.itinerario.ofertasCompradas = itinerarioDAO.findItinerarioPorUsuario(unCliente.id_usuario);
 
 	}
 
-	private void insertarEnItineario(Cliente unCliente, Oferta unaOferta) {
+	private void insertarEnItineario(Usuario unCliente, Oferta unaOferta) {
 		ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
 		if (unaOferta instanceof Promocion) {
 			Promocion unaPromocion = (Promocion) unaOferta;
-			itinerarioDAO.insertPromocion(unCliente.id_cliente, unaPromocion);
+			itinerarioDAO.insertPromocion(unCliente.id_usuario, unaPromocion);
 		} else if (unaOferta instanceof Atraccion) {
 			Atraccion unaAtraccion = (Atraccion) unaOferta;
-			itinerarioDAO.insertAtraccion(unCliente.id_cliente, unaAtraccion);
+			itinerarioDAO.insertAtraccion(unCliente.id_usuario, unaAtraccion);
 		}
 
 	}
 
-	private void mensajeItinerario(Cliente unCliente) {
+	private void mensajeItinerario(Usuario unCliente) {
 		System.out.println("----------------8<-------------------------------------------");
 		System.out.println("Este será su itinerario: ");
 		System.out.println(unCliente.itinerario);
@@ -254,7 +254,7 @@ public class TurismoTM {
 		System.out.println("Te recomendamos esta oferta\n" + unaOferta + "\n\n¿Quieres comprarla? S/N");
 	}
 
-	private void mensajeBienvenida(Cliente unCliente) {
+	private void mensajeBienvenida(Usuario unCliente) {
 		System.out.println();
 
 		System.out.println("<<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>>");

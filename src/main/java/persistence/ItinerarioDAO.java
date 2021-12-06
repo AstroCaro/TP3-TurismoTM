@@ -11,11 +11,11 @@ import persistence.commons.GenericDAO;
 
 public interface ItinerarioDAO extends GenericDAO<Itinerario>{
 
-	ArrayList<Oferta> findItinerarioPorCliente(int id_cliente);
+	ArrayList<Oferta> findItinerarioPorUsuario(int id_usuario);
 	
-	public abstract int insertPromocion(int id_cliente, Promocion unaPromocion);
+	public abstract int insertPromocion(int id_usuario, Promocion unaPromocion);
 	
-	public abstract int insertAtraccion(int id_cliente, Atraccion unaAtraccion);
+	public abstract int insertAtraccion(int id_usuario, Atraccion unaAtraccion);
 
 
 }

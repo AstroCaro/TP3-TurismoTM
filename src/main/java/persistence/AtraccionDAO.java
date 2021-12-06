@@ -9,5 +9,13 @@ public interface AtraccionDAO extends GenericDAO<Atraccion> {
 
 	public abstract Atraccion findAtraccionPorNombre(String nombreAtraccion);
 	
-	public abstract Atraccion findAtraccionPorId(int id_atraccion);
+	public abstract Atraccion find(Integer id_atraccion);
+
+	int update(Atraccion atraccion);
+
+	Integer getIdTipoAtraccion(String tipoAtraccion);
+
+	int insert(Atraccion atraccion);
+
+	int delete(Atraccion atraccion);
 }

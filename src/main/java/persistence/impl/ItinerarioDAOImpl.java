@@ -20,20 +20,20 @@ import model.Promocion;
 public class ItinerarioDAOImpl implements ItinerarioDAO {
 
 	@Override
-	public ArrayList<Oferta> findItinerarioPorCliente(int id_cliente) {
+	public ArrayList<Oferta> findItinerarioPorUsuario(int id_usuario) {
 
 		try {
-			ArrayList<Oferta> comprasCliente = new ArrayList<Oferta>();
+			ArrayList<Oferta> comprasUsuario = new ArrayList<Oferta>();
 			TurismoTM boleteria = new TurismoTM(); 
 			String sql = "SELECT coalesce(promociones.nombre, atracciones.nombre)AS compras " 
 					+ "FROM itinerarios "
 					+ "LEFT JOIN \"promociones\" ON \"promociones\".id_promocion = itinerarios.fk_promocion "
 					+ "LEFT JOIN \"atracciones\" ON \"atracciones\".id_atraccion = itinerarios.fk_atraccion "
-					+ "LEFT JOIN \"clientes\" ON \"clientes\".id_cliente=itinerarios.fk_cliente "
-					+ "WHERE clientes.id_cliente = ?;";
+					+ "LEFT JOIN \"usuarios\" ON \"usuarios\".id_usuario=itinerarios.fk_usuario "
+					+ "WHERE usuarios.id_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, id_cliente);
+			statement.setInt(1, id_usuario);
 			ResultSet resultados = statement.executeQuery();
 
 			ArrayList<String> compras = new ArrayList<>();
@@ -44,23 +44,23 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 			for (String compra : compras) {
 				for (Oferta unaOferta : boleteria.getOfertas()) {
 					if (compra.equals(unaOferta.getNombre())) {
-						comprasCliente.add(unaOferta);
+						comprasUsuario.add(unaOferta);
 					}
 				}
 			}
-			return comprasCliente;
+			return comprasUsuario;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
 
-	public int insertAtraccion(int id_cliente, Atraccion unaAtraccion) {
+	public int insertAtraccion(int id_usuario, Atraccion unaAtraccion) {
 		try {
-			String sql = "INSERT INTO itinerarios (fk_cliente, fk_atraccion, costo, tiempo) VALUES (?, ?, ?, ?);";
+			String sql = "INSERT INTO itinerarios (fk_usuario, fk_atraccion, costo, tiempo) VALUES (?, ?, ?, ?);";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, id_cliente);
+			statement.setInt(1, id_usuario);
 			statement.setInt(2, unaAtraccion.getId_atraccion());
 			statement.setInt(3, unaAtraccion.getCosto());
 			statement.setDouble(4, unaAtraccion.getTiempo());
@@ -72,13 +72,13 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 		}
 	}
 
-	public int insertPromocion(int id_cliente, Promocion unaPromocion) {
+	public int insertPromocion(int id_usuario, Promocion unaPromocion) {
 		try {
-			String sql = "INSERT INTO itinerarios (fk_cliente, fk_promocion, costo, tiempo) VALUES (?, ?, ?, ?);";
+			String sql = "INSERT INTO itinerarios (fk_usuario, fk_promocion, costo, tiempo) VALUES (?, ?, ?, ?);";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, id_cliente);
+			statement.setInt(1, id_usuario);
 			statement.setInt(2, unaPromocion.getId_promocion());
 			statement.setInt(3, unaPromocion.getCosto());
 			statement.setDouble(4, unaPromocion.getTiempo());
