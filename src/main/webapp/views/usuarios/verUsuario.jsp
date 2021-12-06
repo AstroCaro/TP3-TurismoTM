@@ -19,6 +19,7 @@
 					<th>Preferencia</th>
 					<th>Presupuesto</th>
 					<th>Tiempo Disponible</th>
+					<th>Admin</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -28,7 +29,8 @@
 					<td><c:out value="${usuario.nombre}"></c:out></td>
 					<td><c:out value="${usuario.preferencia}"></c:out></td>
 					<td><c:out value="${usuario.presupuesto}"></c:out></td>
-					<td><c:out value="${usuario.tiempo}"></c:out></td>
+					<td><c:out value="${usuario.tiempo_disponible}"></c:out></td>
+					<td><c:out value="${usuario.admin ? 'Si' : 'No'}"></c:out></td>
 				</tr>
 			</tbody>
 		</table>

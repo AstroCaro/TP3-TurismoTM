@@ -140,7 +140,7 @@ public class Usuario {
 		return id_usuario;
 	}
 
-	public Boolean isAdmin() {
+	public Boolean getAdmin() {
 		return admin;
 	}
 

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 
 import persistence.commons.ConnectionProvider;
-import model.Atraccion;
 import model.Usuario;
 import persistence.UsuarioDAO;
 import persistence.commons.MissingDataException;
@@ -17,7 +16,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public ArrayList<Usuario> findAll() {
 		try {
-			String sql = "SELECT id_usuario, nombre, tipo_atraccion, presupuesto, tiempo_disponible " + "FROM usuarios "
+			String sql = "SELECT id_usuario, nombre, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
 					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion ;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -42,10 +41,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, AtraccionDAOImpl.getIdTipoAtraccion(usuario.getPreferencia()));
+			statement.setInt(2, 1/*AtraccionDAOImpl.getIdTipoAtraccion(usuario.getPreferencia())*/);
 			statement.setInt(3, usuario.getPresupuesto());
 			statement.setDouble(4, usuario.getTiempo_disponible());
-			statement.setBoolean(5, usuario.isAdmin());
+			statement.setBoolean(5, usuario.getAdmin());
 			
 			int rows = statement.executeUpdate();
 
@@ -58,13 +57,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int update(Usuario usuario) {
 		try {
-			String sql = "UPDATE usuarios SET PRESUPUESTO = ?, TIEMPO_DISPONIBLE = ? WHERE id_usuario = ?;";
+			String sql = "UPDATE usuarios SET nombre = ?, fk_tipoatraccion = ?, presupuesto = ?, tiempo_disponible = ?, admin = ? WHERE id_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, usuario.getPresupuesto());
-			statement.setDouble(2, usuario.getTiempo_disponible());
-			statement.setInt(3, usuario.getId_usuario());
+			statement.setString(1, usuario.getNombre());
+			statement.setInt(2, 1/*AtraccionDAOImpl.getIdTipoAtraccion(usuario.getPreferencia())*/);
+			statement.setInt(3, usuario.getPresupuesto());
+			statement.setDouble(4, usuario.getTiempo_disponible());
+			statement.setBoolean(5, usuario.getAdmin());
+			statement.setInt(6, usuario.getId_usuario());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -90,7 +92,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 	public Usuario find(int id_usuario) {
 		try {
-			String sql ="SELECT id_usuario, nombre, tipo_atraccion, presupuesto, tiempo_disponible " + "FROM usuarios "
+			String sql ="SELECT id_usuario, nombre, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
 					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion "
 					+ "WHERE id_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();

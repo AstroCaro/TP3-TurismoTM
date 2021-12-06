@@ -12,7 +12,7 @@ import services.AtraccionService;
 @WebServlet("/atracciones/delete.do")
 public class DeleteAttractionServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1537949074766873118L;
+	private static final long serialVersionUID = -3023326053838554752L;
 	private AtraccionService atraccionService;
 
 	@Override
@@ -23,9 +23,9 @@ public class DeleteAttractionServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id = Integer.parseInt(req.getParameter("id_atraccion"));
+		Integer id_atraccion = Integer.parseInt(req.getParameter("id_atraccion"));
 
-		atraccionService.delete(id);
+		atraccionService.delete(id_atraccion);
 
 		resp.sendRedirect("/TurismoTMTP3/atracciones/listadoAtracciones.do");
 	}

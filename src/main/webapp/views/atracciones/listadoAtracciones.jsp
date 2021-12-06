@@ -22,7 +22,8 @@
 	<div class="container">
 		<div class="bg-light p-4 mb-3 rounded">
 			<h1>Listado de atracciones de la Tierra Media</h1>
-		</div>	
+		</div>
+	</div>	
 	<div class="container">
 		<div class="mb-3">
 			<a href="/TurismoTMTP3/atracciones/crear.do" class="btn btn-primary"

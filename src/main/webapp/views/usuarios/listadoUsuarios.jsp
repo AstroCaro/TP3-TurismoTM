@@ -22,11 +22,12 @@
 	<div class="container">
 		<div class="bg-light p-4 mb-3 rounded">
 			<h1>Listado de Usuarios</h1>
-		</div>	
+		</div>
+	</div>
 	<div class="container">
 		<div class="mb-3">
 			<a href="/TurismoTMTP3/usuarios/crear.do" class="btn btn-primary"
-				role="button"> <i class="bi bi-plus-lg"></i> Nueva Atracción
+				role="button"> <i class="bi bi-plus-lg"></i> Nuevo Usuario
 			</a>
 		</div>
 	</div>
@@ -39,6 +40,7 @@
 					<th>Preferencia</th>
 					<th>Presupuesto</th>
 					<th>Tiempo Disponible</th>
+					<th>Admin</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -49,12 +51,13 @@
 						<td><c:out value="${usuario.nombre}"></c:out></td>
 						<td><c:out value="${usuario.preferencia}"></c:out></td>
 						<td><c:out value="${usuario.presupuesto}"></c:out></td>
-						<td><c:out value="${usuario.tiempo}"></c:out></td>
+						<td><c:out value="${usuario.tiempo_disponible}"></c:out></td>
+						<td><c:out value="${usuario.admin ? 'Si' : 'No'}"></c:out></td>				
 
 						<td>
 							<a href="/TurismoTMTP3/usuarios/verUsuario.do?id_usuario=${usuario.id_usuario}"
-								class="btn btn-success rounded" role="button">Ver Atracción</a>
-							<a href="/TurismoTMTP3/usuarios/edit.do?id_usuario=${usuario.id_usuario}"
+								class="btn btn-success rounded" role="button">Ver Usuario</a>
+							<a href="/TurismoTMTP3/usuarios/editar.do?id_usuario=${usuario.id_usuario}"
 								class="btn btn-light rounded-0" role="button">Editar
 								<i class="bi bi-pencil-fill"></i></a>
 							<a href="/TurismoTMTP3/usuarios/delete.do?id_usuario=${usuario.id_usuario}"

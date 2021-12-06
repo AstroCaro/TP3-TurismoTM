@@ -1,4 +1,4 @@
-package controller.session;
+package controller.usuarios;
 
 import java.io.IOException;
 
@@ -9,30 +9,30 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
-import services.AtraccionService;
+import model.Usuario;
+import services.UsuarioService;
 
-@WebServlet("/atracciones/verAtraccion.do")
+@WebServlet("/usuarios/verUsuario.do")
 
 public class VerUsuarioServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = -8348190042470480487L;
 	
-	private AtraccionService atraccionService;
+	private UsuarioService usuarioService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.atraccionService = new AtraccionService();
+		this.usuarioService = new UsuarioService();
 	}
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id = Integer.parseInt(req.getParameter("id_atraccion"));
+		Integer id_usuario = Integer.parseInt(req.getParameter("id_usuario"));
 
-		Atraccion atraccion = atraccionService.buscar(id);
-		req.setAttribute("atraccion", atraccion);
+		Usuario usuario = usuarioService.buscar(id_usuario);
+		req.setAttribute("usuario", usuario);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/verAtraccion.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/usuarios/verUsuario.jsp");
 		dispatcher.forward(req, resp);
 	}
 
