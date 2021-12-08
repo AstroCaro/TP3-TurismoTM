@@ -13,8 +13,6 @@ public interface AtraccionDAO extends GenericDAO<Atraccion> {
 
 	int update(Atraccion atraccion);
 
-	Integer getIdTipoAtraccion(String tipoAtraccion);
-
 	int insert(Atraccion atraccion);
 
 	int delete(Atraccion atraccion);

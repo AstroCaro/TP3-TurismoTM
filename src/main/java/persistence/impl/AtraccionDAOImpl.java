@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import persistence.commons.ConnectionProvider;
+import persistence.commons.DAOFactory;
 import model.Atraccion;
 import persistence.AtraccionDAO;
+import persistence.TipoAtraccionDAO;
 import persistence.commons.MissingDataException;
 
 public class AtraccionDAOImpl implements AtraccionDAO {
@@ -47,41 +49,22 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	@Override
-	public Integer getIdTipoAtraccion(String tipoAtraccion) {
-		try {
-			String sql = "SELECT id_tipoatraccion "
-					+ "FROM \"tipo atraccion\" "
-					+ "WHERE tipo_atraccion LIKE ?;";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			
-			statement.setString(1, tipoAtraccion);
-			ResultSet resultado = statement.executeQuery();
-			
-			Integer id_tipoatraccion = null;
-			if (resultado.next()) {
-				id_tipoatraccion = resultado.getInt("id_tipoatraccion");
-			}
-
-			return id_tipoatraccion;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
 	
 	@Override
 	public int insert(Atraccion atraccion) {
 		try {
 			String sql = "INSERT INTO atracciones (nombre, costo, tiempo, cupos_disponibles, fk_tipoatraccion) VALUES (?, ?, ?, ?, ?)";
+			
+			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccion();
+			Integer id_tipoatraccion = tipoAtraccionDAO.getIdTipoAtraccion(atraccion.getTipoAtraccion());
+			
 			Connection conn = ConnectionProvider.getConnection();
-
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, atraccion.getNombre());
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempo());
 			statement.setInt(4, atraccion.getCuposDisponibles());
-			statement.setInt(5, getIdTipoAtraccion(atraccion.getTipoAtraccion()));
+			statement.setInt(5, id_tipoatraccion);
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -95,13 +78,17 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		try {
 			String sql = "UPDATE atracciones SET nombre = ?, costo = ?, tiempo = ?," 
 					+ "cupos_disponibles = ?, fk_tipoatraccion = ? WHERE id_atraccion = ?;";			
+
+			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccion();
+			Integer id_tipoatraccion = tipoAtraccionDAO.getIdTipoAtraccion(atraccion.getTipoAtraccion());
+			
 			Connection conn = ConnectionProvider.getConnection();			 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, atraccion.getNombre());
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempo());
 			statement.setInt(4, atraccion.getCuposDisponibles());
-			statement.setInt(5, getIdTipoAtraccion(atraccion.getTipoAtraccion()));
+			statement.setInt(5, id_tipoatraccion);
 			statement.setInt(6, atraccion.getId_atraccion());
 			int rows = statement.executeUpdate();
 			return rows;
