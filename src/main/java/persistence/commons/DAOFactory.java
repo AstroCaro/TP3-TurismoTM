@@ -4,10 +4,12 @@ import persistence.AtraccionDAO;
 import persistence.UsuarioDAO;
 import persistence.ItinerarioDAO;
 import persistence.PromocionDAO;
+import persistence.TipoAtraccionDAO;
 import persistence.impl.AtraccionDAOImpl;
 import persistence.impl.UsuarioDAOImpl;
 import persistence.impl.ItinerarioDAOImpl;
 import persistence.impl.PromocionDAOImpl;
+import persistence.impl.TipoAtraccionDAOImpl;
 
 public class DAOFactory {
 	public static AtraccionDAO getAtraccionDAO() {
@@ -24,5 +26,9 @@ public class DAOFactory {
 	
 	public static ItinerarioDAO getItinerarioDAO() {
 		return new ItinerarioDAOImpl();
+	}
+
+	public static TipoAtraccionDAO getTipoAtraccion() {
+		return new TipoAtraccionDAOImpl();
 	}
 }
