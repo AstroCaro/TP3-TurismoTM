@@ -13,7 +13,7 @@ public class Usuario {
 	protected Integer id_usuario;
 	protected String nombre;
 	private String password;
-	protected String preferencia;
+	protected TipoAtraccion preferencia;
 	protected int presupuesto;
 	protected double tiempo_disponible;
 	protected boolean admin;
@@ -21,7 +21,7 @@ public class Usuario {
 
 	private Map<String, String> errors;
 
-	public Usuario(Integer id_usuario, String nombre, String password, String preferencia, int presupuesto,
+	public Usuario(Integer id_usuario, String nombre, String password, TipoAtraccion preferencia, int presupuesto,
 			double tiempo, boolean admin) {
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
@@ -56,7 +56,7 @@ public class Usuario {
 		return password;
 	}
 
-	public String getPreferencia() {
+	public TipoAtraccion getPreferencia() {
 		return preferencia;
 	}
 
@@ -80,7 +80,7 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public void setPreferencia(String preferencia) {
+	public void setPreferencia(TipoAtraccion preferencia) {
 		this.preferencia = preferencia;
 	}
 
@@ -106,9 +106,9 @@ public class Usuario {
 		this.tiempo_disponible -= unaOferta.getTiempo();
 	}
 
-//	public void setPassword(String password) {
-//		this.password = Crypt.hash(password);
-//	}
+	public void setPassword(String password) {
+		this.password = Crypt.hash(password);
+	}
 
 	public boolean isNull() {
 		return false;

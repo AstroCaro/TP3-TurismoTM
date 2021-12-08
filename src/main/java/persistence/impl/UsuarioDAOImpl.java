@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
+import model.TipoAtraccion;
 import model.Usuario;
-import persistence.TipoAtraccionDAO;
 import persistence.UsuarioDAO;
 import persistence.commons.MissingDataException;
 
@@ -18,8 +18,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public ArrayList<Usuario> findAll() {
 		try {
-			String sql = "SELECT id_usuario, nombre, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
-					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion ;";
+			String sql = "SELECT * FROM usuarios ";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -40,13 +39,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		try {
 			String sql = "INSERT INTO usuarios (nombre, fk_tipoatraccion, presupuesto, tiempo_disponible, admin) VALUES (?, ?, ?, ?, ?)";
 			
-			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccion();
-			Integer id_tipoatraccion = tipoAtraccionDAO.getIdTipoAtraccion(usuario.getPreferencia());
-			
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, id_tipoatraccion);
+			statement.setInt(2, usuario.getPreferencia().getId_tipoatraccion());
 			statement.setInt(3, usuario.getPresupuesto());
 			statement.setDouble(4, usuario.getTiempo_disponible());
 			statement.setBoolean(5, usuario.getAdmin());
@@ -63,14 +59,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public int update(Usuario usuario) {
 		try {
 			String sql = "UPDATE usuarios SET nombre = ?, fk_tipoatraccion = ?, presupuesto = ?, tiempo_disponible = ?, admin = ? WHERE id_usuario = ?;";
-			
-			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccion();
-			Integer id_tipoatraccion = tipoAtraccionDAO.getIdTipoAtraccion(usuario.getPreferencia());
-			
+						
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, id_tipoatraccion);
+			statement.setInt(2, usuario.getPreferencia().getId_tipoatraccion());
 			statement.setInt(3, usuario.getPresupuesto());
 			statement.setDouble(4, usuario.getTiempo_disponible());
 			statement.setBoolean(5, usuario.getAdmin());
@@ -100,9 +93,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 	public Usuario find(int id_usuario) {
 		try {
-			String sql ="SELECT id_usuario, nombre, password, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
-					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion "
-					+ "WHERE id_usuario = ?;";
+			String sql ="SELECT * FROM usuarios WHERE id_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			
@@ -123,9 +114,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findPorNombre(String nombre) {
 		try {
-			String sql ="SELECT id_usuario, nombre, password, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
-					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion "
-					+ "WHERE nombre = ?;";
+			String sql ="SELECT * FROM usuarios WHERE nombre = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			
@@ -145,7 +134,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	private Usuario toUsuario(ResultSet resultados) {
 		try {
-			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("password"),resultados.getString("nombre"), resultados.getString("tipo_atraccion"),
+			TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(resultados.getInt("fk_tipoatraccion"));
+			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("nombre"), resultados.getString("password"),tipoAtraccion ,
 					resultados.getInt("presupuesto"), resultados.getDouble("tiempo_disponible"), resultados.getBoolean("admin"));
 
 		} catch (Exception e) {

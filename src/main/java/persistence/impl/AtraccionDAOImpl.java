@@ -55,7 +55,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		try {
 			String sql = "INSERT INTO atracciones (nombre, costo, tiempo, cupos_disponibles, fk_tipoatraccion) VALUES (?, ?, ?, ?, ?)";
 			
-			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccion();
+			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccionDAO();
 			Integer id_tipoatraccion = tipoAtraccionDAO.getIdTipoAtraccion(atraccion.getTipoAtraccion());
 			
 			Connection conn = ConnectionProvider.getConnection();
@@ -79,7 +79,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			String sql = "UPDATE atracciones SET nombre = ?, costo = ?, tiempo = ?," 
 					+ "cupos_disponibles = ?, fk_tipoatraccion = ? WHERE id_atraccion = ?;";			
 
-			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccion();
+			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccionDAO();
 			Integer id_tipoatraccion = tipoAtraccionDAO.getIdTipoAtraccion(atraccion.getTipoAtraccion());
 			
 			Connection conn = ConnectionProvider.getConnection();			 

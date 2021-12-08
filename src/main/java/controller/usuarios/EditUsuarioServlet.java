@@ -38,7 +38,7 @@ public class EditUsuarioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Integer id_usuario = Integer.parseInt(req.getParameter("id_usuario"));		
 		String nombre = req.getParameter("nombre");
-		String preferencia = req.getParameter("tipoAtraccion");
+		Integer preferencia = Integer.parseInt(req.getParameter("tipoAtraccion"));
 		Integer presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
 		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
 		Double tiempo_disponible = Double.parseDouble(req.getParameter("tiempo_disponible"));

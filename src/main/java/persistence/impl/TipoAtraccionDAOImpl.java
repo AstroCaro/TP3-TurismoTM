@@ -15,7 +15,7 @@ public class TipoAtraccionDAOImpl implements TipoAtraccionDAO {
 	@Override
 	public ArrayList<TipoAtraccion> findAll() {
 		try {
-			String sql = "SELECT id_tipoatraccion, tipo_atraccion FROM atracciones;";					
+			String sql = "SELECT id_tipoatraccion, tipo_atraccion FROM \"tipo atraccion\";";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -30,25 +30,44 @@ public class TipoAtraccionDAOImpl implements TipoAtraccionDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	@Override
 	public Integer getIdTipoAtraccion(String tipoAtraccion) {
 		try {
-			String sql = "SELECT id_tipoatraccion "
-					+ "FROM \"tipo atraccion\" "
-					+ "WHERE tipo_atraccion LIKE ?;";
+			String sql = "SELECT id_tipoatraccion " + "FROM \"tipo atraccion\" " + "WHERE tipo_atraccion LIKE ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			
+
 			statement.setString(1, tipoAtraccion);
 			ResultSet resultado = statement.executeQuery();
-			
+
 			Integer id_tipoatraccion = null;
 			if (resultado.next()) {
 				id_tipoatraccion = resultado.getInt("id_tipoatraccion");
 			}
 
 			return id_tipoatraccion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public TipoAtraccion find(Integer id_tipoatraccion) {
+		try {
+			String sql = "SELECT * FROM \"tipo atraccion\" WHERE id_tipoatraccion = ?;";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setInt(1, id_tipoatraccion);
+			ResultSet resultado = statement.executeQuery();
+
+			TipoAtraccion tipoAtraccion = null;
+			if (resultado.next()) {
+				tipoAtraccion = toTipoAtraccion(resultado);
+			}
+
+			return tipoAtraccion;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

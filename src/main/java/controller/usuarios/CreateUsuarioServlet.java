@@ -33,13 +33,14 @@ public class CreateUsuarioServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nombre = req.getParameter("nombre");
-		String preferencia = req.getParameter("tipoAtraccion");
+		String password = req.getParameter("password");
+		Integer preferencia = Integer.parseInt(req.getParameter("tipoAtraccion"));
 		Integer presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
 		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
 		Double tiempo_disponible = Double.parseDouble(req.getParameter("tiempo_disponible"));
 		Boolean admin = Boolean.parseBoolean(req.getParameter("tiempo_disponible"));
 		
-		Usuario usuario = usuarioService.create(nombre, preferencia, presupuesto, tiempo_disponible, admin);
+		Usuario usuario = usuarioService.create(nombre, password, preferencia, presupuesto, tiempo_disponible, admin);
 
 		
 		if (usuario.isValid()) {

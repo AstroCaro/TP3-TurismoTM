@@ -5,6 +5,8 @@ import persistence.commons.GenericDAO;
 
 public interface TipoAtraccionDAO extends GenericDAO<TipoAtraccion> {
 
-	Integer getIdTipoAtraccion(String tipoAtraccion);
+	public abstract Integer getIdTipoAtraccion(String tipoAtraccion);
+
+	public abstract TipoAtraccion find(Integer id_tipoatraccion);
 
 }
