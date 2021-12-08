@@ -20,20 +20,9 @@ public class Usuario {
 	protected Itinerario itinerario;
 
 	private Map<String, String> errors;
-	
-	public Usuario(Integer id_usuario, String nombre, String preferencia, int presupuesto, double tiempo,
-			boolean admin) {
-		this.id_usuario = id_usuario;
-		this.nombre = nombre;
-		this.preferencia = preferencia;
-		this.presupuesto = presupuesto;
-		this.tiempo_disponible = tiempo;
-		this.admin = admin;
-		this.itinerario = new Itinerario();
-	}
 
-	public Usuario(Integer id_usuario, String nombre, String password, String preferencia, int presupuesto, double tiempo,
-			boolean admin) {
+	public Usuario(Integer id_usuario, String nombre, String password, String preferencia, int presupuesto,
+			double tiempo, boolean admin) {
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.password = password;
@@ -44,16 +33,16 @@ public class Usuario {
 		this.itinerario = new Itinerario();
 	}
 
-	public Usuario(String nombre, String password, String preferencia, int presupuesto, double tiempo, boolean admin) {
-		this.id_usuario = null;
-		this.nombre = nombre;
-		this.password = Crypt.hash(password);
-		this.preferencia = preferencia;
-		this.presupuesto = presupuesto;
-		this.tiempo_disponible = tiempo;
-		this.admin = admin;
-		this.itinerario = new Itinerario();
-	}
+//	public Usuario(String nombre, String password, String preferencia, int presupuesto, double tiempo, boolean admin) {
+//		this.id_usuario = null;
+//		this.nombre = nombre;
+//		this.password = Crypt.hash(password);
+//		this.preferencia = preferencia;
+//		this.presupuesto = presupuesto;
+//		this.tiempo_disponible = tiempo;
+//		this.admin = admin;
+//		this.itinerario = new Itinerario();
+//	}
 
 	public Integer getId_usuario() {
 		return id_usuario;
@@ -61,6 +50,10 @@ public class Usuario {
 
 	public String getNombre() {
 		return nombre;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	public String getPreferencia() {
@@ -113,9 +106,9 @@ public class Usuario {
 		this.tiempo_disponible -= unaOferta.getTiempo();
 	}
 
-	public void setPassword(String password) {
-		this.password = Crypt.hash(password);
-	}
+//	public void setPassword(String password) {
+//		this.password = Crypt.hash(password);
+//	}
 
 	public boolean isNull() {
 		return false;
@@ -147,7 +140,8 @@ public class Usuario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id_usuario, nombre, preferencia, presupuesto, tiempo_disponible);
+		return Objects.hash(admin, errors, id_usuario, itinerario, nombre, password, preferencia, presupuesto,
+				tiempo_disponible);
 	}
 
 	@Override
@@ -159,7 +153,9 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return id_usuario == other.id_usuario && Objects.equals(nombre, other.nombre)
+		return admin == other.admin && Objects.equals(errors, other.errors)
+				&& Objects.equals(id_usuario, other.id_usuario) && Objects.equals(itinerario, other.itinerario)
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password)
 				&& Objects.equals(preferencia, other.preferencia) && presupuesto == other.presupuesto
 				&& Double.doubleToLongBits(tiempo_disponible) == Double.doubleToLongBits(other.tiempo_disponible);
 	}
@@ -170,7 +166,7 @@ public class Usuario {
 				+ ", tiempo=" + tiempo_disponible + "]\n";
 	}
 
-	//XXX ELIMINAR!!!!
+	// XXX ELIMINAR!!!!
 	public boolean responderPregunta() throws IOException {
 
 		String laRespuesta = null;

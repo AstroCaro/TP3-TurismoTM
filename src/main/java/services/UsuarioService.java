@@ -11,9 +11,9 @@ public class UsuarioService {
 		return DAOFactory.getUsuarioDAO().findAll();
 	}
 
-	public Usuario create(String nombre, String preferencia, int presupuesto, double tiempo, boolean admin) {
+	public Usuario create(String nombre, String password, String preferencia, int presupuesto, double tiempo, boolean admin) {
 
-		Usuario usuario = new Usuario (-1, nombre, preferencia, presupuesto, tiempo, admin);
+		Usuario usuario = new Usuario (-1, nombre, password, preferencia, presupuesto, tiempo, admin);
 
 		if (usuario.isValid()) {
 			UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
@@ -44,7 +44,7 @@ public class UsuarioService {
 	}
 
 	public void delete(Integer id) {
-		Usuario usuario = new Usuario(id, "", "", 0, 0, false);
+		Usuario usuario = new Usuario(id, "", "","", 0, 0, false);
 
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 		usuarioDAO.delete(usuario);

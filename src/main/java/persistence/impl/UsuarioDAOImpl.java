@@ -123,8 +123,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findPorNombre(String nombre) {
 		try {
-			String sql ="SELECT id_cliente, nombre, password, tipo_atraccion, admin, presupuesto, tiempo_disponible " + "FROM clientes "
-					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = clientes.fk_tipoatraccion "
+			String sql ="SELECT id_usuario, nombre, password, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
+					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion "
 					+ "WHERE nombre = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -132,12 +132,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setString(1, nombre);
 			ResultSet resultado = statement.executeQuery();
 			
-			Usuario cliente = null;
+			Usuario usuario = null;
 			if (resultado.next()) {
-				cliente = toUsuario(resultado);
+				usuario = toUsuario(resultado);
 			}
 
-			return cliente;
+			return usuario;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

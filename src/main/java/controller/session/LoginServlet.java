@@ -1,8 +1,7 @@
 package controller.session;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
@@ -11,11 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
 import model.Usuario;
-import model.ComparadorDeOfertas;
-import services.AtraccionService;
+import model.Oferta;
 import services.LoginService;
+import services.OfertaService;
 
 
 @WebServlet("/login")
@@ -24,13 +22,13 @@ public class LoginServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 7426414066105522340L;
 
 	private LoginService loginService;
-	private AtraccionService atraccionService;
+	private OfertaService ofertaService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		loginService = new LoginService();
-		atraccionService = new AtraccionService();
+		ofertaService = new OfertaService();
 	}
 
 	//REQ	encapsula las peticiones que viene del usuario
@@ -43,9 +41,8 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		Usuario user = loginService.login(username, password);
 		
 		if (!user.isNull()) {
-			List<Atraccion> atracciones = atraccionService.listar();
-			ordenarOfertas(atracciones, user.getPreferencia());
-			req.getSession().setAttribute("atracciones", atracciones);
+			ArrayList<Oferta> ofertas = ofertaService.listarOrdenado(user.getPreferencia());
+			req.getSession().setAttribute("ofertas", ofertas);
 			req.getSession().setAttribute("username", username);//abstraccion del tiempo que utiliza el usuario dentro de la app
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario.jsp"); //le pido al contexto del servelt que me lleva a donde quiero direccionar
 			dispatcher.forward(req, resp);
