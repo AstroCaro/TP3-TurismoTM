@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;900&display=swap');
+
+@font-face {
+    font-family: "ringbearer";
+    src: url("../webfonts/ringbearer.ttf");
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-principal: #232c39;
+    --color-principal-oscuro: #13161a;
+    --color-principal-claro: #5872f5;
+    --text-color: #cfcde7;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    /* background-color: var(--color-principal); */
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+}
+
+.fondo {
+    background-image: url(../img/admin/texturaazul.jpg);
+    background-attachment: fixed;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    /*background-color: var(--color-principal);*/
+    width: 16rem;
+    padding: 1.8rem 0.85rem;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.5s ease-in-out;
+}
+
+main {
+    flex: 1;
+    background-color: #fff;
+    color: #1f2027;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px 0px 0px 20px;
+    box-shadow: -5px 0 6px 5px rgba(0, 0, 0, 0.4);
+}
+
+.topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.menu {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    color: var(--color-principal-oscuro);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.menu i {
+    transition: 0.3s;
+}
+
+.action {
+    position: fixed;
+    right: 30px;
+}
+
+.action .profile {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.action .profile img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+}
+
+.action .menu-usuario {
+    position: absolute;
+    top: 65px;
+    right: -10px;
+    padding: 10px 20px;
+    color: var(--text-color);
+    background-color: var(--color-principal);
+    width: 200px;
+    box-shadow: -1px 3px 4px 1px rgba(41, 34, 54, 0.4);
+    border-radius: 15px;
+    direction: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.action .mostrar-menu-usuario {
+    visibility: visible;
+    opacity: 1;
+}
+
+.action .menu-usuario::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-principal);
+    transform: rotate(45deg);
+    z-index: -1;
+    transition: none;
+    border: 7px solid transparent;
+    border-bottom-color: var(--color-principal);
+}
+
+.action .menu-usuario h3 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 20px 0 0 0;
+    font-weight: 500;
+    line-height: 1.2em;
+}
+
+.action .menu-usuario h5 {
+    width: 100%;
+    text-align: center;
+    padding: 5px 0 20px 0;
+    line-height: 1.2em;
+    font-size: 14px;
+    color: rgb(182, 177, 177);
+    font-weight: 400;
+}
+
+.action .menu-usuario ul li {
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px solid rgba(182, 177, 177, 0.068);
+}
+
+.action .menu-usuario ul li a {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+}
+
+.action .menu-usuario ul li span {
+    margin-left: 7px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.action .menu-usuario ul li:hover span {
+    color: var(--color-principal-claro);
+}
+
+.action .menu-usuario ul li i {
+    font-size: 18px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.action .menu-usuario ul li:hover i {
+    opacity: 1;
+}
+
+main .contenido {
+    padding: 2rem;
+}
+
+main h1 {
+    margin-bottom: 1rem;
+}
+
+main .copyright {
+    padding: 1rem 2rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+main .copyright span {
+    color: var(--color-principal);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.menulateral-top {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.menulateral-top .logo {
+    width: 2.1rem;
+    margin: 0 0.8rem;
+    filter: invert(100%);
+}
+
+.menulateral-top h3 {
+    font-family: "ringbearer";
+    padding-left: 0.5rem;
+    font-weight: 600;
+    font-size: 1.15rem;
+}
+
+.buscador {
+    min-height: 2.7rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin: 2rem 0.5rem 1.7rem;
+    display: grid;
+    grid-template-columns: 2.7rem 1fr;
+    align-items: center;
+    text-align: center;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.buscador input {
+    height: 100%;
+    border: none;
+    background: none;
+    outline: none;
+    color: #fff;
+    caret-color: #fff;
+    font-family: inherit;
+}
+
+.buscador input::placeholder {
+    color: var(--text-color);
+}
+
+.menu-links ul {
+    position: relative;
+}
+
+.menu-links li {
+    position: relative;
+    padding: 2.5px 0;
+}
+
+.menu-links a {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    height: 53px;
+}
+
+.menu-links a .link {
+    white-space: nowrap;
+}
+
+.icon {
+    font-size: 1.3rem;
+    text-align: center;
+    min-width: 3.7rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.icon i {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    transition: 0.3s;
+}
+
+.icon i:last-child {
+    opacity: 0;
+    color: #fff;
+}
+
+.menu-links a.active,
+.menu-links a:hover {
+    color: #fff;
+}
+
+.menu-links a .link {
+    transition: opacity 0.3s 0.2s, color 0.3s;
+}
+
+.menu-links a.active i:first-child {
+    opacity: 0;
+}
+
+.menu-links a.active i:last-child {
+    opacity: 1;
+}
+
+.active-tab {
+    width: 100%;
+    height: 53px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    position: absolute;
+    top: 2.5px;
+    left: 0;
+    transition: top 0.3s;
+}
+
+.tooltip {
+    background-color: var(--color-principal);
+    position: absolute;
+    right: -1.2rem;
+    top: 0;
+    transform: translateX(100%) translateY(-50%);
+    width: fit-content;
+    padding: 0 0.8rem;
+    font-size: 0.85rem;
+    display: none;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    height: 40px;
+    align-items: center;
+    border-radius: 7px;
+    box-shadow: 0 3px 10px -2px rgba(70, 46, 118, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.tooltip span {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.tooltip span.mostrar {
+    opacity: 1;
+}
+
+.elemento-tooltip:hover~.tooltip {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+/*Cuando se cliquea en el icono del menu*/
+
+.oculto {
+    transition: opacity 0.3s 0.2s;
+}
+
+body.menu-comprimido nav {
+    width: 5.4rem;
+}
+
+body.menu-comprimido .oculto {
+    opacity: 0;
+    pointer-events: none;
+    transition-delay: 0s;
+}
+
+body.menu-comprimido .flechita-btn i {
+    transform: rotate(-180deg);
+}
+
+body.menu-comprimido .tooltip {
+    display: grid;
+}

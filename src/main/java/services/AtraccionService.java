@@ -7,13 +7,14 @@ import persistence.AtraccionDAO;
 import persistence.commons.DAOFactory;
 
 public class AtraccionService {
-	public ArrayList<Atraccion> listar(){
+	public ArrayList<Atraccion> listar() {
 		return DAOFactory.getAtraccionDAO().findAll();
 	}
 
-	public Atraccion create(String nombre, Integer costo, Double tiempo, Integer cuposDisponibles, String tipoAtraccion) {
+	public Atraccion create(String nombre, Integer costo, Double tiempo, Integer cuposDisponibles,
+			String tipoAtraccion) {
 
-		Atraccion atraccion = new Atraccion (-1, nombre, costo, tiempo, cuposDisponibles, tipoAtraccion);
+		Atraccion atraccion = new Atraccion(-1, nombre, costo, tiempo, cuposDisponibles, tipoAtraccion);
 
 		if (atraccion.isValid()) {
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
@@ -24,7 +25,8 @@ public class AtraccionService {
 		return atraccion;
 	}
 
-	public Atraccion update(int id, String nombre, int costo, double tiempo, int cuposDisponibles, String tipoAtraccion) {
+	public Atraccion update(int id, String nombre, int costo, double tiempo, int cuposDisponibles,
+			String tipoAtraccion) {
 
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		Atraccion atraccion = atraccionDAO.find(id);

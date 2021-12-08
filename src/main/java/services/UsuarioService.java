@@ -2,9 +2,7 @@ package services;
 
 import java.util.ArrayList;
 
-import model.Atraccion;
 import model.Usuario;
-import persistence.AtraccionDAO;
 import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 

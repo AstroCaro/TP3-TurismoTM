@@ -1,0 +1,158 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "aniron";
+    src: url("../webfonts/aniron.regular.ttf");
+  }
+
+html {
+   font-family: "aniron", "Bitstream Vera Serif", serif;
+}
+
+header, section, footer{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+#inicio:before{
+    content: '';
+    position: fixed;
+    background-image: url(../img/login/Rivendell.jpeg);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter:blur(4px);
+}
+
+#box{
+    position: absolute;
+    left: 50%;
+    margin-right: 100px;
+    width: 420px;
+    height: 100vh;
+    background-image: url(../img/login/loginbackgroundsombra.png);
+    background-size: cover; 
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#contenedor{
+    position: relative;
+    padding: 50px;
+    width: 360px;
+    height: 480px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#form{
+    position:relative;
+    width: 100%;
+}
+
+#form h2{
+    color: #111;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+#form .inputBx{
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#form .inputBx input{
+    width: 100%;
+    outline:none;
+    border: 1.5px solid rgba(26, 21, 21, 0.8);
+    background: transparent;
+    box-sizing:border-box;
+    padding: 8px 10px;
+    padding-left: 40px;
+    border-radius: 6px;
+    color:#111;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.2);
+}
+
+#form .inputBx input::placeholder{
+    color: #111;
+}
+
+#form .inputSubmit{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+#form .inputSubmit input{
+    background: rgba(61, 46, 46, 0);
+    border: 2px solid rgb(109, 25, 25);
+    color:rgb(109, 25, 25);
+    max-width: 100px;
+    padding: 8px 10px;
+    box-shadow: none;
+    font-weight: 520;
+    letter-spacing: 0px;
+    cursor: pointer;
+}
+
+#form .inputSubmit input:hover{
+    background: rgb(61, 46, 46);
+    border: 2px solid rgba(26, 21, 21, 0.8);
+    color: #fff;
+}
+
+#form .inputBx img{
+    position: absolute;
+    top:6px;
+    left: 10px;
+    /*transform: scale(0.7);*/
+}
+
+ #form .error {
+	font-size: 12px;
+	color:  rgb(109, 25, 25);;
+}
+
+#recordar{
+    position: relative;
+    display: inline-block;
+    color: #000;
+    font-weight: 300;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+
+#form p{
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+#form p a{
+    color: #111;
+    text-decoration: none;
+}
+
+#recordar:hover,#form p a:hover{
+    color: rgb(109, 25, 25);
+
+}

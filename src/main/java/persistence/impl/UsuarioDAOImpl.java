@@ -92,7 +92,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 	public Usuario find(int id_usuario) {
 		try {
-			String sql ="SELECT id_usuario, nombre, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
+			String sql ="SELECT id_usuario, nombre, password, tipo_atraccion, presupuesto, tiempo_disponible, admin " + "FROM usuarios "
 					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = usuarios.fk_tipoatraccion "
 					+ "WHERE id_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();
@@ -111,10 +111,33 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
+	
+	@Override
+	public Usuario findPorNombre(String nombre) {
+		try {
+			String sql ="SELECT id_cliente, nombre, password, tipo_atraccion, admin, presupuesto, tiempo_disponible " + "FROM clientes "
+					+ "JOIN \"tipo atraccion\" ON \"tipo atraccion\".id_tipoatraccion = clientes.fk_tipoatraccion "
+					+ "WHERE nombre = ?;";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			
+			statement.setString(1, nombre);
+			ResultSet resultado = statement.executeQuery();
+			
+			Usuario cliente = null;
+			if (resultado.next()) {
+				cliente = toUsuario(resultado);
+			}
+
+			return cliente;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 
 	private Usuario toUsuario(ResultSet resultados) {
 		try {
-			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("nombre"), resultados.getString("tipo_atraccion"),
+			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("password"),resultados.getString("nombre"), resultados.getString("tipo_atraccion"),
 					resultados.getInt("presupuesto"), resultados.getDouble("tiempo_disponible"), resultados.getBoolean("admin"));
 
 		} catch (Exception e) {
