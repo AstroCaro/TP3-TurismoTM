@@ -8,13 +8,13 @@
 <jsp:include page="/partials/head.jsp"></jsp:include>
 
 <link rel="stylesheet" type="text/css"
-	href="../assets/css/datatables.min.css">
+	href="../assets/css/datatables/datatables.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 
 <script defer type="text/javascript" charset="utf8"
-	src="../assets/js/datatables.min.js"></script>
+	src="../assets/js/datatables/datatables.min.js"></script>
 <title>Listado de Usuarios</title>
 </head>
 <body>
