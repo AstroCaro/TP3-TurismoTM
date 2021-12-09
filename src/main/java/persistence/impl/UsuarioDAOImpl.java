@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
 import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
 import model.TipoAtraccion;
@@ -18,7 +17,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public ArrayList<Usuario> findAll() {
 		try {
-			String sql = "SELECT * FROM usuarios ";
+			String sql = "SELECT * FROM usuarios";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -33,20 +32,21 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	@Override
 	public int insert(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuarios (nombre, fk_tipoatraccion, presupuesto, tiempo_disponible, admin) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO usuarios (nombre, password, fk_tipoatraccion, presupuesto, tiempo_disponible, admin) VALUES (?, ?, ?, ?, ?, ?)";
 			
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, usuario.getPreferencia().getIdTipoAtraccion());
-			statement.setInt(3, usuario.getPresupuesto());
-			statement.setDouble(4, usuario.getTiempo_disponible());
-			statement.setBoolean(5, usuario.getAdmin());
-			
+			statement.setString(2, usuario.getPassword());
+			statement.setInt(3, usuario.getPreferencia().getIdTipoAtraccion());
+			statement.setInt(4, usuario.getPresupuesto());
+			statement.setDouble(5, usuario.getTiempo_disponible());
+			statement.setBoolean(6, usuario.getAdmin());
+
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -54,20 +54,21 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	@Override
 	public int update(Usuario usuario) {
 		try {
-			String sql = "UPDATE usuarios SET nombre = ?, fk_tipoatraccion = ?, presupuesto = ?, tiempo_disponible = ?, admin = ? WHERE id_usuario = ?;";
-						
+			String sql = "UPDATE usuarios SET nombre = ?, password = ?, fk_tipoatraccion = ?, presupuesto = ?, tiempo_disponible = ?, admin = ? WHERE id_usuario = ?;";
+
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, usuario.getPreferencia().getIdTipoAtraccion());
-			statement.setInt(3, usuario.getPresupuesto());
-			statement.setDouble(4, usuario.getTiempo_disponible());
-			statement.setBoolean(5, usuario.getAdmin());
-			statement.setInt(6, usuario.getId_usuario());
+			statement.setString(2, usuario.getPassword());
+			statement.setInt(3, usuario.getPreferencia().getIdTipoAtraccion());
+			statement.setInt(4, usuario.getPresupuesto());
+			statement.setDouble(5, usuario.getTiempo_disponible());
+			statement.setBoolean(6, usuario.getAdmin());
+			statement.setInt(7, usuario.getId_usuario());
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -91,15 +92,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
+
 	public Usuario find(int id_usuario) {
 		try {
-			String sql ="SELECT * FROM usuarios WHERE id_usuario = ?;";
+			String sql = "SELECT * FROM usuarios WHERE id_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			
+
 			statement.setInt(1, id_usuario);
 			ResultSet resultado = statement.executeQuery();
-			
+
 			Usuario usuario = null;
 			if (resultado.next()) {
 				usuario = toUsuario(resultado);
@@ -110,17 +112,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			throw new MissingDataException(e);
 		}
 	}
-	
+
 	@Override
 	public Usuario findPorNombre(String nombre) {
 		try {
-			String sql ="SELECT * FROM usuarios WHERE nombre = ?;";
+			String sql = "SELECT * FROM usuarios WHERE nombre = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
-			
+
 			statement.setString(1, nombre);
 			ResultSet resultado = statement.executeQuery();
-			
+
 			Usuario usuario = null;
 			if (resultado.next()) {
 				usuario = toUsuario(resultado);
@@ -135,8 +137,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private Usuario toUsuario(ResultSet resultados) {
 		try {
 			TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(resultados.getInt("fk_tipoatraccion"));
-			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("nombre"), resultados.getString("password"),tipoAtraccion ,
-					resultados.getInt("presupuesto"), resultados.getDouble("tiempo_disponible"), resultados.getBoolean("admin"));
+			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("nombre"),
+					resultados.getString("password"), tipoAtraccion, resultados.getInt("presupuesto"),
+					resultados.getDouble("tiempo_disponible"), resultados.getBoolean("admin"));
 
 		} catch (Exception e) {
 			throw new MissingDataException(e);

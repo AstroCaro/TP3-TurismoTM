@@ -10,13 +10,12 @@ public class ConnectionProvider {
 	private static Connection connection;
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
-		//if (true) throw new RuntimeException("Configure absolute path Database");
 
 		try {
 			Class.forName("org.sqlite.JDBC");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}	
+		}
 		if (connection == null) {
 			connection = DriverManager.getConnection(url);
 		}
