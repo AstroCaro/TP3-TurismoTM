@@ -36,15 +36,16 @@ public class EditUsuarioServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id_usuario = Integer.parseInt(req.getParameter("id_usuario"));		
+		Integer id_usuario = Integer.parseInt(req.getParameter("id_usuario"));
 		String nombre = req.getParameter("nombre");
-		Integer preferencia = Integer.parseInt(req.getParameter("tipoAtraccion"));
+		String password = req.getParameter("password");
+		Integer preferencia = Integer.parseInt(req.getParameter("preferencia"));
 		Integer presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
 		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
 		Double tiempo_disponible = Double.parseDouble(req.getParameter("tiempo_disponible"));
 		Boolean admin = Boolean.parseBoolean(req.getParameter("admin"));
 		
-		Usuario usuario = usuarioService.update(id_usuario, nombre, preferencia, presupuesto, tiempo_disponible, admin);
+		Usuario usuario = usuarioService.update(id_usuario, nombre, password, preferencia, presupuesto, tiempo_disponible, admin);
 		
 		if (usuario.isValid()) {
 			resp.sendRedirect("/TurismoTMTP3/usuarios/listadoUsuarios.do");

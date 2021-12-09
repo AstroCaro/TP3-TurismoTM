@@ -27,7 +27,7 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public Usuario update(int id_usuario, String nombre, Integer preferencia, int presupuesto, double tiempo,
+	public Usuario update(int id_usuario, String nombre, String password, Integer preferencia, int presupuesto, double tiempo,
 			boolean admin) {
 
 		TipoAtraccion tipoAtraccion= DAOFactory.getTipoAtraccionDAO().find(preferencia);
@@ -36,6 +36,7 @@ public class UsuarioService {
 		Usuario usuario = usuarioDAO.find(id_usuario);
 
 		usuario.setNombre(nombre);
+		usuario.setPassword(password);
 		usuario.setPreferencia(tipoAtraccion);
 		usuario.setPresupuesto(presupuesto);
 		usuario.setTiempo_disponible(tiempo);

@@ -18,7 +18,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public ArrayList<Usuario> findAll() {
 		try {
-			String sql = "SELECT * FROM usuarios ";
+			String sql = "SELECT * FROM usuarios";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -37,15 +37,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int insert(Usuario usuario) {
 		try {
-			String sql = "INSERT INTO usuarios (nombre, fk_tipoatraccion, presupuesto, tiempo_disponible, admin) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO usuarios (nombre, password, fk_tipoatraccion, presupuesto, tiempo_disponible, admin) VALUES (?, ?, ?, ?, ?, ?)";
 			
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, usuario.getPreferencia().getId_tipoatraccion());
-			statement.setInt(3, usuario.getPresupuesto());
-			statement.setDouble(4, usuario.getTiempo_disponible());
-			statement.setBoolean(5, usuario.getAdmin());
+			statement.setString(2, usuario.getPassword());
+			statement.setInt(3, usuario.getPreferencia().getId_tipoatraccion());
+			statement.setInt(4, usuario.getPresupuesto());
+			statement.setDouble(5, usuario.getTiempo_disponible());
+			statement.setBoolean(6, usuario.getAdmin());
 			
 			int rows = statement.executeUpdate();
 
@@ -58,16 +59,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int update(Usuario usuario) {
 		try {
-			String sql = "UPDATE usuarios SET nombre = ?, fk_tipoatraccion = ?, presupuesto = ?, tiempo_disponible = ?, admin = ? WHERE id_usuario = ?;";
+			String sql = "UPDATE usuarios SET nombre = ?, password = ?, fk_tipoatraccion = ?, presupuesto = ?, tiempo_disponible = ?, admin = ? WHERE id_usuario = ?;";
 						
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, usuario.getPreferencia().getId_tipoatraccion());
-			statement.setInt(3, usuario.getPresupuesto());
-			statement.setDouble(4, usuario.getTiempo_disponible());
-			statement.setBoolean(5, usuario.getAdmin());
-			statement.setInt(6, usuario.getId_usuario());
+			statement.setString(2, usuario.getPassword());
+			statement.setInt(3, usuario.getPreferencia().getId_tipoatraccion());
+			statement.setInt(4, usuario.getPresupuesto());
+			statement.setDouble(5, usuario.getTiempo_disponible());
+			statement.setBoolean(6, usuario.getAdmin());
+			statement.setInt(7, usuario.getId_usuario());
 			int rows = statement.executeUpdate();
 
 			return rows;
