@@ -42,7 +42,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, usuario.getPreferencia().getId_tipoatraccion());
+			statement.setInt(2, usuario.getPreferencia().getIdTipoAtraccion());
 			statement.setInt(3, usuario.getPresupuesto());
 			statement.setDouble(4, usuario.getTiempo_disponible());
 			statement.setBoolean(5, usuario.getAdmin());
@@ -63,7 +63,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, usuario.getNombre());
-			statement.setInt(2, usuario.getPreferencia().getId_tipoatraccion());
+			statement.setInt(2, usuario.getPreferencia().getIdTipoAtraccion());
 			statement.setInt(3, usuario.getPresupuesto());
 			statement.setDouble(4, usuario.getTiempo_disponible());
 			statement.setBoolean(5, usuario.getAdmin());

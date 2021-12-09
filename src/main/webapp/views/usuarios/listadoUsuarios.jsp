@@ -49,7 +49,7 @@
 					<tr>
 						<td><c:out value="${usuario.id_usuario}"></c:out></td>
 						<td><c:out value="${usuario.nombre}"></c:out></td>
-						<td><c:out value="${usuario.preferencia}"></c:out></td>
+						<td><c:out value="${usuario.getPreferencia().getTipoAtraccion()}"></c:out></td>
 						<td><c:out value="${usuario.presupuesto}"></c:out></td>
 						<td><c:out value="${usuario.tiempo_disponible}"></c:out></td>
 						<td><c:out value="${usuario.admin ? 'Si' : 'No'}"></c:out></td>				

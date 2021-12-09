@@ -313,7 +313,7 @@
 			<div class="col-9" id="ofertas">
 				<div class="row">
 					<div class="row row-cols-1 row-cols-md-3 ">
-						<c:forEach items="${atracciones}" var="atraccion">
+						<c:forEach items="${ofertas}" var="oferta">
 							<div class="col">
 								<div class="card h-100">
 									<img src="assets/img/atracciones/greendragon.jpg"
@@ -321,28 +321,28 @@
 									<div class="card-body">
 										<small>
 											<p class="text-muted">
-												<c:out value="${atraccion.getClase()}"></c:out>
+												<c:out value="${oferta.getClase()}"></c:out>
 											</p>
 										</small>
 										<h5 class="card-title">
-											<c:out value="${atraccion.nombre}"></c:out>
+											<c:out value="${oferta.nombre}"></c:out>
 										</h5>
 										<p class="card-text">
-											<c:out value="${atraccion.descripcion}"></c:out>
+											<c:out value="${oferta.descripcion}"></c:out>
 										</p>
 									</div>
 									<div class="card-footer">
 										<div class="costo">
 											<img alt="" src="assets/img/usuario/coins.png">
 											<span>
-												<c:out value="${atraccion.costo}"></c:out>
+												<c:out value="${oferta.costo}"></c:out>
 												monedas
 											</span>
 										</div>
 										<div class="tiempo">
 											<img alt="" src="assets/img/usuario/reloj.png">
 											<span>
-												<c:out value="${atraccion.tiempo}"></c:out>
+												<c:out value="${oferta.tiempo}"></c:out>
 												horas
 											</span>
 										</div>

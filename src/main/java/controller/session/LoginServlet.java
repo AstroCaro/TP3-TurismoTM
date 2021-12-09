@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		Usuario user = loginService.login(username, password);
 		
 		if (!user.isNull()) {
-			ArrayList<Oferta> ofertas = ofertaService.listarOrdenado(user.getPreferencia().getTipo_atraccion());
+			ArrayList<Oferta> ofertas = ofertaService.listarOrdenado(user.getPreferencia().getTipoAtraccion());
 			req.getSession().setAttribute("ofertas", ofertas);
 			req.getSession().setAttribute("username", username);//abstraccion del tiempo que utiliza el usuario dentro de la app
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario.jsp"); //le pido al contexto del servelt que me lleva a donde quiero direccionar

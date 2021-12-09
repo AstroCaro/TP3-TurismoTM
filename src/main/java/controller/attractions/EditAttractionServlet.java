@@ -38,13 +38,14 @@ public class EditAttractionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Integer id_atraccion = Integer.parseInt(req.getParameter("id_atraccion"));
 		String nombre = req.getParameter("nombre");
+		String descripcion = req.getParameter("descripcion");
 		Integer costo = Integer.parseInt(req.getParameter("costo"));
 		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
 		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
 		Integer cuposDisponibles = Integer.parseInt(req.getParameter("cuposDisponibles"));
-		String tipoAtraccion = req.getParameter("tipoAtraccion");
+		Integer tipoAtraccion = Integer.parseInt(req.getParameter("tipoAtraccion"));
 		
-		Atraccion atraccion = atraccionService.update(id_atraccion, nombre, costo, tiempo, cuposDisponibles, tipoAtraccion);
+		Atraccion atraccion = atraccionService.update(id_atraccion, nombre, descripcion, costo, tiempo, cuposDisponibles, tipoAtraccion);
 
 		if (atraccion.isValid()) {
 			resp.sendRedirect("/TurismoTMTP3/atracciones/listadoAtracciones.do");

@@ -9,16 +9,18 @@ public class Atraccion extends Oferta {
 	private int id_atraccion;
 	private int costo;
 	private int cuposDisponibles;
-	
+
 	private Map<String, String> errors;
 
-	public Atraccion(int id_atraccion, String nombre, int costo, double tiempo, int cuposDisponibles, String tipoAtraccion) {
-		super(nombre, tipoAtraccion);
+	public Atraccion(int id_atraccion, String nombre, String descripcion, int costo, double tiempo,
+			int cuposDisponibles, TipoAtraccion tipoAtraccion) {
+		super(nombre, descripcion, tipoAtraccion);
 		this.costo = costo;
 		this.tiempo = tiempo;
 		this.cuposDisponibles = cuposDisponibles;
 		this.id_atraccion = id_atraccion;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -26,11 +28,12 @@ public class Atraccion extends Oferta {
 	public void setCosto(int costo) {
 		this.costo = costo;
 	}
-	
+
 	public void setTiempo(double tiempo) {
 		this.tiempo = tiempo;
 	}
-	public void setTipoAtraccion(String tipoAtraccion) {
+
+	public void setTipoAtraccion(TipoAtraccion tipoAtraccion) {
 		this.tipoAtraccion = tipoAtraccion;
 	}
 
@@ -53,6 +56,11 @@ public class Atraccion extends Oferta {
 	public int getCuposDisponibles() {
 		return cuposDisponibles;
 	}
+	
+	public String getClase() {
+		return "ATRACCION";
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -80,11 +88,12 @@ public class Atraccion extends Oferta {
 		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: " + tipoAtraccion
 				+ "\nCupos Disponibles: " + cuposDisponibles;
 	}
+
 	public boolean isValid() {
 		validate();
 		return errors.isEmpty();
 	}
-	
+
 	public void validate() {
 		errors = new HashMap<String, String>();
 
@@ -98,7 +107,7 @@ public class Atraccion extends Oferta {
 			errors.put("cuposDisponibles", "Debe ser positivo");
 		}
 	}
-	
+
 	public Map<String, String> getErrors() {
 		return errors;
 	}

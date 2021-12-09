@@ -8,8 +8,9 @@ public class PromocionAxB extends Promocion {
 	// corresponde con el último espacio del ArrayList
 	public Atraccion atraccionGratis;
 
-	public PromocionAxB(int id_promocion, String nombre, String tipoAtraccion, ArrayList<Atraccion> atracciones) {
-		super(id_promocion, nombre, tipoAtraccion, atracciones);
+	public PromocionAxB(int id_promocion, String nombre, String descripcion, TipoAtraccion tipoAtraccion,
+			ArrayList<Atraccion> atracciones) {
+		super(id_promocion, nombre, descripcion, tipoAtraccion, atracciones);
 		this.atraccionGratis = atracciones.get(atracciones.size() - 1);
 	}
 
@@ -21,26 +22,6 @@ public class PromocionAxB extends Promocion {
 		}
 		return costo;
 	}
-
-	//Se va???
-
-//	@Override
-//	public int getCuposDisponibles() {
-//		int cupoDisponible = 9999;
-//		for (String a : atracciones) {
-//			ArrayList<Oferta> lista_atracciones = new ArrayList<Oferta>();
-//			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-//			lista_atracciones.addAll(atraccionDAO.findAll());
-//			for (Oferta b : lista_atracciones) {
-//				if (a.equals(b.nombre)) {
-//					if (b.getCuposDisponibles() < cupoDisponible) {
-//						cupoDisponible = b.getCuposDisponibles();
-//					}
-//				}
-//			}
-//		}
-//		return cupoDisponible;
-//	}
 
 	@Override
 	public String toString() {
@@ -70,5 +51,4 @@ public class PromocionAxB extends Promocion {
 		return Objects.equals(atraccionGratis, other.atraccionGratis);
 	}
 
-	
 }

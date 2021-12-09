@@ -5,19 +5,17 @@ import java.util.Objects;
 
 public abstract class Promocion extends Oferta {
 	protected int id_promocion;
-	public ArrayList<Atraccion> atracciones;
+
 	protected int costo;
 	protected double tiempoTotal;
 	protected int cuposDisponibles;
+	public ArrayList<Atraccion> atracciones;
 
-	public Promocion(int id_promocion, String nombre, String tipoAtraccion, ArrayList<Atraccion> atracciones) {
-		super(nombre, tipoAtraccion);
-		this.atracciones = atracciones;
+	public Promocion(int id_promocion, String nombre, String descripcion, TipoAtraccion tipoAtraccion,
+			ArrayList<Atraccion> atracciones) {
+		super(nombre, descripcion, tipoAtraccion);
 		this.id_promocion = id_promocion;
-	}
-
-	public String getNombre() {
-		return nombre;
+		this.atracciones = atracciones;
 	}
 
 	public int getId_promocion() {
@@ -34,6 +32,14 @@ public abstract class Promocion extends Oferta {
 
 	public ArrayList<Atraccion> getAtracciones() {
 		return this.atracciones;
+	}
+	
+	public void setAtracciones(ArrayList<Atraccion> atracciones) {
+		this.atracciones = atracciones;
+	}
+	
+	public String getClase() {
+		return "PROMOCION";
 	}
 
 	public ArrayList<String> getNombreAtracciones() {
@@ -61,6 +67,8 @@ public abstract class Promocion extends Oferta {
 		return cupoDisponible;
 	}
 
+	public abstract int getCosto();
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,21 +79,16 @@ public abstract class Promocion extends Oferta {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Promocion other = (Promocion) obj;
 		return Objects.equals(atracciones, other.atracciones) && costo == other.costo
 				&& cuposDisponibles == other.cuposDisponibles && id_promocion == other.id_promocion
 				&& Double.doubleToLongBits(tiempoTotal) == Double.doubleToLongBits(other.tiempoTotal);
 	}
-
-	public abstract int getCosto();
 
 }

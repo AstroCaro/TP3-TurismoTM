@@ -1,27 +1,48 @@
 package model;
 
+import java.util.Objects;
+
 public class TipoAtraccion {
-	public Integer id_tipoatraccion;
-	public String tipo_atraccion;
-	
-	public TipoAtraccion(Integer id_tipoatraccion, String tipo_atraccion) {
-		this.id_tipoatraccion = id_tipoatraccion;
-		this.tipo_atraccion = tipo_atraccion;
+	public Integer idTipoAtraccion;
+	public String tipoAtraccion;
+
+	public TipoAtraccion(Integer idTipoAtraccion, String tipoAtraccion) {
+		this.idTipoAtraccion = idTipoAtraccion;
+		this.tipoAtraccion = tipoAtraccion;
 	}
 
-	public Integer getId_tipoatraccion() {
-		return id_tipoatraccion;
+	public Integer getIdTipoAtraccion() {
+		return idTipoAtraccion;
 	}
 
-	public void setId_tipoatraccion(Integer id_tipoatraccion) {
-		this.id_tipoatraccion = id_tipoatraccion;
+	public void setIdTipoAtraccion(Integer idTipoAtraccion) {
+		this.idTipoAtraccion = idTipoAtraccion;
 	}
 
-	public String getTipo_atraccion() {
-		return tipo_atraccion;
+	public String getTipoAtraccion() {
+		return tipoAtraccion;
 	}
 
 	public void setTipo_atraccion(String tipo_atraccion) {
-		this.tipo_atraccion = tipo_atraccion;
+		this.tipoAtraccion = tipo_atraccion;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idTipoAtraccion, tipoAtraccion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TipoAtraccion other = (TipoAtraccion) obj;
+		return Objects.equals(idTipoAtraccion, other.idTipoAtraccion)
+				&& Objects.equals(tipoAtraccion, other.tipoAtraccion);
+	}
+
 }
