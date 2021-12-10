@@ -17,7 +17,7 @@ public class UsuarioService {
 
 		TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(preferencia);
 
-		Usuario usuario = new Usuario(-1, nombre, password, tipoAtraccion, presupuesto, tiempo, admin);
+		Usuario usuario = new Usuario(nombre, password, tipoAtraccion, presupuesto, tiempo, admin);
 
 		if (usuario.isValid()) {
 			UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();

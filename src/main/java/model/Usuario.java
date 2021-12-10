@@ -30,16 +30,16 @@ public class Usuario {
 		this.itinerario = new Itinerario();
 	}
 
-//	public Usuario(String nombre, String password, String preferencia, int presupuesto, double tiempo, boolean admin) {
-//		this.id_usuario = null;
-//		this.nombre = nombre;
-//		this.password = Crypt.hash(password);
-//		this.preferencia = preferencia;
-//		this.presupuesto = presupuesto;
-//		this.tiempo_disponible = tiempo;
-//		this.admin = admin;
-//		this.itinerario = new Itinerario();
-//	}
+	public Usuario(String nombre, String password, TipoAtraccion preferencia, int presupuesto, double tiempo, boolean admin) {
+		this.id_usuario = null;
+		this.nombre = nombre;
+		this.password = Crypt.hash(password);
+		this.preferencia = preferencia;
+		this.presupuesto = presupuesto;
+		this.tiempoDisponible = tiempo;
+		this.admin = admin;
+		this.itinerario = new Itinerario();
+	}
 
 	public Integer getId_usuario() {
 		return id_usuario;

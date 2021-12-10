@@ -39,6 +39,7 @@
 					<th>Costo</th>
 					<th>Tiempo</th>
 					<th>Cupo</th>
+					<th>Tipo Atracción</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -59,6 +60,9 @@
 						</td>
 						<td>
 							<c:out value="${atraccion.cuposDisponibles}"></c:out>
+						</td>
+						<td>
+							<c:out value="${atraccion.tipoAtraccion.getTipoAtraccion()}"></c:out>
 						</td>
 						<td>
 							<a

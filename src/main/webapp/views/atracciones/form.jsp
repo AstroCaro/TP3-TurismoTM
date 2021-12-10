@@ -2,13 +2,17 @@
 <div class="modal-body">
 	<div class="mb-3">
 		<label for="nombre" class="col-form-label">Nombre:</label> <input
-			type="text" class="form-control" id="nombre" name="nombre"
-			required value="${atraccion.nombre}">
+			type="text" class="form-control" id="nombre" name="nombre" required
+			value="${atraccion.nombre}">
 	</div>
 	<div class="mb-3">
-		<label for="tipoAtraccion" class="col-form-label">Tipo de Atraccion:</label> <input
-			type="text" class="form-control" id="tipoAtraccion" name="tipoAtraccion"
-			required value="${atraccion.tipoAtraccion}">
+		<label for="tipoAtraccion" class="col-form-label">Tipo de
+			Atraccion:</label> <select class="form-control" name="tipoAtraccion"
+			id="tipoAtraccion" required>
+			<option value="1">Aventura</option>
+			<option value="2">Degustacion</option>
+			<option value="3">Paisaje</option>
+		</select>
 	</div>
 	<div class="mb-3">
 		<label for="costo"
@@ -30,9 +34,10 @@
 	</div>
 	<div class="mb-3">
 		<label for="cuposDisponibles"
-			class='col-form-label ${atraccion.errors.get("cuposDisponibles") != null ? "is-invalid" : "" }'>Cupos Disponibles:</label>
-		<input class="form-control" type="number" id="cuposDisponibles" name="cuposDisponibles"
-			required value="${atraccion.cuposDisponibles}"></input>
+			class='col-form-label ${atraccion.errors.get("cuposDisponibles") != null ? "is-invalid" : "" }'>Cupos
+			Disponibles:</label> <input class="form-control" type="number"
+			id="cuposDisponibles" name="cuposDisponibles" required
+			value="${atraccion.cuposDisponibles}"></input>
 		<div class="invalid-feedback">
 			<c:out value='${atraccion.errors.get("cuposDisponibles")}'></c:out>
 		</div>
