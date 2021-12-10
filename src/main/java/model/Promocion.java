@@ -33,11 +33,11 @@ public abstract class Promocion extends Oferta {
 	public ArrayList<Atraccion> getAtracciones() {
 		return this.atracciones;
 	}
-	
+
 	public void setAtracciones(ArrayList<Atraccion> atracciones) {
 		this.atracciones = atracciones;
 	}
-	
+
 	public String getClase() {
 		return "PROMOCION";
 	}
@@ -67,6 +67,12 @@ public abstract class Promocion extends Oferta {
 		return cupoDisponible;
 	}
 
+	public Boolean tieneCupo() {
+		return this.cuposDisponibles >= 1;
+	}
+
+	public abstract boolean isValid();
+	
 	public abstract int getCosto();
 
 	@Override
@@ -90,5 +96,7 @@ public abstract class Promocion extends Oferta {
 				&& cuposDisponibles == other.cuposDisponibles && id_promocion == other.id_promocion
 				&& Double.doubleToLongBits(tiempoTotal) == Double.doubleToLongBits(other.tiempoTotal);
 	}
+
+	
 
 }

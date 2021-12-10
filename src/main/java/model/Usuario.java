@@ -1,8 +1,5 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -15,7 +12,7 @@ public class Usuario {
 	private String password;
 	protected TipoAtraccion preferencia;
 	protected int presupuesto;
-	protected double tiempo_disponible;
+	protected double tiempoDisponible;
 	protected boolean admin;
 	protected Itinerario itinerario;
 
@@ -28,7 +25,7 @@ public class Usuario {
 		this.password = password;
 		this.preferencia = preferencia;
 		this.presupuesto = presupuesto;
-		this.tiempo_disponible = tiempo;
+		this.tiempoDisponible = tiempo;
 		this.admin = admin;
 		this.itinerario = new Itinerario();
 	}
@@ -65,7 +62,7 @@ public class Usuario {
 	}
 
 	public double getTiempo_disponible() {
-		return tiempo_disponible;
+		return tiempoDisponible;
 	}
 
 	public Boolean getAdmin() {
@@ -88,8 +85,8 @@ public class Usuario {
 		this.presupuesto = presupuesto;
 	}
 
-	public void setTiempo_disponible(double tiempo_disponible) {
-		this.tiempo_disponible = tiempo_disponible;
+	public void setTiempo_disponible(double tiempoDisponible) {
+		this.tiempoDisponible = tiempoDisponible;
 	}
 
 	public void setAdmin(boolean admin) {
@@ -101,9 +98,17 @@ public class Usuario {
 		this.itinerario.agregarAlItinerario(unaOferta);
 	}
 
-	private void descontarOroYTiempo(Oferta unaOferta) {
+	public boolean puedeComprar(Oferta unaOferta) {
+		return presupuesto >= unaOferta.getCosto();
+	}
+	
+	public boolean puedeAsistir(Oferta unaOferta) {
+		return tiempoDisponible >= unaOferta.getTiempo();
+	}
+
+	public void descontarOroYTiempo(Oferta unaOferta) {
 		this.presupuesto -= unaOferta.getCosto();
-		this.tiempo_disponible -= unaOferta.getTiempo();
+		this.tiempoDisponible -= unaOferta.getTiempo();
 	}
 
 	public void setPassword(String password) {
@@ -129,7 +134,7 @@ public class Usuario {
 		if (presupuesto <= 0) {
 			errors.put("presupuesto", "Debe ser positivo");
 		}
-		if (tiempo_disponible <= 0) {
+		if (tiempoDisponible <= 0) {
 			errors.put("tiempo_disponible", "Debe ser positivo");
 		}
 	}
@@ -141,7 +146,7 @@ public class Usuario {
 	@Override
 	public int hashCode() {
 		return Objects.hash(admin, errors, id_usuario, itinerario, nombre, password, preferencia, presupuesto,
-				tiempo_disponible);
+				tiempoDisponible);
 	}
 
 	@Override
@@ -157,50 +162,12 @@ public class Usuario {
 				&& Objects.equals(id_usuario, other.id_usuario) && Objects.equals(itinerario, other.itinerario)
 				&& Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password)
 				&& Objects.equals(preferencia, other.preferencia) && presupuesto == other.presupuesto
-				&& Double.doubleToLongBits(tiempo_disponible) == Double.doubleToLongBits(other.tiempo_disponible);
+				&& Double.doubleToLongBits(tiempoDisponible) == Double.doubleToLongBits(other.tiempoDisponible);
 	}
 
 	@Override
 	public String toString() {
 		return "Usuario [nombre=" + nombre + ", preferencia=" + preferencia + ", presupuesto=" + presupuesto
-				+ ", tiempo=" + tiempo_disponible + "]\n";
-	}
-
-	// XXX ELIMINAR!!!!
-	public boolean responderPregunta() throws IOException {
-
-		String laRespuesta = null;
-		boolean r = false;
-
-		InputStreamReader sr = new InputStreamReader(System.in);
-		BufferedReader br = new BufferedReader(sr);
-
-		laRespuesta = br.readLine();
-		laRespuesta = laRespuesta.toLowerCase();
-
-		int intentos = 3;
-		int ans = -1;
-
-		while (intentos >= 1 && ans == -1) {
-			if (laRespuesta.equals("si") || laRespuesta.equals("s")) {
-				ans = 1;
-				r = true;
-			} else if (laRespuesta.equals("no") || laRespuesta.equals("n")) {
-				ans = 0;
-				r = false;
-			} else if (intentos > 1) {
-				System.out.println(
-						".. la respuesta ingresada es incorrecta, debe contestar con 'Si' o 'No' (intentos restantes "
-								+ (intentos - 1) + ")");
-				laRespuesta = br.readLine();
-				laRespuesta = laRespuesta.toLowerCase();
-			} else {
-				System.out.println(".. intentos agotados, la oferta se rechazara automaticamente .. ");
-				ans = 0;
-				r = false;
-			}
-			intentos--;
-		}
-		return r;
+				+ ", tiempo=" + tiempoDisponible + "]\n";
 	}
 }

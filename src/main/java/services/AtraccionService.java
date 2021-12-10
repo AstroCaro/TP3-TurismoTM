@@ -44,11 +44,21 @@ public class AtraccionService {
 
 		if (atraccion.isValid()) {
 			atraccionDAO.update(atraccion);
-			// XXX: si no devuelve "1", es que hubo más errores
 		}
 
 		return atraccion;
 	}
+	
+	public Atraccion updateCupo(Atraccion unaAtraccion) {
+		
+		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
+
+		if (unaAtraccion.isValid()) {
+			atraccionDAO.updateCupo(unaAtraccion);
+		}
+		return unaAtraccion;
+	}
+	
 
 	public void delete(Integer id) {
 		Atraccion atraccion = new Atraccion(id, "", "", 0, 0, 0, null);
@@ -61,4 +71,5 @@ public class AtraccionService {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		return atraccionDAO.find(id);
 	}
+
 }

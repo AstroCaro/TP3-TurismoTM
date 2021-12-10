@@ -98,7 +98,7 @@ public class Atraccion extends Oferta {
 		errors = new HashMap<String, String>();
 
 		if (costo <= 0) {
-			errors.put("cost", "Debe ser positivo");
+			errors.put("costo", "Debe ser positivo");
 		}
 		if (tiempo <= 0) {
 			errors.put("tiempo", "Debe ser positivo");
@@ -110,5 +110,9 @@ public class Atraccion extends Oferta {
 
 	public Map<String, String> getErrors() {
 		return errors;
+	}
+	
+	public Boolean tieneCupo() {
+		return this.cuposDisponibles >= 1;
 	}
 }

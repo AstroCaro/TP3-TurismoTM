@@ -8,17 +8,19 @@ import persistence.commons.GenericDAO;
 
 public interface PromocionDAO extends GenericDAO<Promocion> {
 
+	public abstract Promocion find(Integer id_promocion);
 
-	public abstract Promocion findPorNombre(Integer idPromocion, ArrayList<Atraccion> atracciones);
+	public abstract Promocion findPorNombre(String nombre);
 
-	public abstract ArrayList<Promocion> findAll(ArrayList<Atraccion> atracciones);
-
-	public abstract ArrayList<Atraccion> listarAtraccionesIncluidas(Integer idPromocion, ArrayList<Atraccion> atracciones);
+	public abstract ArrayList<Promocion> findAll();
 
 	public abstract int insert(Promocion promocion);
-	
+
 	public abstract int update(Promocion promocion);
-	
+
 	public abstract int delete(Promocion promocion);
 
+	public abstract ArrayList<Atraccion> listarAtraccionesIncluidas(Integer idPromocion);
+
+	public abstract int insertAtraccionIncluida(Promocion promocion, Integer idAtraccion);
 }

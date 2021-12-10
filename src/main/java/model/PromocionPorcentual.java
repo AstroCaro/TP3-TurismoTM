@@ -53,4 +53,10 @@ public class PromocionPorcentual extends Promocion {
 		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
 	}
 
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

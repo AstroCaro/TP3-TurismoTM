@@ -20,7 +20,53 @@ import persistence.commons.MissingDataException;
 public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
-	public ArrayList<Promocion> findAll(ArrayList<Atraccion> atracciones) {
+	public Promocion find(Integer id_promocion) {
+		try {
+			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, fk_tipoatraccion, costo, descuento, atraccion_gratis "
+					+ "FROM promociones "
+					+ "JOIN \"tipo promocion\" ON \"tipo promocion\".id_tipopromocion = promociones.fk_tipopromocion "
+					+ "WHERE id_promocion = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setInt(1, id_promocion);
+			ResultSet resultado = statement.executeQuery();
+
+			Promocion promocion = null;
+			if (resultado.next()) {
+				promocion = toPromocion(resultado);
+			}
+			return promocion;
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	public Promocion findPorNombre(String nombre) {
+
+		try {
+			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, fk_tipoatraccion, costo, descuento, atraccion_gratis "
+					+ "FROM promociones "
+					+ "JOIN \"tipo promocion\" ON \"tipo promocion\".id_tipopromocion = promociones.fk_tipopromocion "
+					+ "WHERE nombre = ?;";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, nombre);
+			ResultSet resultados = statement.executeQuery();
+
+			Promocion promocion = null;
+			if (resultados.next()) {
+				promocion = toPromocion(resultados);
+			}
+			return promocion;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public ArrayList<Promocion> findAll() {
 		try {
 			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, \"fk_tipoatraccion\", costo, descuento, atraccion_gratis "
 					+ "FROM promociones "
@@ -31,7 +77,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 			ArrayList<Promocion> promociones = new ArrayList<Promocion>();
 			while (resultados.next()) {
-				promociones.add(toPromocion(resultados, atracciones));
+				promociones.add(toPromocion(resultados));
 			}
 
 			return promociones;
@@ -49,7 +95,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 			PreparedStatement statement = conn.prepareStatement(sql);
 
 			String tipoPromocion = promocion.getClass().getSimpleName();
-			
+
 			statement.setString(1, promocion.getNombre());
 			statement.setString(2, promocion.getDescripcion());
 			statement.setInt(4, promocion.getTipoAtraccion().getIdTipoAtraccion());
@@ -61,7 +107,7 @@ public class PromocionDAOImpl implements PromocionDAO {
 				break;
 			case "PromocionAxB":
 				statement.setInt(3, 2);
-				// XXX hacer metodo en promocion axb que devuelva la atraccion gratis
+				// XXX hacer metodo en promocion axb que devuelva atraccion gratis
 				statement.setInt(7,
 						promocion.getAtracciones().get(promocion.getAtracciones().size() - 1).getId_atraccion());
 				break;
@@ -80,6 +126,26 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
+	public int insertAtraccionIncluida(Promocion promocion, Integer idAtraccion) {
+		try {
+			String sql = "INSERT INTO promociones-atracciones VALUES (?, ?)";
+
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+
+			statement.setInt(1, promocion.getId_promocion());
+
+			statement.setInt(2, idAtraccion);
+
+			int rows = statement.executeUpdate();
+			return rows;
+
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
 	public int update(Promocion promocion) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -91,63 +157,33 @@ public class PromocionDAOImpl implements PromocionDAO {
 		return 0;
 	}
 
-	public Promocion findPorNombre(Integer idPromocion, ArrayList<Atraccion> atracciones) {
-
-		try {
-			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, fk_tipoatraccion, costo, descuento, atraccion_gratis "
-					+ "FROM promociones "
-					+ "JOIN \"tipo promocion\" ON \"tipo promocion\".id_tipopromocion = promociones.fk_tipopromocion "
-					+ "WHERE id_promocion;";
-			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, idPromocion);
-			ResultSet resultados = statement.executeQuery();
-
-			Promocion promocion = null;
-			if (resultados.next()) {
-				promocion = toPromocion(resultados, atracciones);
-			}
-			return promocion;
-		} catch (Exception e) {
-			throw new MissingDataException(e);
-		}
-	}
-
 	@Override
-	public ArrayList<Promocion> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Atraccion> listarAtraccionesIncluidas(Integer idPromocion, ArrayList<Atraccion> atracciones) {
+	public ArrayList<Atraccion> listarAtraccionesIncluidas(Integer idPromocion) {
 		try {
+			ArrayList<Atraccion> atraccionesIncluidas = new ArrayList<Atraccion>();
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 			String sql = "SELECT fk_atraccion FROM \"promocion-atraccion\" WHERE fk_promocion = ?;";
+
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, idPromocion);
 			ResultSet resultados = statement.executeQuery();
-			ArrayList<Atraccion> atraccionesIncluidas = new ArrayList<Atraccion>();
-			while (resultados.next()) {
-				if (atracciones.contains(atraccionDAO.find(resultados.getInt("fk_atraccion")))) {
-					int indice = atracciones.indexOf(atraccionDAO.find(resultados.getInt("fk_atraccion")));
-					atraccionesIncluidas.add(atracciones.get(indice));
-				}
 
+			while (resultados.next()) {
+				atraccionesIncluidas.add(atraccionDAO.find(resultados.getInt("fk_atraccion")));
 			}
 			return atraccionesIncluidas;
+
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
 
-	private Promocion toPromocion(ResultSet resultados, ArrayList<Atraccion> atracciones) {
+	private Promocion toPromocion(ResultSet resultados) {
 		try {
 
 			Promocion unaPromocion = null;
-			ArrayList<Atraccion> arrayDeAtracciones = listarAtraccionesIncluidas(resultados.getInt("id_promocion"),
-					atracciones);
+			ArrayList<Atraccion> arrayDeAtracciones = listarAtraccionesIncluidas(resultados.getInt("id_promocion"));
 			TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(resultados.getInt("fk_tipoatraccion"));
 			String tipoPromocion = resultados.getString("tipo_promocion");
 
@@ -159,8 +195,8 @@ public class PromocionDAOImpl implements PromocionDAO {
 				break;
 			case "PORCENTUAL":
 				unaPromocion = new PromocionPorcentual(resultados.getInt("id_promocion"),
-						resultados.getString("nombre"), resultados.getString("descripcion"), tipoAtraccion, resultados.getDouble("descuento"),
-						arrayDeAtracciones);
+						resultados.getString("nombre"), resultados.getString("descripcion"), tipoAtraccion,
+						resultados.getDouble("descuento"), arrayDeAtracciones);
 				break;
 			case "AxB":
 				unaPromocion = new PromocionAxB(resultados.getInt("id_promocion"), resultados.getString("nombre"),

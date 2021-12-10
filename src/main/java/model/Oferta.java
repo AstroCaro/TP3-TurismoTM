@@ -38,6 +38,8 @@ public abstract class Oferta {
 		this.tipoAtraccion = tipoAtraccion;
 	}
 
+	public abstract Boolean tieneCupo();
+	
 	protected abstract int getCuposDisponibles();
 
 	public abstract void venderCupo();

@@ -36,12 +36,12 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 	@Override
 	public int updateCupo(Atraccion atraccion) {
 		try {
-			String sql = "UPDATE atracciones SET cupos_disponibles = ? WHERE nombre = ?;";
+			String sql = "UPDATE atracciones SET cupos_disponibles = ? WHERE id_atraccion = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, atraccion.getCuposDisponibles());
-			statement.setString(2, atraccion.getNombre());
+			statement.setInt(2, atraccion.getId_atraccion());
 			int rows = statement.executeUpdate();
 			return rows;
 		} catch (Exception e) {

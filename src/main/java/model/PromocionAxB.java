@@ -51,4 +51,10 @@ public class PromocionAxB extends Promocion {
 		return Objects.equals(atraccionGratis, other.atraccionGratis);
 	}
 
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

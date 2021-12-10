@@ -42,4 +42,10 @@ public class PromocionAbsoluta extends Promocion {
 		return true;
 	}
 
+	@Override
+	public boolean isValid() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
