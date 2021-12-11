@@ -70,7 +70,7 @@ public abstract class Promocion extends Oferta {
 	public Boolean tieneCupo() {
 		return this.cuposDisponibles >= 1;
 	}
-
+	
 	public abstract boolean isValid();
 	
 	public abstract int getCosto();

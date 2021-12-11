@@ -19,11 +19,11 @@
 	box-sizing: border-box;
 }
 
-:root { 
-	--color-principal: #232c39; 
-	--color-principal-oscuro: #13161a; 
-	--color-principal-claro: #5872f5; 
-	--text-color: #cfcde7;
+:root { -
+	-color-principal: #232c39; -
+	-color-principal-oscuro: #13161a; -
+	-color-principal-claro: #5872f5; -
+	-text-color: #cfcde7;
 }
 
 body {
@@ -341,6 +341,10 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 	
 }
 
+.row {
+	margin-right:0px;
+}
+
 .row>* {
 	padding-right: 0px;
 }
@@ -354,21 +358,56 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 	box-shadow: 0px 5px 10px #888888;
 }
 
+.card:hover {
+  transform: translateY(-1%);
+  box-shadow: 0 4rem 4rem rgba(0, 0, 0, 0.5);
+}
+
 .card-header {
 	max-height: 50%;
 }
 
+.card-img {
+	overflow: hidden;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	
+}
+
+
 .card-img-top {
-    max-height: 100%;
-    object-fit: container;
+	border-radius: 20px 20px 0 0;
+	height: 100%;
+	object-fit: container;
 }
 
 .card-body {
 	padding: 20px 20px 16px 20px;
 }
 
+.boton-agregar {
+	display: none;
+	position: absolute;
+	top: 45%;
+	left:20%;
+	justify-content:center;
+}
+
+.card-body input{
+	border-radius: 15px;
+	padding: 4px;
+	color: #fff;
+	background: #ffe066;
+}
+
+.card:hover .boton-agregar {
+	display: block;
+}
+
 .card p {
 	margin-bottom: 0px;
+	font-size: 14px;
 }
 
 .card-footer {
@@ -379,8 +418,7 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 }
 
 .card-footer:last-child {
-	background-color: #ffffff;
-	border-radius: 0 0 20px 20px;
+	background: none;
 }
 
 .card-footer img {
@@ -390,3 +428,4 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 .card-footer span {
 	font-size: 12px;
 }
+

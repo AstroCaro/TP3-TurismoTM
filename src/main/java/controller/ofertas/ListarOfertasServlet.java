@@ -1,8 +1,5 @@
 package controller.ofertas;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
@@ -13,6 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Oferta;
 import model.Usuario;
 import services.OfertaService;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet("/cuenta_usuario/ofertas.do")
 public class ListarOfertasServlet extends HttpServlet implements Servlet {
@@ -32,7 +32,8 @@ public class ListarOfertasServlet extends HttpServlet implements Servlet {
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
 		ArrayList<Oferta> ofertas = ofertaService.listarOrdenado(usuario.getPreferencia().getTipoAtraccion());
 		req.getSession().setAttribute("ofertas", ofertas);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/cuentaUsuario/index.jsp"); // le pido al contexto del servelt que me  lleva a  donde quiero direccionar 
-		dispatcher.forward(req, resp); 
+		System.out.println(ofertas);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/cuentaUsuario/index.jsp"); // le pido al contexto del servelt que  me lleva a donde quiero direccionar
+		dispatcher.forward(req, resp);
 	}
 }

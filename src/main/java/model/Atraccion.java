@@ -85,7 +85,7 @@ public class Atraccion extends Oferta {
 
 	@Override
 	public String toString() {
-		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: " + tipoAtraccion
+		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: " + tipoAtraccion.getTipoAtraccion()
 				+ "\nCupos Disponibles: " + cuposDisponibles;
 	}
 
@@ -115,4 +115,5 @@ public class Atraccion extends Oferta {
 	public Boolean tieneCupo() {
 		return this.cuposDisponibles >= 1;
 	}
+
 }

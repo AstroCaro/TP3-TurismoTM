@@ -47,7 +47,15 @@ public abstract class Oferta {
 	protected abstract int getCosto();
 
 	protected abstract double getTiempo();
+	
+	public Boolean esPromocion() {
+		return this instanceof Promocion;
+	}
 
+	public Boolean esAtraccion() {
+		return this instanceof Atraccion;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(descripcion, nombre, tiempo, tipoAtraccion);

@@ -56,7 +56,7 @@
 <script type="text/javascript" src="assets/js/usuario_app.js" defer></script>
 <script src="https://kit.fontawesome.com/7cc28fa7fa.js"
 	crossorigin="anonymous"></script>
-<title><c:out value="${username}" />, en la Tierra Media
+<title><c:out value="${usuario.nombre}" />, en la Tierra Media
 </title>
 <%-- <% String username = (String) session.getAttribute("username"); %> --%>
 </head>
@@ -104,7 +104,7 @@
 						</a>
 						<div class="menu-usuario fondo">
 							<h3>
-								<c:out value="${username}" />
+								<c:out value="${usuario.nombre}" />
 							</h3>
 							<h5>Administrador de TurismoTM</h5>
 							<ul>
@@ -142,37 +142,37 @@
 		</div>
 		<!-- <span class="navbar-text small text-truncate mt-1 text-end order-1 order-md-last">always show</span> -->
 	</nav>
-	<section id="inicio">
-		<div class="info-usuario">
-			<div>
-				<p>
-					Bienvenido,
-					<c:out value="${username}" />
-				</p>
-			</div>
-			<div class="perfil">
-				<div class="perfil-imagen">
-					<img src="assets/img/usuario/gandalf.jpg" alt="">
-				</div>
-				<a href="">
-					<div class="perfil-logout">
-						<div class="icon">
-							<i class='bx bx-log-out'></i>
-						</div>
-					</div>
-				</a>
-				<a href="#">
-					<div class="perfil-editar">
-						<div class="icon">
-							<i class='bx bx-pencil'></i>
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="perfil-resumen"></div>
-		</div>
-	</section>
 	<main>
+		<section id="inicio">
+			<div class="info-usuario">
+				<div>
+					<p>
+						Bienvenido,
+						<c:out value="${usuario.nombre}" />
+					</p>
+				</div>
+				<div class="perfil">
+					<div class="perfil-imagen">
+						<img src="assets/img/usuario/gandalf.jpg" alt="">
+					</div>
+					<a href="">
+						<div class="perfil-logout">
+							<div class="icon">
+								<i class='bx bx-log-out'></i>
+							</div>
+						</div>
+					</a>
+					<a href="#">
+						<div class="perfil-editar">
+							<div class="icon">
+								<i class='bx bx-pencil'></i>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="perfil-resumen"></div>
+			</div>
+		</section>
 		<section class="row pt-5">
 			<div class="col-3" id="filtros-bar">
 				<div class="filtros-header">
@@ -311,92 +311,52 @@
 				</div>
 			</div>
 			<div class="col-9" id="ofertas">
-				<div class="row">
-					<div class="row row-cols-1 row-cols-md-3 ">
-						<c:forEach items="${ofertas}" var="oferta">
-							<div class="col">
-								<div class="card h-100">
-									<img src="assets/img/atracciones/greendragon.jpg"
-										class="card-img-top" alt="...">
-									<div class="card-body">
-										<small>
-											<p class="text-muted">
-												<c:out value="${oferta.getClase()}"></c:out>
-											</p>
-										</small>
-										<h5 class="card-title">
-											<c:out value="${oferta.nombre}"></c:out>
-										</h5>
-										<p class="card-text">
-											<c:out value="${oferta.descripcion}"></c:out>
-										</p>
-									</div>
-									<div class="card-footer">
-										<div class="costo">
-											<img alt="" src="assets/img/usuario/coins.png">
-											<span>
-												<c:out value="${oferta.costo}"></c:out>
-												monedas
-											</span>
-										</div>
-										<div class="tiempo">
-											<img alt="" src="assets/img/usuario/reloj.png">
-											<span>
-												<c:out value="${oferta.tiempo}"></c:out>
-												horas
-											</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
+				<div class="row row-cols-1 row-cols-md-3 ">
+					<c:forEach items="${ofertas}" var="oferta">
 						<div class="col">
 							<div class="card h-100">
-								<div class="card-header">
+								<div class="card-img h-50">
 									<img src="assets/img/atracciones/greendragon.jpg"
 										class="card-img-top" alt="...">
 								</div>
-								<div class="card-body">
+								<div class="card-body h-35">
+									<div class="boton-agregar">
+										<input type="button" value="AGREGAR A ITINERARIO">
+									</div>
 									<small>
-										<p class="text-muted">PROMOCION</p>
+										<p class="text-muted">
+											<c:out value="${oferta.getClase()}"></c:out>
+										</p>
 									</small>
-									<h5 class="card-title">Tres Posadas</h5>
-									<p class="card-text">Incluye:
-									<ul>
-										<li>The Prancing Pony</li>
-										<li>Green Dragon</li>
-										<li>The Forsaken</li>
-									</ul>
+									<h5 class="card-title">
+										<c:out value="${oferta.nombre}"></c:out>
+									</h5>
+									<p class="card-text">
+										<c:out value="${oferta.descripcion}"></c:out>
+										<c:out value="${oferta.esPromocion()}"></c:out>
+										<c:out
+											value="${oferta.getClass().simpleName == 'PromocionAxB' }"></c:out>
 									</p>
 								</div>
-								<div class="card-footer">
+								<div class="card-footer h-15">
 									<div class="costo">
 										<img alt="" src="assets/img/usuario/coins.png">
-										<span>45 monedas</span>
+										<span>
+											<c:out value="${oferta.costo}"></c:out>
+											monedas
+										</span>
 									</div>
 									<div class="tiempo">
 										<img alt="" src="assets/img/usuario/reloj.png">
-										<span>4 horas</span>
+										<span>
+											<c:out value="${oferta.tiempo}"></c:out>
+											horas
+										</span>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col">
-							<div class="card h-100">
-								<img src="..." class="card-img-top" alt="...">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">This is a wider card with supporting
-										text below as a natural lead-in to additional content. This
-										card has even longer content than the first to show that equal
-										height action.</p>
-								</div>
-								<div class="card-footer">
-									<small class="text-muted">Last updated 3 mins ago</small>
-								</div>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</section>

@@ -14,7 +14,7 @@ import utils.Crypt;
 
 public class App {
 
-
+//solo para probar funcionamiento, al finalizar eliminar!!
 	public static void main(String[] args) {
 		UsuarioDAO clienteDAO = DAOFactory.getUsuarioDAO();
     	Usuario user = clienteDAO.findPorNombre("Eowyn");
@@ -36,6 +36,8 @@ public class App {
     	atracciones.add(bosqueNegro);
     	
     	Promocion promocion = new PromocionAxB(1, "promo", "", aventura,atracciones);
+    	
+    	System.out.println(promocion.esAtraccion());
     	
 		String tipoPromocion = promocion.getClass().getSimpleName();
 		
