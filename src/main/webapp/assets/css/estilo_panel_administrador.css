@@ -84,7 +84,7 @@ main {
 	position: relative;
 	width: 60px;
 	height: 60px;
-	color: var(- -color-principal-oscuro);
+	color: var(--color-principal-oscuro);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -123,8 +123,8 @@ main {
 	top: 65px;
 	right: -10px;
 	padding: 10px 20px;
-	color: var(- -text-color);
-	background-color: var(- -color-principal);
+	color: var(--text-color);
+	background-color: var(--color-principal);
 	width: 200px;
 	box-shadow: -1px 3px 4px 1px rgba(41, 34, 54, 0.4);
 	border-radius: 15px;
@@ -147,12 +147,12 @@ main {
 	right: 28px;
 	width: 20px;
 	height: 20px;
-	background-color: var(- -color-principal);
+	background-color: var(--color-principal);
 	transform: rotate(45deg);
 	z-index: -1;
 	transition: none;
 	border: 7px solid transparent;
-	border-bottom-color: var(- -color-principal);
+	border-bottom-color: var(--color-principal);
 }
 
 .action .menu-usuario h3 {
@@ -181,7 +181,7 @@ main {
 }
 
 .action .menu-usuario ul li a {
-	color: var(- -text-color);
+	color: var(--text-color);
 	display: flex;
 	align-items: center;
 }
@@ -195,7 +195,7 @@ main {
 }
 
 .action .menu-usuario ul li:hover span {
-	color: var(- -color-principal-claro);
+	color: var(--color-principal-claro);
 }
 
 .action .menu-usuario ul li i {
@@ -223,7 +223,7 @@ main .copyright {
 }
 
 main .copyright span {
-	color: var(- -color-principal);
+	color: var(--color-principal);
 	font-weight: 500;
 	cursor: pointer;
 }
@@ -270,7 +270,7 @@ main .copyright span {
 }
 
 .buscador input::placeholder {
-	color: var(- -text-color);
+	color: var(--text-color);
 }
 
 .menu-links ul {
@@ -343,7 +343,7 @@ main .copyright span {
 }
 
 .tooltip {
-	background-color: var(- -color-principal);
+	background-color: var(--color-principal);
 	position: absolute;
 	right: -1.2rem;
 	top: 0;

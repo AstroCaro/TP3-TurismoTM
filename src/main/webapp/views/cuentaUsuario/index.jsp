@@ -313,32 +313,52 @@
 			<div class="col-9" id="ofertas">
 				<div class="row row-cols-1 row-cols-md-3 ">
 					<c:forEach items="${ofertas}" var="oferta">
-						<div class="col">
+						<div class="col card-group">
 							<div class="card h-100">
-								<div class="card-img h-50">
-									<img src="assets/img/atracciones/greendragon.jpg"
-										class="card-img-top" alt="...">
-								</div>
-								<div class="card-body h-35">
+								<div class="card-img">
 									<div class="boton-agregar">
 										<input type="button" value="AGREGAR A ITINERARIO">
 									</div>
+									<c:choose>
+										<c:when test="${oferta.esPromocion()}">
+											<img src="assets/img/promociones/PromocionPorcentual1.jpeg"
+												class="card-img-top" alt="...">
+										</c:when>
+										<c:when test="${oferta.esAtraccion()}">
+											<img src="assets/img/atracciones/LaComarca.jpg"
+												class="card-img-top" alt="...">
+										</c:when>
+										<c:otherwise>
+											<img src="assets/img/atracciones/marannon.jpg"
+												class="card-img-top" alt="...">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="card-body">
 									<small>
 										<p class="text-muted">
 											<c:out value="${oferta.getClase()}"></c:out>
 										</p>
 									</small>
-									<h5 class="card-title">
-										<c:out value="${oferta.nombre}"></c:out>
-									</h5>
+									<a href="">
+										<h5 class="card-title">
+											<c:out value="${oferta.nombre}"></c:out>
+										</h5>
+									</a>
 									<p class="card-text">
 										<c:out value="${oferta.descripcion}"></c:out>
-										<c:out value="${oferta.esPromocion()}"></c:out>
-										<c:out
-											value="${oferta.getClass().simpleName == 'PromocionAxB' }"></c:out>
+										<c:if test="${oferta.esPromocion()}">
+											<ul class="card-text">
+												<c:forEach items="${oferta.atracciones}" var="atraccion">
+													<li>
+														<c:out value="${atraccion.nombre}"></c:out>
+													</li>
+												</c:forEach>
+											</ul>
+										</c:if>
 									</p>
 								</div>
-								<div class="card-footer h-15">
+								<div class="card-footer">
 									<div class="costo">
 										<img alt="" src="assets/img/usuario/coins.png">
 										<span>
