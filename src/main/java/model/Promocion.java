@@ -39,7 +39,7 @@ public abstract class Promocion extends Oferta {
 	}
 
 	public String getClase() {
-		return "PROMOCION";
+		return "PROMOCIÓN";
 	}
 
 	public ArrayList<String> getNombreAtracciones() {

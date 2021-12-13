@@ -21,7 +21,7 @@
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -49,13 +49,13 @@
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-el-api</artifactId>
-			<version>10.0.13</version>
+			<version>10.0.10</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
 		<dependency>
-		    <groupId>org.mindrot</groupId>
-		    <artifactId>jbcrypt</artifactId>
-		    <version>0.4</version>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.4</version>
 		</dependency>
 
 	</dependencies>

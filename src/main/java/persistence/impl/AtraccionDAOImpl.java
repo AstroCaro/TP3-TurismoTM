@@ -55,13 +55,20 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 			String sql = "INSERT INTO atracciones (nombre, costo, tiempo, cupos_disponibles, fk_tipoatraccion) VALUES (?, ?, ?, ?, ?)";
 
 			Connection conn = ConnectionProvider.getConnection();
-			PreparedStatement statement = conn.prepareStatement(sql);
+			PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
 			statement.setString(1, atraccion.getNombre());
 			statement.setInt(2, atraccion.getCosto());
 			statement.setDouble(3, atraccion.getTiempo());
 			statement.setInt(4, atraccion.getCuposDisponibles());
 			statement.setInt(5, atraccion.getTipoAtraccion().getIdTipoAtraccion());
 			int rows = statement.executeUpdate();
+
+			ResultSet resultado = statement.getGeneratedKeys();
+			if (resultado.next()) {
+				int id = resultado.getInt(1);
+				atraccion.setId_atraccion(id);
+			}
 
 			return rows;
 		} catch (Exception e) {
@@ -108,7 +115,7 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 
 //BORRAR!!
 	@Override
-	public Atraccion findPorNombre (String nombreAtraccion) {
+	public Atraccion findPorNombre(String nombreAtraccion) {
 		try {
 			String sql = "SELECT * FROM atracciones WHERE nombre LIKE ?;";
 			Connection conn = ConnectionProvider.getConnection();
@@ -153,9 +160,9 @@ public class AtraccionDAOImpl implements AtraccionDAO {
 		try {
 			Integer idTipoAtraccion = resultados.getInt("fk_tipoatraccion");
 			TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(idTipoAtraccion);
-			return new Atraccion(resultados.getInt("id_atraccion"), resultados.getString("nombre"), resultados.getString("descripcion"),
-					resultados.getInt("costo"), resultados.getDouble("tiempo"), resultados.getInt("cupos_disponibles"),
-					tipoAtraccion);
+			return new Atraccion(resultados.getInt("id_atraccion"), resultados.getString("nombre"),
+					resultados.getString("descripcion"), resultados.getInt("costo"), resultados.getDouble("tiempo"),
+					resultados.getInt("cupos_disponibles"), tipoAtraccion);
 
 		} catch (Exception e) {
 			throw new MissingDataException(e);

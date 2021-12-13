@@ -19,11 +19,13 @@
 	box-sizing: border-box;
 }
 
-:root { -
-	-color-principal: #232c39; -
-	-color-principal-oscuro: #13161a; -
-	-color-principal-claro: #5872f5; -
-	-text-color: #cfcde7;
+:root { 
+	--color-principal: #232c39; 
+	--color-principal-oscuro: #13161a; 
+	--color-principal-claro: #5872f5; 
+	--color-titulos: #001021;
+	--color-botones: #f96900;
+	--text-color: #cfcde7;
 }
 
 body {
@@ -100,8 +102,8 @@ nav {
 	position: fixed;
 	top: 65px;
 	padding: 10px 20px;
-	color: var(- -text-color);
-	background-color: var(- -color-principal);
+	color: var(--text-color);
+	background-color: var(--color-principal);
 	width: 200px;
 	right: 175px;
 	box-shadow: -1px 3px 4px 1px rgba(41, 34, 54, 0.4);
@@ -125,12 +127,12 @@ nav {
 	right: 28px;
 	width: 20px;
 	height: 20px;
-	background-color: var(- -color-principal);
+	background-color: var(--color-principal);
 	transform: rotate(45deg);
 	z-index: -1;
 	transition: none;
 	border: 7px solid transparent;
-	border-bottom-color: var(- -color-principal);
+	border-bottom-color: var(--color-principal);
 }
 
 .action .menu-usuario h3 {
@@ -165,7 +167,7 @@ nav {
 }
 
 .action .menu-usuario ul li a {
-	color: var(- -text-color);
+	color: var(--text-color);
 	display: flex;
 	align-items: center;
 	text-decoration: none;
@@ -180,7 +182,7 @@ nav {
 }
 
 .action .menu-usuario ul li:hover span {
-	color: var(- -color-principal-claro);
+	color: var(--color-principal-claro);
 }
 
 .action .menu-usuario ul li i {
@@ -342,7 +344,7 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 }
 
 .row {
-	margin-right:0px;
+	margin-right: 0px;
 }
 
 .row>* {
@@ -353,14 +355,23 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 	margin-bottom: 10px;
 }
 
+dl, ol, ul {
+	margin-bottom: 0rem;
+}
+
+.card .text-muted {
+	font-size: 12px;
+}
 .card {
 	border-radius: 20px;
 	box-shadow: 0px 5px 10px #888888;
+	padding: 1.5vh;
+	transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-1%);
-  box-shadow: 0 4rem 4rem rgba(0, 0, 0, 0.5);
+	transform: translateY(-1%);
+	box-shadow: 0 4rem 4rem rgba(0, 0, 0, 0.5);
 }
 
 .card-header {
@@ -368,53 +379,67 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 }
 
 .card-img {
-	overflow: hidden;
 	background-size: cover;
 	background-position: center;
 	position: relative;
-	
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
 }
-
 
 .card-img-top {
 	border-radius: 20px 20px 0 0;
-	height: 100%;
-	object-fit: container;
+	width: 100%; 
+	height : 12vw;
+	object-fit: cover;
 }
 
 .card-body {
-	padding: 20px 20px 16px 20px;
+	/* padding: 20px 20px 16px 20px; */
+	padding: .9rem .2rem;
 }
 
 .boton-agregar {
 	display: none;
 	position: absolute;
-	top: 45%;
-	left:20%;
-	justify-content:center;
+	justify-content: center;
+	bottom: -2vh;
 }
 
-.card-body input{
+.card-img input {
+	font-size: 12px;
+	font-weight: 500;
 	border-radius: 15px;
-	padding: 4px;
+	padding: 0.9vh;
 	color: #fff;
-	background: #ffe066;
+	background: var(--color-botones);
+	border: 0px;
 }
 
 .card:hover .boton-agregar {
 	display: block;
 }
 
-.card p {
+.card p, ul>li{
 	margin-bottom: 0px;
 	font-size: 14px;
+}
+
+.card-body a {
+	text-decoration: none;
+}
+
+.card-body h5 {
+	font-size: 18px;
+	color: var(--color-titulos);
 }
 
 .card-footer {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px 20px 20px 20px;
+	padding: .5rem .2rem;
+	/* padding: 16px 20px 20px 20px; */
 }
 
 .card-footer:last-child {
@@ -428,4 +453,3 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 .card-footer span {
 	font-size: 12px;
 }
-

@@ -10,20 +10,19 @@
 <style>
 .img-circular {
 	border-radius: 50%;
-	max-height: 200px;
-	max-with: 200px;
+	height: 100;
 	width: auto;
 }
 </style>
 <link rel="stylesheet" type="text/css"
-	href="assets/css/bootstrap/bootstrap.min.css">
-<script defer src="assets/js/bootstrap/bootstrap.min.js"
+	href="assets/css/bootstrap/bootstrap.css">
+<script defer src="assets/js/bootstrap/bootstrap.js"
 	type="text/javascript"></script>
 
-<link rel="stylesheet" type="text/css"
-	href="assets/css/datatables.min.css">
+<link rel="stylesheet" type="text/css" href="assets/css/datatables/datatables.css">
 
-<script defer src="assets/js/mapa.js" type="text/javascript"></script>
+<script defer src="asses/js/mapa.js" type="text/javascript"></script>
+<script defer src="assets/js/puntos-rojos.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/estilo-mapa.css">
 <title>Turismo en la Tierra Media - Inicio</title>
 </head>
@@ -57,10 +56,10 @@
 	</div>
 	<div class="container mt-5">
 		<div class="row">
-			<div class="col-6">
-				<div id="carouselExampleIndicators" class="carousel slide"
+			<div class="col-4">
+				<div id=carruselAtracciones class="carousel slide align-middle"
 					data-bs-ride="carousel">
-					
+
 					<div class="carousel-inner">
 						<div class="carousel-item active">
 							<div class="card h-100">
@@ -78,46 +77,50 @@
 							</div>
 						</div>
 						<c:forEach items="${atracciones}" var="atraccion">
-							<div class="carousel-item">
-								<div class="card h-100">
-									<img src="assets/img/${atraccion.nombre}/1.jpg"
-										class="card-img-top" alt="${atraccion.nombre}">
-									<div class="card-body">
-										<h5 class="card-title">
-											<c:out value="${atraccion.nombre}"></c:out>
-										</h5>
-										<p class="card-text">
-											<c:out value="${atraccion.descripcion}"></c:out>
-										</p>
-									</div>
+							<c:choose>
+								<c:when test="${atraccion.id_atraccion == 1}">
+									<div class="carousel-item active">
+								</c:when>
+								<c:otherwise>
+									<div class="carousel-item">
+								</c:otherwise>
+							</c:choose>
+							<div class="card h-100">
+								<img src="assets/img/${atraccion.nombre}/1.jpg"
+									class="card-img-top" alt="${atraccion.nombre}">
+								<div class="card-body">
+									<h5 class="card-title">
+										<c:out value="${atraccion.nombre}"></c:out>
+									</h5>
+									<p class="card-text">
+										<c:out value="${atraccion.descripcion}"></c:out>
+									</p>
 								</div>
 							</div>
-						</c:forEach>
 					</div>
-					<button class="carousel-control-prev" type="button"
-						data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button"
-						data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
+					</c:forEach>
 				</div>
-			</div>
-			<div class="col-6">
-				<div id="container-mapa">
-					<img src="assets/img/mapa.png" alt="mapa" id="img-mapa">
-					<!--usemap="#img-map">
-		 <map id="img-map" name="img-map">
-			<area shape="circle" coords="355,185,10" alt="Moria"
-				href="moria.html" target="" class="">
-		</map> -->
-
-				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carruselAtracciones" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carruselAtracciones" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
 			</div>
 		</div>
+		<div class="col-8">
+			<div id="container-mapa">
+				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa">
+				<a href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
+					class="punto-rojo" style="left: 33%; top: 35%;"><img
+					src="assets/img/etiquetas/Moria.png" class="etiqueta-atraccion"></a>
+			</div>
+		</div>
+	</div>
 	</div>
 </body>
 </html>

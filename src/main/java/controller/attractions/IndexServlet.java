@@ -29,7 +29,6 @@ public class IndexServlet extends HttpServlet implements Servlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ArrayList<Atraccion> atracciones = atraccionService.listar();
-		atracciones.remove(0);
 		req.setAttribute("atracciones", atracciones);
 
 		RequestDispatcher dispatcher = getServletContext()

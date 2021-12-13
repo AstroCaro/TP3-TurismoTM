@@ -56,11 +56,10 @@ public class Atraccion extends Oferta {
 	public int getCuposDisponibles() {
 		return cuposDisponibles;
 	}
-	
+
 	public String getClase() {
-		return "ATRACCION";
+		return "ATRACCIÓN";
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -83,10 +82,16 @@ public class Atraccion extends Oferta {
 		return id_atraccion;
 	}
 
+	public void setId_atraccion(int id_atraccion) {
+		if (this.id_atraccion == 0) {
+			this.id_atraccion = id_atraccion;
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: " + tipoAtraccion.getTipoAtraccion()
-				+ "\nCupos Disponibles: " + cuposDisponibles;
+		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: "
+				+ tipoAtraccion.getTipoAtraccion() + "\nCupos Disponibles: " + cuposDisponibles;
 	}
 
 	public boolean isValid() {
@@ -111,7 +116,7 @@ public class Atraccion extends Oferta {
 	public Map<String, String> getErrors() {
 		return errors;
 	}
-	
+
 	public Boolean tieneCupo() {
 		return this.cuposDisponibles >= 1;
 	}
