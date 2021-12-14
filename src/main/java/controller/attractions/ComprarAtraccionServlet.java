@@ -16,7 +16,7 @@ import persistence.commons.DAOFactory;
 import services.AtraccionService;
 import services.ComprarOfertaService;
 
-@WebServlet("/ofertas/agregarAItinerario.do")
+@WebServlet("/agregarAtraccionAItinerario.do")
 public class ComprarAtraccionServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = -3480177878957973545L;
@@ -48,7 +48,7 @@ public class ComprarAtraccionServlet extends HttpServlet implements Servlet {
 			req.setAttribute("errors", errors);
 			req.setAttribute("flash", "No ha podido realizarse la compra");
 		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/listado.do");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/ofertas.do");
 		dispatcher.forward(req, resp);
 
 	}

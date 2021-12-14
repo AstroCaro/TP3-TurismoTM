@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -129,13 +130,86 @@
 							</ul>
 						</div>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" aria-current="page" href="#">
+					<li class="nav-item action">
+						<a class="nav-link mapa" aria-current="page" href="#">
 							<div class="icon">
 								<i class='bx bx-map-alt'></i>
 								<i class='bx bxs-map-alt'></i>
 							</div>
 						</a>
+						<div class="itinerario fondo">
+							<h3>
+								<c:out value="${usuario.nombre}" />
+							</h3>
+							<h5>Administrador de TurismoTM</h5>
+							<!-- TODO modelo de objeto nulo para itinerario -->
+							<c:choose>
+								<c:when test="${empty itinerario}">
+									<p class="text-center">Su itinerario se encuentra vacio. No
+										esperes más, armá tu próxima travesía.</p>
+								</c:when>
+								<c:when test="${not empty itinerario}">
+									<!-- otherwise -->
+									<ul>
+										<c:forEach items="${itinerario}" var="ofertaComprada">
+											<li>
+												<div class="card mb-3" style="max-width: 500px;">
+													<div class="row g-0">
+														<div class="col-md-3">
+															<c:choose>
+																<c:when test="${oferta.esPromocion()}">
+																	<img
+																		src="assets/img/promociones/PromocionPorcentual1.jpeg"
+																		class="img-fluid rounded-start" alt="...">
+																</c:when>
+																<c:when test="${oferta.esAtraccion()}">
+																	<img src="assets/img/atracciones/LaComarca.jpg"
+																		class="img-fluid rounded-start" alt="...">
+																</c:when>
+																<c:otherwise>
+																	<img src="assets/img/atracciones/marannon.jpg"
+																		class="img-fluid rounded-start" alt="...">
+																</c:otherwise>
+															</c:choose>
+														</div>
+														<div class="col-md-6">
+															<div class="card-body">
+																<h5 class="card-title">
+																	<c:out value="${ofertaComprada.nombre}"></c:out>
+																</h5>
+																<p class="card-text">
+																	<c:out
+																		value="${fn:substring(ofertaComprada.descripcion,0,80)}"></c:out>
+																</p>
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="detalles">
+																<div class="costo">
+																	<img alt="" src="assets/img/usuario/coins.png">
+																	<span>
+																		<c:out value="${ofertaComprada.costo}"></c:out>
+																		monedas
+																	</span>
+																</div>
+																<div class="tiempo">
+																	<img alt="" src="assets/img/usuario/reloj.png">
+																	<span>
+																		<c:out value="${ofertaComprada.tiempo}"></c:out>
+																		horas
+																	</span>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</li>
+										</c:forEach>
+									</ul>
+								</c:when>
+							</c:choose>
+						</div>
+					</li>
 					</li>
 				</ul>
 			</div>
@@ -174,6 +248,22 @@
 			</div>
 		</section>
 		<section class="row pt-5">
+			<c:if test="${flash != null}">
+				<div class="alert alert-danger">
+					<p>
+						<c:out value="${flash}" />
+						<c:if test="${errors != null}">
+							<ul>
+								<c:forEach items="${errors}" var="entry">
+									<li>
+										<c:out value="${entry.getValue()}"></c:out>
+									</li>
+								</c:forEach>
+							</ul>
+						</c:if>
+					</p>
+				</div>
+			</c:if>
 			<div class="col-3" id="filtros-bar">
 				<div class="filtros-header">
 					<h5>Filtros</h5>
@@ -315,10 +405,74 @@
 					<c:forEach items="${ofertas}" var="oferta">
 						<div class="col card-group">
 							<div class="card h-100">
-								<div class="card-img">
-									<div class="boton-agregar">
-										<input type="button" value="AGREGAR A ITINERARIO">
+								<c:if test="${oferta.tipoAtraccion==usuario.preferencia}">
+									<div class="tag-preferencia">
+										<i class='bx bx-heart'></i>
 									</div>
+								</c:if>
+								<div class="tag"
+									style="background-color: var(--color-${fn:toLowerCase(oferta.tipoAtraccion.tipoAtraccion)});--color:var(--color-${fn:toLowerCase(oferta.tipoAtraccion.tipoAtraccion)}); --color-sombra:var(--color-sombra-${fn:toLowerCase(oferta.tipoAtraccion.tipoAtraccion)});">
+									<p class="tipo-atraccion">
+										<c:out value="${oferta.tipoAtraccion.tipoAtraccion}"></c:out>
+									</p>
+								</div>
+								<div class="card-img">
+									<c:choose>
+										<c:when
+											test="${usuario.puedeComprar(oferta) && usuario.puedeAsistir(oferta) && oferta.tieneCupo()}">
+											<div class="boton-agregar">
+												<c:choose>
+													<c:when test="${oferta.esAtraccion()}">
+														<a
+															href="agregarAtraccionAItinerario.do?id=${oferta.id_atraccion}">
+															<input type="button" value="AGREGAR A ITINERARIO">
+														</a>
+													</c:when>
+													<c:when test="${oferta.esPromocion()}">
+														<a
+															href="agregarPromocionAItinerario.do?id=${oferta.id_promocion}">
+															<input type="button" value="AGREGAR A ITINERARIO">
+														</a>
+													</c:when>
+												</c:choose>
+											</div>
+										</c:when>
+										<c:when
+											test="${ ! oferta.tieneCupo() && usuario.puedeComprar(oferta) && usuario.puedeAsistir(oferta)}">
+											<div class="boton-deshabilitado">
+												<a href="#">
+													<input class="btn btn-secondary" type="button"
+														value="OFERTA NO DISPONIBLE">
+												</a>
+											</div>
+										</c:when>
+										<c:when
+											test="${oferta.tieneCupo() && ! usuario.puedeComprar(oferta) && usuario.puedeAsistir(oferta)}">
+											<div class="boton-deshabilitado">
+												<a href="#">
+													<input class="btn btn-secondary" type="button"
+														value="MONEDAS INSUFICIENTES">
+												</a>
+											</div>
+										</c:when>
+										<c:when
+											test="${oferta.tieneCupo() && usuario.puedeComprar(oferta) && ! usuario.puedeAsistir(oferta)}">
+											<div class="boton-deshabilitado">
+												<a href="#">
+													<input class="btn btn-secondary" type="button"
+														value="TIEMPO INSUFICIENTE">
+												</a>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="boton-deshabilitado">
+												<a href="#">
+													<input class="btn btn-secondary" type="button"
+														value="NO SE PUEDE COMPRAR">
+												</a>
+											</div>
+										</c:otherwise>
+									</c:choose>
 									<c:choose>
 										<c:when test="${oferta.esPromocion()}">
 											<img src="assets/img/promociones/PromocionPorcentual1.jpeg"

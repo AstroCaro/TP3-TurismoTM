@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 	<error-page>
+	<error-code>404</error-code>
+	<location>/errors/error404.html</location>
+	</error-page> -->
+    
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="assets/css/estilo-error404.css">
+<title>Error 404</title>
+</head>
+<body>
+	<div class="text">
+		<h1>404</h1>
+		<h2>Ups!</h2>
+		<h3>Está todo muy oscuro por aquí, no podemos encontrar la url solicitada. Inténtelo nuevamente.</h3>
+		<!--TODO agregar un link a la pagina de inicio  -->
+	</div>
+	<div class="torch"></div>
+<script type="text/javascript">
+$(document).mousemove(function(event) {
+	$('.torch').css({
+		'top': event.pageY,
+		'left': event.pageX
+	});
+});
+</script>
+</body>
+</html>

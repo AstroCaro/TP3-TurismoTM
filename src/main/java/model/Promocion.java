@@ -68,7 +68,7 @@ public abstract class Promocion extends Oferta {
 	}
 
 	public Boolean tieneCupo() {
-		return this.cuposDisponibles >= 1;
+		return this.getCuposDisponibles() >= 1;
 	}
 	
 	public abstract boolean isValid();

@@ -5,14 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
-
 import persistence.commons.ConnectionProvider;
+import persistence.commons.DAOFactory;
 import model.Atraccion;
 
 import model.Itinerario;
 import model.Oferta;
-import model.TurismoTM;
 import persistence.ItinerarioDAO;
 import persistence.commons.MissingDataException;
 import model.Promocion;
@@ -23,32 +21,23 @@ public class ItinerarioDAOImpl implements ItinerarioDAO {
 	public ArrayList<Oferta> findItinerarioPorUsuario(int id_usuario) {
 
 		try {
-			ArrayList<Oferta> comprasUsuario = new ArrayList<Oferta>();
-			TurismoTM boleteria = new TurismoTM(); 
-			String sql = "SELECT coalesce(promociones.nombre, atracciones.nombre)AS compras " 
-					+ "FROM itinerarios "
-					+ "LEFT JOIN \"promociones\" ON \"promociones\".id_promocion = itinerarios.fk_promocion "
-					+ "LEFT JOIN \"atracciones\" ON \"atracciones\".id_atraccion = itinerarios.fk_atraccion "
-					+ "LEFT JOIN \"usuarios\" ON \"usuarios\".id_usuario=itinerarios.fk_usuario "
-					+ "WHERE usuarios.id_usuario = ?;";
+			String sql = "SELECT fk_promocion, fk_atraccion " + "FROM itinerarios " + "WHERE fk_usuario = ?;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, id_usuario);
 			ResultSet resultados = statement.executeQuery();
 
-			ArrayList<String> compras = new ArrayList<>();
+			ArrayList<Oferta> compras = new ArrayList<>();
 			while (resultados.next()) {
-				compras.add(resultados.getString("compras"));
-
-			}
-			for (String compra : compras) {
-				for (Oferta unaOferta : boleteria.getOfertas()) {
-					if (compra.equals(unaOferta.getNombre())) {
-						comprasUsuario.add(unaOferta);
-					}
+				if (resultados.getString("fk_promocion") != null) {
+					Promocion oferta = DAOFactory.getPromocionDAO().find(resultados.getInt("fk_promocion"));
+					compras.add(oferta);
+				} else if (resultados.getString("fk_atraccion") != null) {
+					Atraccion atraccion = DAOFactory.getAtraccionDAO().find(resultados.getInt("fk_atraccion"));
+					compras.add(atraccion);
 				}
 			}
-			return comprasUsuario;
+			return compras;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}

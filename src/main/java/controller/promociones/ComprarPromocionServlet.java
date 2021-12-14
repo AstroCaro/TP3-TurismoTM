@@ -1,4 +1,4 @@
-package controller.ofertas;
+package controller.promociones;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,37 +10,34 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
+import model.Promocion;
 import model.Usuario;
 import persistence.commons.DAOFactory;
-import services.AtraccionService;
 import services.ComprarOfertaService;
 import services.PromocionService;
 
-@WebServlet("/agregarAItinerarioOfera.do")
-public class ComprarOfertaServlet extends HttpServlet implements Servlet {
+@WebServlet("/agregarPromocionAItinerario.do")
+public class ComprarPromocionServlet extends HttpServlet implements Servlet {
 
-	private static final long serialVersionUID = 3800623316523866327L;
+	private static final long serialVersionUID = -3480177878957973545L;
 
 	ComprarOfertaService comprarService;
-	AtraccionService atraccionService;
 	PromocionService promocionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		comprarService = new ComprarOfertaService();
-		atraccionService = new AtraccionService();
 		promocionService = new PromocionService();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Usuario usuario = (Usuario) req.getSession().getAttribute("usuario");
-		Integer idAtraccion = Integer.parseInt(req.getParameter("id"));
-		Atraccion atraccion = atraccionService.buscar(idAtraccion);
+		Integer idPromocion = Integer.parseInt(req.getParameter("id"));
+		Promocion promocion = promocionService.buscar(idPromocion);
 
-		Map<String, String> errors = comprarService.comprar(usuario, atraccion);
+		Map<String, String> errors = comprarService.comprar(usuario, promocion);
 
 		Usuario usuarioActualizado = DAOFactory.getUsuarioDAO().find(usuario.getId_usuario());
 		req.getSession().setAttribute("usuario", usuarioActualizado);
@@ -56,4 +53,3 @@ public class ComprarOfertaServlet extends HttpServlet implements Servlet {
 
 	}
 }
-
