@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,10 @@ public class ComprarOfertaService {
 		// verificaciones
 		Map<String, String> errors = new HashMap<String, String>();
 
+		ArrayList<Oferta> ofertasCompradas = itinerarioDAO.findItinerarioPorUsuario(usuario.getId_usuario());
+		if (ofertasCompradas.contains(oferta)) {
+			errors.put("usuario", "No se puede agregar nuevamente esta oferta al itinerario");
+		}
 		if (!oferta.tieneCupo()) {
 			errors.put("oferta", "No hay cupo disponible");
 		}

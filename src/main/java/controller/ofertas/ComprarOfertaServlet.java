@@ -17,7 +17,7 @@ import services.AtraccionService;
 import services.ComprarOfertaService;
 import services.PromocionService;
 
-@WebServlet("/ofertas/agregarAItinerarioOfera.do")
+@WebServlet("/agregarAItinerarioOfera.do")
 public class ComprarOfertaServlet extends HttpServlet implements Servlet {
 
 	private static final long serialVersionUID = 3800623316523866327L;
@@ -51,7 +51,7 @@ public class ComprarOfertaServlet extends HttpServlet implements Servlet {
 			req.setAttribute("errors", errors);
 			req.setAttribute("flash", "No ha podido realizarse la compra");
 		}
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/listado.do");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/ofertas.do");
 		dispatcher.forward(req, resp);
 
 	}

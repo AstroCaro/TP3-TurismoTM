@@ -25,6 +25,14 @@
 	--color-principal-claro: #5872f5; 
 	--color-titulos: #001021;
 	--color-botones: #f96900;
+	--color-aventura: #aa4f15;
+	--color-sombra-aventura:#804119;
+	--color-degustacion: #8963ba;
+	--color-sombra-degustacion: #514166;
+	--color-paisaje: #50723c;
+	--color-sombra-paisaje: #36442e;
+	--color-preferencia: #9a031e;
+	--color-deshabilitado: #b4b4b4;
 	--text-color: #cfcde7;
 }
 
@@ -115,12 +123,29 @@ nav {
 	opacity: 0;
 }
 
-.action .mostrar-menu-usuario {
+.action .itinerario {
+	position: fixed;
+	top: 65px;
+	padding: 10px 20px;
+	color: var(--text-color);
+	background-color: var(--color-principal);
+	width: 500px;
+	right: 120px;
+	box-shadow: -1px 3px 4px 1px rgba(41, 34, 54, 0.4);
+	border-radius: 15px;
+	direction: flex;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.action .mostrar-menu-usuario, .action .mostrar-itinerario{
 	visibility: visible;
 	opacity: 1;
 }
 
-.action .menu-usuario::after { /* triangulito */
+.action .menu-usuario::after, .action .itinerario::after{ /* triangulito */
 	content: '';
 	position: absolute;
 	top: -3px;
@@ -135,7 +160,7 @@ nav {
 	border-bottom-color: var(--color-principal);
 }
 
-.action .menu-usuario h3 {
+.action .menu-usuario h3, .action .itinerario h3 {
 	width: 100%;
 	text-align: center;
 	font-size: 18px;
@@ -145,7 +170,7 @@ nav {
 	margin-bottom: 0;
 }
 
-.action .menu-usuario h5 {
+.action .menu-usuario h5, .action .itinerario h5 {
 	width: 100%;
 	text-align: center;
 	padding: 5px 0 20px 0;
@@ -156,24 +181,24 @@ nav {
 	margin-bottom: 0;
 }
 
-.menu-usuario ul {
+.menu-usuario ul, .itinerario ul {
 	padding-left: 0px;
 }
 
-.menu-usuario ul li {
+.menu-usuario ul li, .itinerario ul li {
 	list-style: none;
 	padding: 10px 0;
 	border-top: 1px solid rgba(182, 177, 177, 0.068);
 }
 
-.action .menu-usuario ul li a {
+.action .menu-usuario ul li a, .itinerario ul li a {
 	color: var(--text-color);
 	display: flex;
 	align-items: center;
 	text-decoration: none;
 }
 
-.action .menu-usuario ul li span {
+.action .menu-usuario ul li span, .action .itinerario ul li span {
 	margin-left: 7px;
 	font-size: 14px;
 	font-weight: 500;
@@ -181,17 +206,17 @@ nav {
 	transition: 0.3s;
 }
 
-.action .menu-usuario ul li:hover span {
+.action .menu-usuario ul li:hover span, .action .itinerario ul li:hover span {
 	color: var(--color-principal-claro);
 }
 
-.action .menu-usuario ul li i {
+.action .menu-usuario ul li i, .action .itinerario ul li i {
 	font-size: 18px;
 	opacity: 0.7;
 	transition: 0.3s;
 }
 
-.action .menu-usuario ul li:hover i {
+.action .menu-usuario ul li:hover i, .action .itinerario ul li:hover i {
 	opacity: 1;
 }
 
@@ -258,6 +283,10 @@ section {
 	border: none;
 }
 
+.accordion-button {
+	padding: 1rem 0;
+}
+
 .accordion-button:not(.collapsed) {
 	color: #000000;
 	background-color: #ffffff;
@@ -266,6 +295,14 @@ section {
 
 .accordion-button:focus, .accordion-button {
 	box-shadow: none;
+}
+
+.accordion-body {
+	padding: 1rem 0;
+}
+
+#filtros-bar {
+	padding-left:0px;
 }
 
 #filtros-bar ul {
@@ -345,6 +382,7 @@ works properly when clicked or hovered */ html .ui-button.ui-state-disabled:hove
 
 .row {
 	margin-right: 0px;
+	margin-left: 0px;
 }
 
 .row>* {
@@ -406,7 +444,15 @@ dl, ol, ul {
 	bottom: -2vh;
 }
 
-.card-img input {
+.boton-deshabilitado {
+	display: block;
+	position: absolute;
+	justify-content: center;
+	bottom: -2vh;
+}
+
+
+.boton-agregar input , .boton-deshabilitado input{
 	font-size: 12px;
 	font-weight: 500;
 	border-radius: 15px;
@@ -414,6 +460,10 @@ dl, ol, ul {
 	color: #fff;
 	background: var(--color-botones);
 	border: 0px;
+}
+
+.boton-deshabilitado input{
+	background: var(--color-deshabilitado);
 }
 
 .card:hover .boton-agregar {
@@ -446,10 +496,72 @@ dl, ol, ul {
 	background: none;
 }
 
-.card-footer img {
+.card-footer img , .detalles img {
 	width: 24px;
 }
 
 .card-footer span {
 	font-size: 12px;
+}
+
+.tag {
+	position:absolute;
+	width:auto;
+	height: 20px;
+	background-color: var(--color-aventura);
+	left: -6px;
+	top: 4vh;
+	z-index: 100;
+	border: 0;
+	display: flex;
+	align-items: center;
+}
+
+.tag:before {
+	content: "";
+	position: absolute;
+	top:-6px;
+	left: 0;
+	border-left: 3px solid transparent;
+	border-right: 3px solid var(--color-sombra);
+	border-top: 3px solid transparent;
+	border-bottom: 3px solid var(--color-sombra);
+}
+
+.tag:after {
+	content: "";
+	position: absolute;
+	top:0px;
+	right: 0px;
+	transform:translateX(100%);
+	border-left: 10px solid var(--color);
+	border-right: 10px solid transparent;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+}
+
+.tag .tipo-atraccion {
+	font-size: 10px;
+	color: #fff;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+.tag-preferencia {
+	position: absolute;
+	top: 3vh;
+	right: 3vh;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background-color: var(--color-preferencia);
+	z-index: 100;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tag-preferencia i {
+	font-size:20px;
+	color: #fff;
 }
