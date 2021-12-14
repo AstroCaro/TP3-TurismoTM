@@ -40,6 +40,7 @@ public class ComprarAtraccionServlet extends HttpServlet implements Servlet {
 		Map<String, String> errors = comprarService.comprar(usuario, atraccion);
 
 		Usuario usuarioActualizado = DAOFactory.getUsuarioDAO().find(usuario.getId_usuario());
+
 		req.getSession().setAttribute("usuario", usuarioActualizado);
 
 		if (errors.isEmpty()) {

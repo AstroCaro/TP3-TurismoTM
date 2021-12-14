@@ -140,6 +140,11 @@ nav {
 	opacity: 0;
 }
 
+.itinerario-img {
+	height: 100%;
+	object-fit: cover;
+}
+
 .action .mostrar-menu-usuario, .action .mostrar-itinerario{
 	visibility: visible;
 	opacity: 1;
@@ -160,7 +165,7 @@ nav {
 	border-bottom-color: var(--color-principal);
 }
 
-.action .menu-usuario h3, .action .itinerario h3 {
+.action .menu-usuario h3 {
 	width: 100%;
 	text-align: center;
 	font-size: 18px;
@@ -170,7 +175,15 @@ nav {
 	margin-bottom: 0;
 }
 
-.action .menu-usuario h5, .action .itinerario h5 {
+.action .itinerario h3 {
+	width: 100%;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1.2em;
+	margin-bottom: 0;
+}
+
+.action .menu-usuario h5 {
 	width: 100%;
 	text-align: center;
 	padding: 5px 0 20px 0;
@@ -181,6 +194,36 @@ nav {
 	margin-bottom: 0;
 }
 
+.action .itinerario .card-body h5 {
+	font-size: 16px;
+	width: 100%;
+	line-height: 1.2em;
+	font-weight: 400;
+	margin-bottom: 0;
+}
+
+.action .itinerario p {
+	color: #000;
+	font-size: 12px;
+}
+
+.action .itinerario .col-detalles {
+	display: flex;
+	align-items: center;
+}
+
+.action .itinerario .costo {
+	padding-bottom: 20px;
+}
+
+.action .itinerario .detalles span{
+	font-size: 12px;
+}
+
+.action .itinerario .card-body {
+	padding-left: 10px;
+	padding-right: 10px; 
+}
 .menu-usuario ul, .itinerario ul {
 	padding-left: 0px;
 }
@@ -189,6 +232,10 @@ nav {
 	list-style: none;
 	padding: 10px 0;
 	border-top: 1px solid rgba(182, 177, 177, 0.068);
+}
+
+.itinerario ul li{
+	padding: 0;
 }
 
 .action .menu-usuario ul li a, .itinerario ul li a {

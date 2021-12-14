@@ -74,7 +74,6 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 			</div>
-			<img alt="" src="">
 			<div
 				class="navbar-collapse collapse justify-content-between order-2 nav-items-centrales"
 				id="navbarSupportedContent">
@@ -141,7 +140,6 @@
 							<h3>
 								<c:out value="${usuario.nombre}" />
 							</h3>
-							<h5>Administrador de TurismoTM</h5>
 							<!-- TODO modelo de objeto nulo para itinerario -->
 							<c:choose>
 								<c:when test="${empty itinerario}">
@@ -150,40 +148,51 @@
 								</c:when>
 								<c:when test="${not empty itinerario}">
 									<!-- otherwise -->
+									<h5>Tu itinerario</h5>
 									<ul>
 										<c:forEach items="${itinerario}" var="ofertaComprada">
 											<li>
-												<div class="card mb-3" style="max-width: 500px;">
+												<div class="card mb-3"
+													style="max-width: 500px; max-height: 200px;">
 													<div class="row g-0">
 														<div class="col-md-3">
 															<c:choose>
-																<c:when test="${oferta.esPromocion()}">
+																<c:when test="${ofertaComprada.esPromocion()}">
 																	<img
 																		src="assets/img/promociones/PromocionPorcentual1.jpeg"
-																		class="img-fluid rounded-start" alt="...">
+																		class="itinerario-img img-fluid rounded-start cover"
+																		alt="...">
 																</c:when>
-																<c:when test="${oferta.esAtraccion()}">
+																<c:when test="${ofertaComprada.esAtraccion()}">
 																	<img src="assets/img/atracciones/LaComarca.jpg"
-																		class="img-fluid rounded-start" alt="...">
+																		class="itinerario-img img-fluid rounded-start cover"
+																		alt="...">
 																</c:when>
 																<c:otherwise>
 																	<img src="assets/img/atracciones/marannon.jpg"
-																		class="img-fluid rounded-start" alt="...">
+																		class="itinerario-img img-fluid rounded-start cover"
+																		alt="...">
 																</c:otherwise>
 															</c:choose>
 														</div>
 														<div class="col-md-6">
 															<div class="card-body">
+																<small>
+																	<p class="text-muted">
+																		<c:out value="${ofertaComprada.getClase()}"></c:out>
+																	</p>
+																</small>
 																<h5 class="card-title">
 																	<c:out value="${ofertaComprada.nombre}"></c:out>
 																</h5>
 																<p class="card-text">
 																	<c:out
 																		value="${fn:substring(ofertaComprada.descripcion,0,80)}"></c:out>
+																	...
 																</p>
 															</div>
 														</div>
-														<div class="col-md-3">
+														<div class="col-md-3 col-detalles">
 															<div class="detalles">
 																<div class="costo">
 																	<img alt="" src="assets/img/usuario/coins.png">
@@ -206,10 +215,26 @@
 											</li>
 										</c:forEach>
 									</ul>
+									
+											<h3>Total:</h3>
+											<div class="costo">
+												<!-- <img alt="" src="assets/img/usuario/coins.png"> -->
+												<span>
+													<c:out value="${usuario.getItinerario().getMontoTotal()}"></c:out>
+													monedas
+												</span>
+											</div>
+											<div class="tiempo">
+												<!-- <img alt="" src="assets/img/usuario/reloj.png"> -->
+												<span>
+													<c:out value="${usuario.itinerario.horasTotales}"></c:out>
+													horas
+												</span>
+											</div>
+
 								</c:when>
 							</c:choose>
 						</div>
-					</li>
 					</li>
 				</ul>
 			</div>

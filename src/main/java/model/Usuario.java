@@ -30,7 +30,8 @@ public class Usuario {
 		this.itinerario = new Itinerario();
 	}
 
-	public Usuario(String nombre, String password, TipoAtraccion preferencia, int presupuesto, double tiempo, boolean admin) {
+	public Usuario(String nombre, String password, TipoAtraccion preferencia, int presupuesto, double tiempo,
+			boolean admin) {
 		this.id_usuario = null;
 		this.nombre = nombre;
 		this.password = Crypt.hash(password);
@@ -68,6 +69,10 @@ public class Usuario {
 	public Boolean getAdmin() {
 		return admin;
 	}
+	
+	public Itinerario getItinerario() {
+		return itinerario;
+	}
 
 	public void setId_usuario(Integer id_usuario) {
 		this.id_usuario = id_usuario;
@@ -93,6 +98,10 @@ public class Usuario {
 		this.admin = admin;
 	}
 
+	public void setItinerario(Itinerario itinerario) {
+		this.itinerario = itinerario;
+	}
+
 	public void comprarOferta(Oferta unaOferta) {
 		descontarOroYTiempo(unaOferta);
 		this.itinerario.agregarAlItinerario(unaOferta);
@@ -101,7 +110,7 @@ public class Usuario {
 	public boolean puedeComprar(Oferta unaOferta) {
 		return presupuesto >= unaOferta.getCosto();
 	}
-	
+
 	public boolean puedeAsistir(Oferta unaOferta) {
 		return tiempoDisponible >= unaOferta.getTiempo();
 	}

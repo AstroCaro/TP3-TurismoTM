@@ -22,6 +22,7 @@ public class ComprarOfertaService {
 		Map<String, String> errors = new HashMap<String, String>();
 
 		ArrayList<Oferta> ofertasCompradas = itinerarioDAO.findItinerarioPorUsuario(usuario.getId_usuario());
+
 		if (ofertasCompradas.contains(oferta)) {
 			errors.put("usuario", "No se puede agregar nuevamente esta oferta al itinerario");
 		}
@@ -36,7 +37,6 @@ public class ComprarOfertaService {
 		}
 
 		if (errors.isEmpty()) {
-			ItinerarioDAO itinerarioDAO = DAOFactory.getItinerarioDAO();
 			UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 

@@ -11,6 +11,9 @@ public class Itinerario {
 	public Itinerario() {
 		ofertasCompradas = new ArrayList<Oferta>();
 	}
+	public Itinerario(ArrayList<Oferta> ofertasCompradas) {
+		this.ofertasCompradas = ofertasCompradas;
+	}
 
 	public Itinerario(ArrayList<Oferta> ofertasCompradas, int montoTotal, double horasTotales) {
 		this.ofertasCompradas = ofertasCompradas;
