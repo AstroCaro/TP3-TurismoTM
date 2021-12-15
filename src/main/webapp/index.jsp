@@ -6,13 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.img-circular {
-	border-radius: 50%;
-	height: 100;
-	width: auto;
-}
-</style>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/bootstrap/bootstrap.css">
 <script defer src="assets/js/bootstrap/bootstrap.js"
@@ -21,12 +14,13 @@
 	href="assets/css/datatables/datatables.css">
 <script defer src="asses/js/mapa.js" type="text/javascript"></script>
 <script defer src="assets/js/puntos-rojos.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="assets/css/estilo-mapa.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/estilos-inicio.css">
 <title>Turismo en la Tierra Media - Inicio</title>
 </head>
 <body>
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
-	<div class="container-fluid">
+	<div id="inicio" class="container-fluid mt-5">
 		<div class="row d-flex justify-content-center">
 			<div class="col-3 d-flex justify-content-center">
 				<img src="assets/img/aventura.jpg" alt="aventura"
@@ -54,22 +48,26 @@
 	</div>
 	<div class="container mt-5">
 		<div class="row">
-			<div class="col-4">
-				<div id=carruselAtracciones class="carousel slide"
+			<div class="col-4 d-flex">
+				<div id=carruselAtracciones class="carousel slide carousel-dark"
 					data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<c:forEach items="${atracciones}" var="atraccion">
 							<c:choose>
 								<c:when test="${atraccion.id_atraccion == 1}">
-									<div class="carousel-item active">
+									<div class="carousel-item active data-bs-interval="1500"">
 								</c:when>
 								<c:otherwise>
-									<div class="carousel-item">
+									<div class="carousel-item data-bs-interval="1500"">
 								</c:otherwise>
 							</c:choose>
 							<div class="card h-100">
+								<!-- <a class="text-decoration-none"
+									href="atracciones/verAtraccion.do?id_atraccion=${atraccion.id_atraccion }">
+									 -->
 								<img src="assets/img/${atraccion.nombre}/1.jpg"
-									class="card-img-top" alt="${atraccion.nombre}">
+									class="card-img-top imagen-carrusel" alt="${atraccion.nombre}">
+								<!--</a> -->
 								<div class="card-body">
 									<h5 class="card-title">
 										<c:out value="${atraccion.nombre}"></c:out>
@@ -96,14 +94,16 @@
 		</div>
 		<div class="col-8">
 			<div id="container-mapa">
-				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa">
-				<a href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
-					class="punto-rojo" style="left: 33%; top: 35%;">
-					<img src="assets/img/etiquetas/Moria.png"
-						class="etiqueta-atraccion">
+				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa"> <a
+					href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
+					class="punto-rojo" style="left: 33%; top: 35%;"> <img
+					src="assets/img/etiquetas/Moria.png" class="etiqueta-atraccion">
 				</a>
 			</div>
 		</div>
 	</div>
+	<<<<<<< Updated upstream =======
+	<jsp:include page="/partials/footer.jsp"></jsp:include>
+	>>>>>>> Stashed changes
 </body>
 </html>
