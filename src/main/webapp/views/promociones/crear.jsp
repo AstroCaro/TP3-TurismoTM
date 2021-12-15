@@ -7,10 +7,22 @@
 <jsp:include page="/partials/head.jsp"></jsp:include>
 <script type="text/javascript">
 $(document).on('change', '#cantidadAtracciones', function(){
-    var shouldEnable = $(this).val() !== '2';
+    var shouldEnable = $(this).val() !== '3';
     $('#atracciones3').prop('disabled', shouldEnable);
 });
 
+$(document).ready(function() {
+    $("#tipoPromocion").on("change", function() {
+        if ($(this).val() == "Promocion Absoluta") {
+            $("#input1").show();
+        }
+        else {
+            $("#input1").hide();
+        }
+        
+    });
+    
+});
 </script>
 </head>
 <body>
