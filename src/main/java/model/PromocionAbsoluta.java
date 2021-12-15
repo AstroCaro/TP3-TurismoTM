@@ -20,6 +20,20 @@ public class PromocionAbsoluta extends Promocion {
 	}
 
 	@Override
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+
+	@Override
+	public void validate() {
+
+		if (costo <= 0) {
+			errors.put("costo", "Debe ser positivo");
+		}
+	}
+
+	@Override
 	public String toString() {
 		return "" + nombre + " contiene las siguientes atracciones de tipo " + "[" + tipoAtraccion + "]:" + "\n\t"
 				+ this.getNombreAtracciones() + "\n\tSu costo total es de " + this.getCosto() + " monedas de oro"
@@ -40,12 +54,6 @@ public class PromocionAbsoluta extends Promocion {
 		if (getClass() != obj.getClass())
 			return false;
 		return true;
-	}
-
-	@Override
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

@@ -7,6 +7,10 @@
 #img-mapa {
 	width: 100%;
 	height: auto;
+	border-radius: 25px;
+}
+.imagen-carrusel {
+	border-radius: 25px;
 }
 
 .punto-rojo {
@@ -20,4 +24,10 @@
 .img-card-atraccion {
     width : 100%;
 	height: auto;
+}
+
+.img-circular {
+	border-radius: 50%;
+	height: 100;
+	width: auto;
 }

@@ -1,15 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 public abstract class Promocion extends Oferta {
 	protected int id_promocion;
-
 	protected int costo;
 	protected double tiempoTotal;
 	protected int cuposDisponibles;
 	public ArrayList<Atraccion> atracciones;
+
+	protected Map<String, String> errors;
 
 	public Promocion(int id_promocion, String nombre, String descripcion, TipoAtraccion tipoAtraccion,
 			ArrayList<Atraccion> atracciones) {
@@ -70,9 +72,11 @@ public abstract class Promocion extends Oferta {
 	public Boolean tieneCupo() {
 		return this.getCuposDisponibles() >= 1;
 	}
-	
+
 	public abstract boolean isValid();
 	
+	public abstract void validate(); 
+
 	public abstract int getCosto();
 
 	@Override
@@ -96,7 +100,5 @@ public abstract class Promocion extends Oferta {
 				&& cuposDisponibles == other.cuposDisponibles && id_promocion == other.id_promocion
 				&& Double.doubleToLongBits(tiempoTotal) == Double.doubleToLongBits(other.tiempoTotal);
 	}
-
-	
 
 }

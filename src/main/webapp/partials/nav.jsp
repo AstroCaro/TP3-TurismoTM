@@ -12,9 +12,9 @@
 				<div class="collapse navbar-collapse" id="navbarText">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="#">Home</a></li>
+							aria-current="page" href="inicio">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="lista-atracciones.html">Lista de Atracciones</a></li>
+							href="atracciones/listadoAtracciones.do">Atracciones</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
 						</li>
 					</ul>

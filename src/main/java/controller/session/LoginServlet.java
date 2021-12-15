@@ -35,12 +35,8 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		String password = req.getParameter("password");
 
 		Usuario usuario = loginService.login(username, password);
-		System.out.println(usuario.getItinerario());
 
 		if (!usuario.isNull()) {
-			// ArrayList<Oferta> ofertas =
-			// ofertaService.listarOrdenado(usuario.getPreferencia().getTipoAtraccion());
-			// req.getSession().setAttribute("ofertas", ofertas);
 
 			req.getSession().setAttribute("usuario", usuario);// abstraccion del tiempo que utiliza el usuario dentro
 																// de la app

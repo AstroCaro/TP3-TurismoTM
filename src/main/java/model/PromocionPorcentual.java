@@ -27,6 +27,19 @@ public class PromocionPorcentual extends Promocion {
 	}
 
 	@Override
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+
+	@Override
+	public void validate() {
+		if (descuento <= 0) {
+			errors.put("atraccionGratis", "Debe ser positivo");
+		}
+	}
+
+	@Override
 	public String toString() {
 		return "" + nombre + " contiene las siguientes atracciones de tipo " + "[" + tipoAtraccion + "]:" + "\n\t"
 				+ this.getNombreAtracciones() + "\n\tSu costo total es de " + this.getCosto() + " monedas de oro"
@@ -51,12 +64,6 @@ public class PromocionPorcentual extends Promocion {
 			return false;
 		PromocionPorcentual other = (PromocionPorcentual) obj;
 		return Double.doubleToLongBits(descuento) == Double.doubleToLongBits(other.descuento);
-	}
-
-	@Override
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }
