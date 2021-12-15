@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PromocionAbsoluta extends Promocion {
 
@@ -19,7 +18,7 @@ public class PromocionAbsoluta extends Promocion {
 	public void setCosto(int costo) {
 		this.costo = costo;
 	}
-	
+
 	@Override
 	public boolean isValid() {
 		validate();

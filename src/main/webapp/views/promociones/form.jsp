@@ -29,18 +29,35 @@
 		</select>
 	</div>
 	<div class="mb-3">
-		<label for="tipoPromocion" class="col-form-label">Tipo de
-			Promocion:</label>
-		<select class="form-select" name="tipoPromocion" id="tipoPromocion"
-			required>
-			<option value="1">2</option>
-			<option value="2">3</option>
+		<label for="cantidadAtracciones" class="col-form-label">Cantidad
+			de atracciones:</label>
+		<select class="form-select" name="cantidadAtracciones"
+			id="cantidadAtracciones" required>
+			<option value="2">2</option>
+			<option value="3">3</option>
 		</select>
 	</div>
 	<div class="mb-3">
-		<label for="tipoPromocion" class="col-form-label">Tipo de
-			Promocion:</label>
-		<select class="form-select" name="atracciones" id="atracciones"
+		<label for="tipoPromocion" class="col-form-label">Atracciones</label>
+		<select class="form-select" name="atracciones1" id="atracciones1"
+			required>
+			<c:forEach items="${atracciones}" var="atraccion">
+				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="tipoPromocion" class="col-form-label">Atracciones</label>
+		<select class="form-select" name="atracciones2" id="atracciones2"
+			required>
+			<c:forEach items="${atracciones}" var="atraccion">
+				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
+			</c:forEach>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="tipoPromocion" class="col-form-label">Atracciones</label>
+		<select class="form-select atracciones3" name="atracciones3" id="atracciones3"
 			required>
 			<c:forEach items="${atracciones}" var="atraccion">
 				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>

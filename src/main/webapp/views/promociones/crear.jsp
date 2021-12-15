@@ -5,6 +5,13 @@
 <html>
 <head>
 <jsp:include page="/partials/head.jsp"></jsp:include>
+<script type="text/javascript">
+$(document).on('change', '#cantidadAtracciones', function(){
+    var shouldEnable = $(this).val() !== '2';
+    $('#atracciones3').prop('disabled', shouldEnable);
+});
+
+</script>
 </head>
 <body>
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
@@ -13,7 +20,7 @@
 
 		<c:if test="${promocion != null && !promocion.isValid()}">
 			<div class="alert alert-danger">
-				<p>Se encontraron errores al crear la atracción.</p>
+				<p>Se encontraron errores al crear la promocion.</p>
 			</div>
 		</c:if>
 
