@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PromocionAbsoluta extends Promocion {
 
@@ -17,6 +18,20 @@ public class PromocionAbsoluta extends Promocion {
 
 	public void setCosto(int costo) {
 		this.costo = costo;
+	}
+	
+	@Override
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+
+	@Override
+	public void validate() {
+
+		if (costo <= 0) {
+			errors.put("costo", "Debe ser positivo");
+		}
 	}
 
 	@Override
@@ -40,12 +55,6 @@ public class PromocionAbsoluta extends Promocion {
 		if (getClass() != obj.getClass())
 			return false;
 		return true;
-	}
-
-	@Override
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

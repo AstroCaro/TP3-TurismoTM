@@ -40,6 +40,20 @@ public class PromocionAxB extends Promocion {
 	}
 
 	@Override
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+
+	@Override
+	public void validate() {
+
+		if (atraccionGratis == null) {
+			errors.put("atraccionGratis", "Debe ingresar una atraccion");
+		}
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -50,11 +64,4 @@ public class PromocionAxB extends Promocion {
 		PromocionAxB other = (PromocionAxB) obj;
 		return Objects.equals(atraccionGratis, other.atraccionGratis);
 	}
-
-	@Override
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

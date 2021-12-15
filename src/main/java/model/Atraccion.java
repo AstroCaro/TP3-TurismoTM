@@ -61,23 +61,6 @@ public class Atraccion extends Oferta {
 		return "ATRACCIÓN";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(costo, cuposDisponibles, id_atraccion);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Atraccion other = (Atraccion) obj;
-		return costo == other.costo && cuposDisponibles == other.cuposDisponibles && id_atraccion == other.id_atraccion;
-	}
-
 	public int getId_atraccion() {
 		return id_atraccion;
 	}
@@ -87,12 +70,12 @@ public class Atraccion extends Oferta {
 			this.id_atraccion = id_atraccion;
 		}
 	}
+	
 
-	@Override
-	public String toString() {
-		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: "
-				+ tipoAtraccion.getTipoAtraccion() + "\nCupos Disponibles: " + cuposDisponibles;
+	public Boolean tieneCupo() {
+		return this.cuposDisponibles >= 1;
 	}
+
 
 	public boolean isValid() {
 		validate();
@@ -117,8 +100,26 @@ public class Atraccion extends Oferta {
 		return errors;
 	}
 
-	public Boolean tieneCupo() {
-		return this.cuposDisponibles >= 1;
+	@Override
+	public int hashCode() {
+		return Objects.hash(costo, cuposDisponibles, id_atraccion);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Atraccion other = (Atraccion) obj;
+		return costo == other.costo && cuposDisponibles == other.cuposDisponibles && id_atraccion == other.id_atraccion;
+	}
+
+	@Override
+	public String toString() {
+		return "\nAtraccion: " + nombre + "\nCosto: " + costo + "\nDuración: " + tiempo + "\nTipo: "
+				+ tipoAtraccion.getTipoAtraccion() + "\nCupos Disponibles: " + cuposDisponibles;
+	}
 }

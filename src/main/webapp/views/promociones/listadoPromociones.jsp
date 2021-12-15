@@ -23,80 +23,77 @@
 			<div class="container">
 				<h1>Listado de Promociones</h1>
 			</div>
-		</div>
-		<div class="container">
-			<div class="mb-3">
-				<a href="/TurismoTMTP3/atracciones/crear.do" class="btn btn-primary"
-					role="button">
-					<i class="bi bi-plus-lg"></i>
-					Nueva Promocion
-				</a>
+			<div class="container">
+				<div class="mb-3">
+					<a href="/TurismoTMTP3/promociones/crear.do"
+						class="btn btn-primary" role="button">
+						<i class="bi bi-plus-lg"></i>
+						Nueva Promocion
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="container">
-			<div class="table-responsive">
-				<table class="datatable table table-hover table-striped"
-					id="table_id" class="display">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Nombre</th>
-							<th>Tipo de Promocion</th>
-							<th>Tipo de Atracción</th>
-							<th>Tiempo</th>
-							<th>Costo</th>
-							<th>Cupo</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${promociones}" var="promocion">
+			<div class="container">
+				<div class="table-responsive">
+					<table class="datatable table table-hover table-striped"
+						id="table_id" class="display">
+						<thead>
 							<tr>
-								<td>
-									<c:out value="${promocion.id_promocion}"></c:out>
-								</td>
-								<td>
-									<c:out value="${promocion.nombre}"></c:out>
-								</td>
-								<td>
-									<c:out value="${promocion.clase.simpleName}"></c:out>
-								</td>
-								<td>
-									<c:out value="${promocion.tipoAtraccion}"></c:out>
-								</td>
-								<td>
-									<c:out value="${promocion.tiempo}"></c:out>
-								</td>
-								<td>
-									<c:out value="${promocion.costo}"></c:out>
-								</td>
-								<td>
-									<c:out value="${atraccion.cuposDisponibles}"></c:out>
-								</td>
-								<td>
-									<c:out value="${atraccion.tipoAtraccion.getTipoAtraccion()}"></c:out>
-								</td>
-								<td>
-									<a
-										href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=${atraccion.id_atraccion}"
-										class="btn btn-success rounded" role="button">
-										<i class="far fa-eye"></i>
-									</a>
-									<a
-										href="/TurismoTMTP3/atracciones/edit.do?id_atraccion=${atraccion.id_atraccion}"
-										class="btn btn-secondary rounded" role="button">
-										<i class="fas fa-pencil-alt"></i>
-									</a>
-									<a
-										href="/TurismoTMTP3/atracciones/delete.do?id_atraccion=${atraccion.id_atraccion}"
-										class="btn btn-danger rounded" role="button">
-										<i class="fas fa-trash-alt"></i>
-									</a>
-								</td>
+								<th>Id</th>
+								<th>Nombre</th>
+								<th>Tipo de Promocion</th>
+								<th>Tipo de Atracción</th>
+								<th>Tiempo</th>
+								<th>Costo</th>
+								<th>Cupo</th>
+								<th></th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach items="${promociones}" var="promocion">
+								<tr>
+									<td>
+										<c:out value="${promocion.id_promocion}"></c:out>
+									</td>
+									<td>
+										<c:out value="${promocion.nombre}"></c:out>
+									</td>
+									<td>
+										<c:out value="${promocion['class']['simpleName']}"></c:out>
+									</td>
+									<td>
+										<c:out value="${promocion.tipoAtraccion.tipoAtraccion}"></c:out>
+									</td>
+									<td>
+										<c:out value="${promocion.tiempo}"></c:out>
+									</td>
+									<td>
+										<c:out value="${promocion.costo}"></c:out>
+									</td>
+									<td>
+										<c:out value="${promocion.cuposDisponibles}"></c:out>
+									</td>
+									<td>
+										<a
+											href="/TurismoTMTP3/promociones/verPromocion.do?id_promocion=${promocion.id_promocion}"
+											class="btn btn-success rounded" role="button">
+											<i class="far fa-eye"></i>
+										</a>
+										<a
+											href="/TurismoTMTP3/promociones/edit.do?id_promocion=${promocion.id_promocion}"
+											class="btn btn-secondary rounded" role="button">
+											<i class="fas fa-pencil-alt"></i>
+										</a>
+										<a
+											href="/TurismoTMTP3/promociones/delete.do?id_promocion=${promocion.id_promocion}"
+											class="btn btn-danger rounded" role="button">
+											<i class="fas fa-trash-alt"></i>
+										</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="copyright">
