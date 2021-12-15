@@ -19,7 +19,8 @@
 <script defer src="assets/js/bootstrap/bootstrap.js"
 	type="text/javascript"></script>
 
-<link rel="stylesheet" type="text/css" href="assets/css/datatables/datatables.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/datatables/datatables.css">
 
 <script defer src="asses/js/mapa.js" type="text/javascript"></script>
 <script defer src="assets/js/puntos-rojos.js" type="text/javascript"></script>
@@ -57,25 +58,10 @@
 	<div class="container mt-5">
 		<div class="row">
 			<div class="col-4">
-				<div id=carruselAtracciones class="carousel slide align-middle"
+				<div id=carruselAtracciones class="carousel slide"
 					data-bs-ride="carousel">
 
 					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<div class="card h-100">
-								<img src="assets/img/Moria/1.jpg" class="card-img-top"
-									alt="Moria">
-								<div class="card-body">
-									<h5 class="card-title">
-										<c:out value="Moria"></c:out>
-									</h5>
-									<p class="card-text">
-										<c:out
-											value="Situada en la Colina de la Guardía, se encuentra rodeada de tierras fértiles que van desde sus muros hasta Rammas Echor"></c:out>
-									</p>
-								</div>
-							</div>
-						</div>
 						<c:forEach items="${atracciones}" var="atraccion">
 							<c:choose>
 								<c:when test="${atraccion.id_atraccion == 1}">
@@ -114,8 +100,8 @@
 		</div>
 		<div class="col-8">
 			<div id="container-mapa">
-				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa">
-				<a href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
+				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa"> <a
+					href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
 					class="punto-rojo" style="left: 33%; top: 35%;"><img
 					src="assets/img/etiquetas/Moria.png" class="etiqueta-atraccion"></a>
 			</div>
