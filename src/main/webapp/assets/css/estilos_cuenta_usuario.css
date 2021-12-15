@@ -80,7 +80,7 @@ nav {
 	color: #111;
 }
 
-.nav-items-derecha a.active, .nav-items-derecha a:hover {
+.nav-items-derecha a.active, .nav-items-derecha .nav-items>a:hover {
 	color: #111;
 }
 
@@ -130,6 +130,7 @@ nav {
 	color: var(--text-color);
 	background-color: var(--color-principal);
 	width: 500px;
+	max-height: 500px;
 	right: 120px;
 	box-shadow: -1px 3px 4px 1px rgba(41, 34, 54, 0.4);
 	border-radius: 15px;
@@ -138,11 +139,16 @@ nav {
 	align-items: center;
 	visibility: hidden;
 	opacity: 0;
+	overflow: auto;
 }
 
 .itinerario-img {
 	height: 100%;
 	object-fit: cover;
+}
+
+.itinerario .total-detalles {
+	display: ruby;
 }
 
 .action .mostrar-menu-usuario, .action .mostrar-itinerario{
@@ -194,6 +200,11 @@ nav {
 	margin-bottom: 0;
 }
 
+.action .itinerario h5 {
+	font-size: 16px;
+	font-weight: 400;
+}
+
 .action .itinerario .card-body h5 {
 	font-size: 16px;
 	width: 100%;
@@ -212,18 +223,50 @@ nav {
 	align-items: center;
 }
 
-.action .itinerario .costo {
+.action .itinerario .col-detalles .costo {
 	padding-bottom: 20px;
 }
 
 .action .itinerario .detalles span{
 	font-size: 12px;
+	color: #000;
 }
 
 .action .itinerario .card-body {
 	padding-left: 10px;
 	padding-right: 10px; 
 }
+
+.action .itinerario .total {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+	padding-left: 150px;
+	
+}
+
+.action .itinerario .ver-itinerario {
+	float: right;
+	display: ruby;
+	margin-bottom: 1rem;
+	padding-left: 150px;
+	font-size: 24px;
+}
+
+.action .itinerario .ver-itinerario:hover a{
+	color: var(--color-principal-claro);
+}
+
+.action .itinerario .ver-itinerario a {
+	display:flex; 
+	align-items: center;
+	text-decoration: none;
+	color: var(--text-color)
+}
+.action .itinerario .ver-itinerario span {
+	font-size: 16px;
+}
+
 .menu-usuario ul, .itinerario ul {
 	padding-left: 0px;
 }
@@ -543,8 +586,12 @@ dl, ol, ul {
 	background: none;
 }
 
-.card-footer img , .detalles img {
+.card-footer img {
 	width: 24px;
+}
+
+.detalles img, .total img{
+	width: 16px;
 }
 
 .card-footer span {

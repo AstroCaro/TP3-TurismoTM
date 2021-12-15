@@ -1,4 +1,4 @@
-const items = document.querySelectorAll(".nav-items-derecha a");
+const items = document.querySelectorAll(".nav-items-derecha .nav-item> a");
 const html = document.querySelector("html");
 const menu_usuario = document.querySelector(".menu-usuario");
 const itinerario = document.querySelector(".itinerario");

@@ -1,7 +1,6 @@
 package controller.session;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
@@ -10,10 +9,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Itinerario;
-import model.Oferta;
 import model.Usuario;
-import services.ItinerarioService;
 import services.LoginService;
 
 @WebServlet("/login")
@@ -22,14 +18,12 @@ public class LoginServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 7426414066105522340L;
 
 	private LoginService loginService;
-	private ItinerarioService itinerarioService;
 	// private OfertaService ofertaService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		loginService = new LoginService();
-		itinerarioService = new ItinerarioService();
 		// ofertaService = new OfertaService();
 	}
 
@@ -41,14 +35,13 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		String password = req.getParameter("password");
 
 		Usuario usuario = loginService.login(username, password);
+		System.out.println(usuario.getItinerario());
 
 		if (!usuario.isNull()) {
 			// ArrayList<Oferta> ofertas =
 			// ofertaService.listarOrdenado(usuario.getPreferencia().getTipoAtraccion());
 			// req.getSession().setAttribute("ofertas", ofertas);
-			ArrayList<Oferta> itinerario = itinerarioService.buscarPorUsuario(usuario.getId_usuario());
-			usuario.setItinerario(new Itinerario(itinerario));
-			System.out.println(usuario.getItinerario());
+
 			req.getSession().setAttribute("usuario", usuario);// abstraccion del tiempo que utiliza el usuario dentro
 																// de la app
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/ofertas.do"); // le

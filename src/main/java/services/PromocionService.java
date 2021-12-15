@@ -15,7 +15,7 @@ import persistence.commons.DAOFactory;
 
 public class PromocionService {
 
-	public ArrayList<Promocion> list() {
+	public ArrayList<Promocion> listar() {
 		return DAOFactory.getPromocionDAO().findAll();
 	}
 

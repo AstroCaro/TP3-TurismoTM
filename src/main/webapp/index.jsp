@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -18,10 +17,8 @@
 	href="assets/css/bootstrap/bootstrap.css">
 <script defer src="assets/js/bootstrap/bootstrap.js"
 	type="text/javascript"></script>
-
 <link rel="stylesheet" type="text/css"
 	href="assets/css/datatables/datatables.css">
-
 <script defer src="asses/js/mapa.js" type="text/javascript"></script>
 <script defer src="assets/js/puntos-rojos.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/estilo-mapa.css">
@@ -60,7 +57,6 @@
 			<div class="col-4">
 				<div id=carruselAtracciones class="carousel slide"
 					data-bs-ride="carousel">
-
 					<div class="carousel-inner">
 						<c:forEach items="${atracciones}" var="atraccion">
 							<c:choose>
@@ -100,13 +96,14 @@
 		</div>
 		<div class="col-8">
 			<div id="container-mapa">
-				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa"> <a
-					href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
-					class="punto-rojo" style="left: 33%; top: 35%;"><img
-					src="assets/img/etiquetas/Moria.png" class="etiqueta-atraccion"></a>
+				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa">
+				<a href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
+					class="punto-rojo" style="left: 33%; top: 35%;">
+					<img src="assets/img/etiquetas/Moria.png"
+						class="etiqueta-atraccion">
+				</a>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

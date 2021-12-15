@@ -12,9 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Atraccion;
 import model.Usuario;
-import persistence.commons.DAOFactory;
 import services.AtraccionService;
 import services.ComprarOfertaService;
+import services.UsuarioService;
 
 @WebServlet("/agregarAtraccionAItinerario.do")
 public class ComprarAtraccionServlet extends HttpServlet implements Servlet {
@@ -38,8 +38,10 @@ public class ComprarAtraccionServlet extends HttpServlet implements Servlet {
 		Atraccion atraccion = atraccionService.buscar(idAtraccion);
 
 		Map<String, String> errors = comprarService.comprar(usuario, atraccion);
+		
+		UsuarioService usuarioService = new UsuarioService();
 
-		Usuario usuarioActualizado = DAOFactory.getUsuarioDAO().find(usuario.getId_usuario());
+		Usuario usuarioActualizado = usuarioService.buscar(usuario.getId_usuario());
 
 		req.getSession().setAttribute("usuario", usuarioActualizado);
 

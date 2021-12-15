@@ -137,18 +137,16 @@
 							</div>
 						</a>
 						<div class="itinerario fondo">
-							<h3>
-								<c:out value="${usuario.nombre}" />
-							</h3>
+							<div class="after"></div>
 							<!-- TODO modelo de objeto nulo para itinerario -->
 							<c:choose>
 								<c:when test="${empty itinerario}">
-									<p class="text-center">Su itinerario se encuentra vacio. No
-										esperes más, armá tu próxima travesía.</p>
+									<h5 class="text-center">Su itinerario se encuentra vacio.
+										No esperes más, armá tu próxima travesía.</h5>
 								</c:when>
 								<c:when test="${not empty itinerario}">
 									<!-- otherwise -->
-									<h5>Tu itinerario</h5>
+									<h5>Tu itinerario incluye</h5>
 									<ul>
 										<c:forEach items="${itinerario}" var="ofertaComprada">
 											<li>
@@ -215,23 +213,33 @@
 											</li>
 										</c:forEach>
 									</ul>
-									
-											<h3>Total:</h3>
+									<div class="total">
+										<h3>Total:</h3>
+										<div class="total-detalles">
 											<div class="costo">
-												<!-- <img alt="" src="assets/img/usuario/coins.png"> -->
+												<img alt="" src="assets/img/usuario/coins.png">
 												<span>
 													<c:out value="${usuario.getItinerario().getMontoTotal()}"></c:out>
 													monedas
 												</span>
 											</div>
 											<div class="tiempo">
-												<!-- <img alt="" src="assets/img/usuario/reloj.png"> -->
+												<img alt="" src="assets/img/usuario/reloj.png">
 												<span>
 													<c:out value="${usuario.itinerario.horasTotales}"></c:out>
 													horas
 												</span>
 											</div>
-
+										</div>
+									</div>
+									<div class="ver-itinerario">
+										<a href="#">
+											<span>Ver detalle de itinerario</span>
+											<div>
+												<i class='bx bxs-right-arrow-alt'></i>
+											</div>
+										</a>
+									</div>
 								</c:when>
 							</c:choose>
 						</div>

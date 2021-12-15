@@ -2,6 +2,8 @@ package services;
 
 import java.util.ArrayList;
 
+import model.Itinerario;
+import model.Oferta;
 import model.TipoAtraccion;
 import model.Usuario;
 import persistence.UsuarioDAO;
@@ -59,8 +61,18 @@ public class UsuarioService {
 	}
 
 	public Usuario buscar(Integer id) {
-		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
-		return usuarioDAO.find(id);
+
+		Usuario usuario = DAOFactory.getUsuarioDAO().find(id);
+		ArrayList<Oferta> itinerario = DAOFactory.getItinerarioDAO().findItinerarioPorUsuario(id);
+		usuario.setItinerario(new Itinerario(itinerario));
+		return usuario;
+	}
+	
+	public Usuario buscarPorNombre(String nombre) {
+		Usuario usuario = DAOFactory.getUsuarioDAO().findPorNombre(nombre);
+		ArrayList<Oferta> itinerario = DAOFactory.getItinerarioDAO().findItinerarioPorUsuario(usuario.getId_usuario());
+		usuario.setItinerario(new Itinerario(itinerario));
+		return usuario;
 	}
 
 	public Usuario update(Usuario unUsuario) {
