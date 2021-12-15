@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet implements Servlet {
 			dispatcher.forward(req, resp);
 			// resp.sendRedirect("cuenta_usuario.jsp");
 		} else {
-			req.setAttribute("flash", "Usuario incorrecta");
+			req.setAttribute("flash", "Usuario/Contraseña incorrectos");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
 			dispatcher.forward(req, resp);// en camino
 			// resp.sendRedirect("login.jsp");
