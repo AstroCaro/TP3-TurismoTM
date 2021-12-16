@@ -12,10 +12,18 @@
 	type="text/javascript"></script>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/datatables/datatables.css">
-<script defer src="asses/js/mapa.js" type="text/javascript"></script>
 <script defer src="assets/js/puntos-rojos.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/estilos-inicio.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'
+	rel='stylesheet'>
+<link rel="stylesheet" href="assets/css/estilos_cuenta_usuario.css">
+<script src="https://kit.fontawesome.com/7cc28fa7fa.js"
+	crossorigin="anonymous"></script>
+
 <title>Turismo en la Tierra Media - Inicio</title>
 </head>
 <body>
@@ -102,8 +110,6 @@
 			</div>
 		</div>
 	</div>
-	<<<<<<< Updated upstream =======
 	<jsp:include page="/partials/footer.jsp"></jsp:include>
-	>>>>>>> Stashed changes
 </body>
 </html>
