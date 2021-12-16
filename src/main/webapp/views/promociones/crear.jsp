@@ -24,7 +24,7 @@
 		<jsp:include page="/partials/nav_top_admin.jsp"></jsp:include>
 		<div class="contenido">
 			<div class="container">
-				<h1>Crear Promoción</h1>
+				<h1>Editar Promoción</h1>
 			</div>
 			<c:if test="${promocion != null && !promocion.isValid()}">
 				<div class="alert alert-danger">

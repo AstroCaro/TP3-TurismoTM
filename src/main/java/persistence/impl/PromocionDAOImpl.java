@@ -24,10 +24,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public Promocion find(Integer id_promocion) {
 		try {
-			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, fk_tipoatraccion, costo, descuento, atraccion_gratis "
+			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, fk_tipoatraccion, costo, descuento, atraccion_gratis,deleted_at "
 					+ "FROM promociones "
 					+ "JOIN \"tipo promocion\" ON \"tipo promocion\".id_tipopromocion = promociones.fk_tipopromocion "
-					+ "WHERE id_promocion = ?";
+					+ "WHERE id_promocion = ? ";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
@@ -70,9 +70,10 @@ public class PromocionDAOImpl implements PromocionDAO {
 	@Override
 	public ArrayList<Promocion> findAll() {
 		try {
-			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, \"fk_tipoatraccion\", costo, descuento, atraccion_gratis "
+			String sql = "SELECT id_promocion, nombre, descripcion, tipo_promocion, \"fk_tipoatraccion\", costo, descuento, atraccion_gratis, deleted_at "
 					+ "FROM promociones "
-					+ "JOIN \"tipo promocion\" ON \"tipo promocion\".id_tipopromocion = promociones.fk_tipopromocion;";
+					+ "JOIN \"tipo promocion\" ON \"tipo promocion\".id_tipopromocion = promociones.fk_tipopromocion "
+					+ "WHERE deleted_at IS NULL;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();
@@ -154,8 +155,20 @@ public class PromocionDAOImpl implements PromocionDAO {
 
 	@Override
 	public int update(Promocion promocion) {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			String sql = "UPDATE promociones SET nombre = ?, descripcion = ?, fk_tipoatraccion = ? WHERE id_promocion = ?;";
+
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, promocion.getNombre());
+			statement.setString(2, promocion.getDescripcion());
+			statement.setInt(3, promocion.getTipoAtraccion().getIdTipoAtraccion());
+			statement.setInt(4, promocion.getId_promocion());
+			int rows = statement.executeUpdate();
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 	}
 
 	@Override

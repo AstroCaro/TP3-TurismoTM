@@ -83,7 +83,7 @@
 			Gratis</label>
 		<select class="form-select" name="atraccionGratis"
 			id="atraccionGratis">
-			<option value="1" disabled="disabled" selected="selected">Selecciona...</option>
+			<option value="0" disabled="disabled" selected="selected">Selecciona...</option>
 			<c:forEach items="${atracciones}" var="atraccion">
 				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
 			</c:forEach>

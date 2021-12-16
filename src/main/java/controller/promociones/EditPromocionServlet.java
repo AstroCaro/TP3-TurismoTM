@@ -8,51 +8,50 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Atraccion;
-import services.AtraccionService;
+
+import model.Promocion;
+
+import services.PromocionService;
 
 @WebServlet("/promociones/edit.do")
 public class EditPromocionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 7722261745778040380L;
-	private AtraccionService atraccionService;
+	private PromocionService promocionService;
 
 	@Override
 	public void init() throws ServletException {
 		super.init();
-		this.atraccionService = new AtraccionService();
+		this.promocionService = new PromocionService();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id = Integer.parseInt(req.getParameter("id_atraccion"));
+		Integer id = Integer.parseInt(req.getParameter("id_promocion"));
 
-		Atraccion atraccion = atraccionService.buscar(id);
-		req.setAttribute("atraccion", atraccion);
+		Promocion promocion = promocionService.buscar(id);
+		req.setAttribute("promocion", promocion);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/editar.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/editar.jsp");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer id_atraccion = Integer.parseInt(req.getParameter("id_atraccion"));
+		Integer id_promocion = Integer.parseInt(req.getParameter("id_promocion"));
 		String nombre = req.getParameter("nombre");
 		String descripcion = req.getParameter("descripcion");
-		Integer costo = Integer.parseInt(req.getParameter("costo"));
-		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
-		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
-		Integer cuposDisponibles = Integer.parseInt(req.getParameter("cuposDisponibles"));
+
 		Integer tipoAtraccion = Integer.parseInt(req.getParameter("tipoAtraccion"));
-		
-		Atraccion atraccion = atraccionService.update(id_atraccion, nombre, descripcion, costo, tiempo, cuposDisponibles, tipoAtraccion);
 
-		if (atraccion.isValid()) {
-			resp.sendRedirect("/TurismoTMTP3/atracciones/listadoAtracciones.do");
+		Promocion promocion = promocionService.update(id_promocion, nombre, descripcion, tipoAtraccion);
+
+		if (promocion.isValid()) {
+			resp.sendRedirect("/TurismoTMTP3/promociones/listadoPromociones.do");
 		} else {
-			req.setAttribute("atraccion", atraccion);
+			req.setAttribute("promocion", promocion);
 
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/atracciones/editar.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/editar.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}
