@@ -9,6 +9,11 @@
 			required value="${promocion.nombre}">
 	</div>
 	<div class="mb-3">
+		<label for="descripcion" class="form-label">Descripcion</label>
+		<textarea class="form-control" id="descripcion"
+			placeholder="Descripcion" required> ${promocion.descripcion}</textarea>
+	</div>
+	<div class="mb-3">
 		<label for="tipoAtraccion" class="col-form-label">Tipo de
 			Atraccion:</label>
 		<select class="form-select" name="tipoAtraccion" id="tipoAtraccion"
@@ -23,12 +28,18 @@
 			de atracciones:</label>
 		<select class="form-select" name="cantidadAtracciones"
 			id="cantidadAtracciones" required>
-			<option selected>Selecciona...</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
+			<option value="ninguno" selected>Selecciona...</option>
+			<c:forEach begin="2" end="4" var="cantidad">
+			<option value="${cantidad}" ${cantidad == grade ? 'selected' : ''}>${cantidad}</option>
+			</c:forEach>
 		</select>
 	</div>
-	<div class="mb-3">
+
+<%-- 	<form:select path="selectName">
+		<form:option value="0" label="Select an Option" />
+		<form:options items="${nameOfList}" />
+	</form:select> --%>
+	<%-- <div class="mb-3" id="atraccion1">
 		<label for="atracciones1" class="col-form-label">Atraccion 1</label>
 		<select class="form-select" name="atracciones1" id="atracciones1"
 			required>
@@ -38,7 +49,7 @@
 			</c:forEach>
 		</select>
 	</div>
-	<div class="mb-3">
+	<div class="mb-3" id="atraccion2">
 		<label for="atracciones2" class="col-form-label">Atraccion 2</label>
 		<select class="form-select" name="atracciones2" id="atracciones2"
 			required>
@@ -48,7 +59,7 @@
 			</c:forEach>
 		</select>
 	</div>
-	<div class="mb-3">
+	<div class="mb-3" id="atraccion3">
 		<label for="atracciones3" class="col-form-label">Atraccion 3</label>
 		<select class="form-select atracciones3" name="atracciones3"
 			id="atracciones3" required>
@@ -57,6 +68,8 @@
 				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
 			</c:forEach>
 		</select>
+	</div> --%>
+	<div id="input-atracciones">
 	</div>
 	<div class="mb-3">
 		<label for="tipoPromocion" class="col-form-label">Tipo de
@@ -74,12 +87,15 @@
 		<input type="text" class="form-control" id="costo" name="costo"required">
 	</div>
 	<div class="mb-3" id="input2">
-		<label for="atraccionGratis" class="col-form-label">Atraccion Gratis:</label>
-		<input type="text" class="form-control" id="atraccionGratis" name="atraccionGratis"required">
+		<label for="atraccionGratis" class="col-form-label">Atraccion
+			Gratis:</label>
+		<input type="text" class="form-control" id="atraccionGratis"
+			name="atraccionGratis"required">
 	</div>
 	<div class="mb-3" id="input3">
 		<label for="descuento" class="col-form-label">Descuento:</label>
-		<input type="number" step="0.01" min=0 class="form-control" id="descuento" name="descuento"required">
+		<input type="number" step="0.01" min=0 class="form-control"
+			id="descuento" name="descuento"required">
 	</div>
 	<%-- 	<div class="mb-3">
 		<label for="costo"
@@ -116,3 +132,4 @@
 		<a onclick="window.history.back();" class="btn btn-secondary"
 			role="button">Cancelar</a>
 	</div>
+</div>

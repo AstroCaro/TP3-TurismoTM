@@ -106,10 +106,11 @@ public class PromocionDAOImpl implements PromocionDAO {
 				statement.setDouble(5, promocion.getCosto());
 				break;
 			case "PromocionAxB":
+				PromocionAxB promocionAxB = (PromocionAxB) promocion; 
 				statement.setInt(3, 2);
 				// XXX hacer metodo en promocion axb que devuelva atraccion gratis
 				statement.setInt(7,
-						promocion.getAtracciones().get(promocion.getAtracciones().size() - 1).getId_atraccion());
+						promocionAxB.getAtraccionGratis().getId_atraccion());
 				break;
 			case "PromocionPorcentual":
 				PromocionPorcentual promocionPorcentual = (PromocionPorcentual) promocion;
@@ -199,8 +200,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 						resultados.getDouble("descuento"), arrayDeAtracciones);
 				break;
 			case "AxB":
+				Atraccion atraccionGratis = DAOFactory.getAtraccionDAO().find(resultados.getInt("atraccion_gratis"));
 				unaPromocion = new PromocionAxB(resultados.getInt("id_promocion"), resultados.getString("nombre"),
-						resultados.getString("descripcion"), tipoAtraccion, arrayDeAtracciones);
+						resultados.getString("descripcion"), tipoAtraccion, arrayDeAtracciones, atraccionGratis);
 				break;
 			}
 			return unaPromocion;

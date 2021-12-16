@@ -9,9 +9,17 @@ public class PromocionAxB extends Promocion {
 	public Atraccion atraccionGratis;
 
 	public PromocionAxB(int id_promocion, String nombre, String descripcion, TipoAtraccion tipoAtraccion,
-			ArrayList<Atraccion> atracciones) {
+			ArrayList<Atraccion> atracciones, Atraccion atraccionGratis) {
 		super(id_promocion, nombre, descripcion, tipoAtraccion, atracciones);
-		this.atraccionGratis = atracciones.get(atracciones.size() - 1);
+		this.atraccionGratis = atraccionGratis;
+	}
+
+	public Atraccion getAtraccionGratis() {
+		return atraccionGratis;
+	}
+
+	public void setAtraccionGratis(Atraccion atraccionGratis) {
+		this.atraccionGratis = atraccionGratis;
 	}
 
 	@Override
