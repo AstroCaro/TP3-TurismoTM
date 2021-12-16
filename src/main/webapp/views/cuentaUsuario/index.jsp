@@ -278,12 +278,36 @@
 					</a>
 				</div>
 				<div class="perfil-resumen">
-				
-				
-				<div class="perfil-presupuesto">
-				</div>
-				<div class="perfil-tiempo">
-				</div>
+					<div class="perfil-presupuesto">
+						<div class="card mb-3" style="max-width: 540px;">
+							<div class="row g-0">
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">Presupuesto</h5>
+										<p class="card-text">${usuario.presupuesto}</p>
+										<p class="card-text">
+											<small class="text-muted">Last updated 3 mins ago</small>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="perfil-tiempo">
+						<div class="card mb-3" style="max-width: 540px;">
+							<div class="row g-0">
+								<div class="col-md-8">
+									<div class="card-body">
+										<h5 class="card-title">Presupuesto</h5>
+										<p class="card-text">${usuario.tiempo}</p>
+										<p class="card-text">
+											<small class="text-muted">Last updated 3 mins ago</small>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -540,7 +564,8 @@
 										</h5>
 									</a>
 									<p class="card-text">
-										<c:out value="${fn:substring(oferta.descripcion,0,120)}"></c:out>...
+										<c:out value="${fn:substring(oferta.descripcion,0,120)}"></c:out>
+										...
 										<c:if test="${oferta.esPromocion()}">
 											<ul class="card-text">
 												<c:forEach items="${oferta.atracciones}" var="atraccion">
