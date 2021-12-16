@@ -70,8 +70,6 @@ public class UsuarioService {
 	
 	public Usuario buscarPorNombre(String nombre) {
 		Usuario usuario = DAOFactory.getUsuarioDAO().findPorNombre(nombre);
-		ArrayList<Oferta> itinerario = DAOFactory.getItinerarioDAO().findItinerarioPorUsuario(usuario.getId_usuario());
-		usuario.setItinerario(new Itinerario(itinerario));
 		return usuario;
 	}
 

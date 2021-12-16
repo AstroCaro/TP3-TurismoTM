@@ -2,12 +2,14 @@ package services;
 
 import model.Usuario;
 import model.nullobjects.NullUsuario;
+import persistence.UsuarioDAO;
+import persistence.commons.DAOFactory;
 
 public class LoginService {
 
 	public Usuario login(String nombre, String password) {
-		UsuarioService usuarioService = new UsuarioService();
-    	Usuario user = usuarioService.buscarPorNombre(nombre);
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+    	Usuario user = usuarioDAO.findPorNombre(nombre);
     
     	
     	if (user.isNull() || !user.checkPassword(password)) {

@@ -9,6 +9,7 @@ import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
 import model.TipoAtraccion;
 import model.Usuario;
+import model.nullobjects.NullUsuario;
 import persistence.UsuarioDAO;
 import persistence.commons.MissingDataException;
 
@@ -123,7 +124,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setString(1, nombre);
 			ResultSet resultado = statement.executeQuery();
 
-			Usuario usuario = null;
+			Usuario usuario = NullUsuario.build();
 			if (resultado.next()) {
 				usuario = toUsuario(resultado);
 			}
