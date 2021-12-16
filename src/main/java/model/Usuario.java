@@ -15,11 +15,12 @@ public class Usuario {
 	protected double tiempoDisponible;
 	protected boolean admin;
 	protected Itinerario itinerario;
+	protected String deleted_at;
 
 	private Map<String, String> errors;
 
 	public Usuario(Integer id_usuario, String nombre, String password, TipoAtraccion preferencia, int presupuesto,
-			double tiempo, boolean admin) {
+			double tiempo, boolean admin, String deleted_at) {
 		this.id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.password = password;
@@ -28,10 +29,19 @@ public class Usuario {
 		this.tiempoDisponible = tiempo;
 		this.admin = admin;
 		this.itinerario = new Itinerario();
+		this.deleted_at=deleted_at;
+	}
+
+	public String getDeleted_at() {
+		return deleted_at;
+	}
+
+	public void setDeleted_at(String deleted_at) {
+		this.deleted_at = deleted_at;
 	}
 
 	public Usuario(String nombre, String password, TipoAtraccion preferencia, int presupuesto, double tiempo,
-			boolean admin) {
+			boolean admin,String deleted_at) {
 		this.id_usuario = null;
 		this.nombre = nombre;
 		this.password = Crypt.hash(password);
@@ -40,6 +50,7 @@ public class Usuario {
 		this.tiempoDisponible = tiempo;
 		this.admin = admin;
 		this.itinerario = new Itinerario();
+		this.deleted_at=deleted_at;
 	}
 
 	public Integer getId_usuario() {

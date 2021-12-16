@@ -9,16 +9,26 @@ public class Atraccion extends Oferta {
 	private int id_atraccion;
 	private int costo;
 	private int cuposDisponibles;
+	private String deleted_at;
 
 	private Map<String, String> errors;
 
 	public Atraccion(int id_atraccion, String nombre, String descripcion, int costo, double tiempo,
-			int cuposDisponibles, TipoAtraccion tipoAtraccion) {
+			int cuposDisponibles, TipoAtraccion tipoAtraccion, String deleted_at) {
 		super(nombre, descripcion, tipoAtraccion);
 		this.costo = costo;
 		this.tiempo = tiempo;
 		this.cuposDisponibles = cuposDisponibles;
 		this.id_atraccion = id_atraccion;
+		this.deleted_at=deleted_at;
+	}
+
+	public String getDeleted_at() {
+		return deleted_at;
+	}
+
+	public void setDeleted_at(String deleted_at) {
+		this.deleted_at = deleted_at;
 	}
 
 	public void setNombre(String nombre) {

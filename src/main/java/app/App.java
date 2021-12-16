@@ -29,8 +29,8 @@ public class App {
     	
     	TipoAtraccion aventura = new TipoAtraccion(1, "AVENTURA");
     	
-    	Atraccion moria = new Atraccion(1, "Moria", "", 10, 2.0, 6, aventura);
-		Atraccion bosqueNegro = new Atraccion(2, "Bosque Negro", "", 3, 4.0, 12, aventura);
+    	Atraccion moria = new Atraccion(1, "Moria", "", 10, 2.0, 6, aventura,"");
+		Atraccion bosqueNegro = new Atraccion(2, "Bosque Negro", "", 3, 4.0, 12, aventura,"");
     	
     	atracciones.add(moria);
     	atracciones.add(bosqueNegro);

@@ -39,8 +39,9 @@ public class CreateAttractionServlet extends HttpServlet {
 		Double tiempo = Double.parseDouble(req.getParameter("tiempo"));
 		Integer cuposDisponibles = Integer.parseInt(req.getParameter("cuposDisponibles"));
 		Integer tipoAtraccion = Integer.parseInt(req.getParameter("tipoAtraccion"));
+		String deleted_at =("");
 		
-		Atraccion atraccion = atraccionService.create(nombre, descripcion, costo, tiempo, cuposDisponibles, tipoAtraccion);
+		Atraccion atraccion = atraccionService.create(nombre, descripcion, costo, tiempo, cuposDisponibles, tipoAtraccion, deleted_at);
 
 		
 		if (atraccion.isValid()) {

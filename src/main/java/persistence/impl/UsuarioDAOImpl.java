@@ -165,7 +165,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(resultados.getInt("fk_tipoatraccion"));
 			return new Usuario(resultados.getInt("id_usuario"), resultados.getString("nombre"),
 					resultados.getString("password"), tipoAtraccion, resultados.getInt("presupuesto"),
-					resultados.getDouble("tiempo_disponible"), resultados.getBoolean("admin"));
+					resultados.getDouble("tiempo_disponible"), resultados.getBoolean("admin"), resultados.getString("deleted_at"));
 
 		} catch (Exception e) {
 			throw new MissingDataException(e);
