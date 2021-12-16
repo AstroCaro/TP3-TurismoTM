@@ -9,10 +9,10 @@
                 </div>
 
                 <div class="menu-usuario fondo">
-                    <h3>Gollum</h3>
+                    <h3>${usuario.nombre }</h3>
                     <h5>Administrador de TurismoTM</h5>
                     <ul>
-                        <li>
+                        <!-- <li>
                             <a href="#">
                                 <i class='bx bx-user-circle'></i>
                                 <span>Mi Perfil</span>
@@ -23,9 +23,9 @@
                                 <i class='bx bx-cog'></i>
                                 <span>Configuracion</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href="#">
+                            <a href="${pageContext.request.contextPath}/logout">
                                 <i class='bx bx-log-out'></i>
                                 <span>Cerrar Sesion</span>
                             </a>

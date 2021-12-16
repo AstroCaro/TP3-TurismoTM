@@ -17,12 +17,11 @@
 	<div class="container mt-5">
 		<c:forEach items="${atracciones}" var="atraccion">
 			<div class="card h-100">
-				<!-- <a class="text-decoration-none"
-									href="atracciones/verAtraccion.do?id_atraccion=${atraccion.id_atraccion }">
-									 -->
+				<a class="text-decoration-none"
+									href="${pageContext.request.contextPath}/atracciones/verAtraccion.do?id_atraccion=${atraccion.id_atraccion }">
 				<img src="${pageContext.request.contextPath}/assets/img/${atraccion.nombre}/1.jpg"
 					class="card-img-top imagen-carrusel" alt="${atraccion.nombre}">
-				<!--</a> -->
+				</a>
 				<div class="card-body">
 					<h5 class="card-title">
 						<c:out value="${atraccion.nombre}"></c:out>

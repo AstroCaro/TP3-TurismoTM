@@ -17,8 +17,8 @@
 				<ul class="navbar-nav nav-fill w-100">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="${pageContext.request.contextPath}/inicio">INICIO</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="#carruselAtracciones">ATRACCIONES</a></li>
+					<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/atracciones/listadoAtraccionesInicio.do">ATRACCIONES</a>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="#">PROMOCIONES</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">CONTACTO</a>
@@ -29,7 +29,7 @@
 				id="navbarSupportedContent">
 				<ul class="nav navbar-nav  mb-2 mb-lg-0">
 					<li class="nav-item action"><a class="nav-link profile"
-						aria-current="page" href="#">
+						aria-current="page" href="${pageContext.request.contextPath}">
 							<div class="icon">
 								<i class='bx bx-user'></i> <i class='bx bxs-user'></i>
 							</div>

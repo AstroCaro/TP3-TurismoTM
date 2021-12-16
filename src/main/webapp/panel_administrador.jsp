@@ -8,8 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'
 	rel='stylesheet'>
-<link rel="stylesheet" href="assets/css/estilos_panel_administrador.css">
-<script type="text/javascript" src="assets/js/admin_app.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/estilo_panel_administrador.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/admin_app.js" defer></script>
 <script src="https://kit.fontawesome.com/7cc28fa7fa.js"
 	crossorigin="anonymous"></script>
 <title>Panel de administración</title>

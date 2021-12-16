@@ -43,24 +43,18 @@ public class LoginServlet extends HttpServlet implements Servlet {
 		if (!usuario.isNull()) {
 			ArrayList<Oferta> itinerario = itinerarioService.buscarPorUsuario(usuario.getId_usuario());
 			usuario.setItinerario(new Itinerario(itinerario));
-
 			req.getSession().setAttribute("usuario", usuario);// abstraccion del tiempo que utiliza el usuario dentro
-																// de la app
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/ofertas.do"); // le
-																													// pido
-																													// al
-																													// contexto
-																													// del
-																													// servelt
-																													// que
-																													// me
-																													// lleva
-																													// a
-																													// donde
-																													// quiero
-																													// redireccionar
-			dispatcher.forward(req, resp);
-			// resp.sendRedirect("cuenta_usuario.jsp");
+															// de la app
+			
+			if(usuario.getAdmin()) {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/panel_administrador.jsp");				
+				dispatcher.forward(req, resp);
+			}
+			else {
+				// le pido al contexto del servelt que me lleva a donde quiero redireccionar
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cuenta_usuario/ofertas.do");				
+				dispatcher.forward(req, resp);				
+			}
 		} else {
 			req.setAttribute("flash", "Usuario/Contraseña incorrectos");
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
