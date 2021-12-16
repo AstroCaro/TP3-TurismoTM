@@ -3,7 +3,7 @@
 	$('#atracciones3').prop('disabled', shouldEnable);
 });*/
 
-/*$(document).ready(function() {
+$(document).ready(function() {
 	$("#cantidadAtracciones").on("change", function() {
 		if ($(this).val() == "2") {
 			$("#atraccion1").show();
@@ -13,23 +13,14 @@
 			$("#atraccion1").show();
 			$("#atraccion2").show();
 			$("#atraccion3").show();
-		} else if ($(this).val()=="ninguno") {
+		} else if ($(this).val() == "ninguno") {
 			$("#atraccion1").hide();
 			$("#atraccion2").hide();
 			$("#atraccion3").hide();
 		}
 	});
-});*/
-
-$("#cantidadAtracciones").change(function() {
-  var value = +$(this).val();
-  var nr = 0;
-  var elem = $('#input-atracciones').empty();
-  while (nr < value) {
-    elem.append($('<input>',{value : "${atraccion.id_atraccion}"}));
-    nr++;
-  }
 });
+
 
 $(document).ready(function() {
 	$("#tipoPromocion").on("change", function() {

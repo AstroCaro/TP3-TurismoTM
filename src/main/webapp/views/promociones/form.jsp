@@ -29,21 +29,15 @@
 		<select class="form-select" name="cantidadAtracciones"
 			id="cantidadAtracciones" required>
 			<option value="ninguno" selected>Selecciona...</option>
-			<c:forEach begin="2" end="4" var="cantidad">
-			<option value="${cantidad}" ${cantidad == grade ? 'selected' : ''}>${cantidad}</option>
-			</c:forEach>
+			<option value="2" >2</option>
+			<option value="3" >3</option>
 		</select>
 	</div>
-
-<%-- 	<form:select path="selectName">
-		<form:option value="0" label="Select an Option" />
-		<form:options items="${nameOfList}" />
-	</form:select> --%>
-	<%-- <div class="mb-3" id="atraccion1">
+	<div class="mb-3" id="atraccion1">
 		<label for="atracciones1" class="col-form-label">Atraccion 1</label>
 		<select class="form-select" name="atracciones1" id="atracciones1"
 			required>
-			<option selected>Selecciona...</option>
+			<option disabled selected>Selecciona...</option>
 			<c:forEach items="${atracciones}" var="atraccion">
 				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
 			</c:forEach>
@@ -53,7 +47,7 @@
 		<label for="atracciones2" class="col-form-label">Atraccion 2</label>
 		<select class="form-select" name="atracciones2" id="atracciones2"
 			required>
-			<option selected>Selecciona...</option>
+			<option disabled selected>Selecciona...</option>
 			<c:forEach items="${atracciones}" var="atraccion">
 				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
 			</c:forEach>
@@ -63,20 +57,19 @@
 		<label for="atracciones3" class="col-form-label">Atraccion 3</label>
 		<select class="form-select atracciones3" name="atracciones3"
 			id="atracciones3" required>
-			<option selected>Selecciona...</option>
+			<option disabled selected>Selecciona...</option>
 			<c:forEach items="${atracciones}" var="atraccion">
 				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
 			</c:forEach>
 		</select>
-	</div> --%>
-	<div id="input-atracciones">
 	</div>
+	<div id="input-atracciones"></div>
 	<div class="mb-3">
 		<label for="tipoPromocion" class="col-form-label">Tipo de
 			Promocion:</label>
 		<select class="form-select" name="tipoPromocion" id="tipoPromocion"
 			required>
-			<option selected>Selecciona...</option>
+			<option disabled selected>Selecciona...</option>
 			<option value="PromocionAbsoluta">Promocion Absoluta</option>
 			<option value="PromocionAXB">Promocion AxB</option>
 			<option value="PromocionPorcentual">Promocion Porcentual</option>
@@ -87,10 +80,14 @@
 		<input type="text" class="form-control" id="costo" name="costo"required">
 	</div>
 	<div class="mb-3" id="input2">
-		<label for="atraccionGratis" class="col-form-label">Atraccion
-			Gratis:</label>
-		<input type="text" class="form-control" id="atraccionGratis"
-			name="atraccionGratis"required">
+		<label for="atraccionGratis" class="col-form-label">Atraccion Gratis</label>
+		<select class="form-select" name="atraccionGratis" id="atraccionGratis"
+			required>
+			<option disabled selected>Selecciona...</option>
+			<c:forEach items="${atracciones}" var="atraccion">
+				<option value="${atraccion.id_atraccion}">${atraccion.nombre}</option>
+			</c:forEach>
+		</select>
 	</div>
 	<div class="mb-3" id="input3">
 		<label for="descuento" class="col-form-label">Descuento:</label>
