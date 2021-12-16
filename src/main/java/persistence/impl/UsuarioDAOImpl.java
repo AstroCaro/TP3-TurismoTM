@@ -128,7 +128,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setInt(1, id_usuario);
 			ResultSet resultado = statement.executeQuery();
 
-			Usuario usuario = null;
+			Usuario usuario =  NullUsuario.build();;
 			if (resultado.next()) {
 				usuario = toUsuario(resultado);
 			}

@@ -1,11 +1,11 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class PromocionAxB extends Promocion {
-	// supondremos que una promoción AxB solo puede tener una atracción gratis, y se
-	// corresponde con el último espacio del ArrayList
+
 	public Atraccion atraccionGratis;
 
 	public PromocionAxB(int id_promocion, String nombre, String descripcion, TipoAtraccion tipoAtraccion,
@@ -25,9 +25,10 @@ public class PromocionAxB extends Promocion {
 	@Override
 	public int getCosto() {
 		costo = 0;
-		for (int i = 0; i < atracciones.size() - 1; i++) {
+		for (int i = 0; i < atracciones.size(); i++) {
 			costo += atracciones.get(i).getCosto();
 		}
+		costo -= this.atraccionGratis.getCosto();
 		return costo;
 	}
 
@@ -55,7 +56,7 @@ public class PromocionAxB extends Promocion {
 
 	@Override
 	public void validate() {
-
+		errors = new HashMap<String, String>();
 		if (atraccionGratis == null) {
 			errors.put("atraccionGratis", "Debe ingresar una atraccion");
 		}

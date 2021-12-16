@@ -14,15 +14,16 @@ public interface PromocionDAO extends GenericDAO<Promocion> {
 
 	public abstract ArrayList<Promocion> findAll();
 
-	public abstract int insert(Promocion promocion);
+	public abstract Promocion insert(Promocion promocion);
 
 	public abstract int update(Promocion promocion);
 
 	public abstract int delete(Promocion promocion);
-	
+
 	public abstract int softDelete(Promocion promocion);
 
 	public abstract ArrayList<Atraccion> listarAtraccionesIncluidas(Integer idPromocion);
 
-	public abstract int insertAtraccionIncluida(Promocion promocion, Integer idAtraccion);
+	public abstract int insertAtraccionIncluida(Promocion promocion, Atraccion atraccion);
+
 }

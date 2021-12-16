@@ -6,18 +6,20 @@
 $(document).ready(function() {
 	$("#cantidadAtracciones").on("change", function() {
 		if ($(this).val() == "2") {
-			$("#atraccion1").show();
-			$("#atraccion2").show();
+			$("#atraccion1").show().find('select').attr('required', true);
+			$("#atraccion2").show().find('select').attr('required', true);
+			$("#atraccion3").hide().find('select').attr('required', false);
+
+		} else if ($(this).val() == "3"){
+			$("#atraccion1").show().find('select').attr('required', true);
+			$("#atraccion2").show().find('select').attr('required', true);
+			$("#atraccion3").show().find('select').attr('required', true);
+		} else {
+			$("#atraccion1").hide().find('select').attr('required', false);
+			$("#atraccion2").hide().find('select').attr('required', false);
+			$("#atraccion3").hide().find('select').attr('required', false);
 		}
-		else if ($(this).val() == "3") {
-			$("#atraccion1").show();
-			$("#atraccion2").show();
-			$("#atraccion3").show();
-		} else if ($(this).val() == "ninguno") {
-			$("#atraccion1").hide();
-			$("#atraccion2").hide();
-			$("#atraccion3").hide();
-		}
+
 	});
 });
 
@@ -25,24 +27,24 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#tipoPromocion").on("change", function() {
 		if ($(this).val() === "PromocionAbsoluta") {
-			$("#input1").show();
+			$("#input1").show().find('input').attr('required', true);
 		}
 		else {
-			$("#input1").hide();
+			$("#input1").hide().find('input').attr('required', false);
 		}
 
-		if ($(this).val() === "PromocionAXB") {
-			$("#input2").show();
+		if ($(this).val() === "PromocionAxB") {
+			$("#input2").show().find('select').attr('required', true);
 		}
 		else {
-			$("#input2").hide();
+			$("#input2").hide().find('select').attr('required', false);
 		}
 
 		if ($(this).val() === "PromocionPorcentual") {
-			$("#input3").show();
+			$("#input3").show().find('input').attr('required', true);
 		}
 		else {
-			$("#input3").hide();
+			$("#input3").hide().find('input').attr('required', false);;
 		}
 	});
 });

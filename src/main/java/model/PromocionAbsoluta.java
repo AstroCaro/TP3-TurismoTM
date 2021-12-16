@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PromocionAbsoluta extends Promocion {
 
@@ -27,7 +28,7 @@ public class PromocionAbsoluta extends Promocion {
 
 	@Override
 	public void validate() {
-
+		errors = new HashMap<String, String>();
 		if (costo <= 0) {
 			errors.put("costo", "Debe ser positivo");
 		}

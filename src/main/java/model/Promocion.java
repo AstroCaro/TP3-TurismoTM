@@ -23,6 +23,11 @@ public abstract class Promocion extends Oferta {
 	public int getId_promocion() {
 		return id_promocion;
 	}
+	
+
+	public void setId_promocion(int id_promocion) {
+		this.id_promocion = id_promocion;
+	}
 
 	public double getTiempo() {
 		tiempoTotal = 0;
@@ -74,8 +79,12 @@ public abstract class Promocion extends Oferta {
 	}
 
 	public abstract boolean isValid();
-	
-	public abstract void validate(); 
+
+	public abstract void validate();
+
+	public Map<String, String> getErrors() {
+		return errors;
+	}
 
 	public abstract int getCosto();
 

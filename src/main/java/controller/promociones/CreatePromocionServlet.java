@@ -38,14 +38,21 @@ public class CreatePromocionServlet extends HttpServlet {
 
 		Integer cantidadAtracciones = Integer.parseInt(req.getParameter("cantidadAtracciones"));
 		ArrayList<Integer> atraccionesIncluidas = new ArrayList<Integer>();
-		for (int i = 0; i < cantidadAtracciones; i++) {
+		for (int i = 1; i <= cantidadAtracciones; i++) {
 			atraccionesIncluidas.add(Integer.parseInt(req.getParameter("atracciones" + i)));
 		}
 		String tipoPromocion = req.getParameter("tipoPromocion");
 		Integer costo = Integer.parseInt(req.getParameter("costo"));
-		Integer idAtraccionGratis = Integer.parseInt(req.getParameter("idAtraccionGratis"));
+
+		Integer idAtraccionGratis = 0;
+		if (req.getParameter("atraccionGratis") == null) {
+			idAtraccionGratis = 0;
+		} else {
+			idAtraccionGratis = Integer.parseInt(req.getParameter("atraccionGratis"));
+		}
 		Double descuento = Double.parseDouble(req.getParameter("descuento"));
-		
+		System.out.println(nombre + " " + descripcion + " " + tipoPromocion + " " + idTipoAtraccion + " " + costo + " "
+				+ descuento + " " + idAtraccionGratis + " " + atraccionesIncluidas);
 
 		Promocion promocion = promocionService.create(nombre, descripcion, tipoPromocion, idTipoAtraccion, costo,
 				descuento, idAtraccionGratis, atraccionesIncluidas);
@@ -54,7 +61,7 @@ public class CreatePromocionServlet extends HttpServlet {
 			resp.sendRedirect("/TurismoTMTP3/promociones/listadoPromociones.do");
 		} else {
 			req.setAttribute("promocion", promocion);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/promociones/crear.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 			dispatcher.forward(req, resp);
 		}
 

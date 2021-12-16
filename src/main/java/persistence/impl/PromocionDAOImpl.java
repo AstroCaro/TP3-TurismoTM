@@ -89,9 +89,9 @@ public class PromocionDAOImpl implements PromocionDAO {
 	}
 
 	@Override
-	public int insert(Promocion promocion) {
+	public Promocion insert(Promocion promocion) {
 		try {
-			String sql = "INSERT INTO promociones (nombre, descripcion, fk_promocion, fk_tipoatraccion, costo, descuento, atraccion_gratis) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO promociones (nombre, descripcion, fk_tipopromocion, fk_tipoatraccion, costo, descuento, atraccion_gratis) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -108,37 +108,41 @@ public class PromocionDAOImpl implements PromocionDAO {
 				statement.setDouble(5, promocion.getCosto());
 				break;
 			case "PromocionAxB":
-				PromocionAxB promocionAxB = (PromocionAxB) promocion; 
-				statement.setInt(3, 2);
+				PromocionAxB promocionAxB = (PromocionAxB) promocion;
+				statement.setInt(3, 3);
 				// XXX hacer metodo en promocion axb que devuelva atraccion gratis
-				statement.setInt(7,
-						promocionAxB.getAtraccionGratis().getId_atraccion());
+				statement.setInt(7, promocionAxB.getAtraccionGratis().getId_atraccion());
 				break;
 			case "PromocionPorcentual":
 				PromocionPorcentual promocionPorcentual = (PromocionPorcentual) promocion;
-				statement.setInt(3, 3);
+				statement.setInt(3, 2);
 				statement.setDouble(6, promocionPorcentual.getDescuento());
 				break;
 			}
-			int rows = statement.executeUpdate();
+			statement.executeUpdate();
 
-			return rows;
+			ResultSet resultado = statement.getGeneratedKeys();
+			if (resultado.next()) {
+				int id = resultado.getInt(1);
+				promocion.setId_promocion(id);
+			}
+			return promocion;
 		} catch (Exception e) {
 			throw new MissingDataException(e);
 		}
 	}
 
 	@Override
-	public int insertAtraccionIncluida(Promocion promocion, Integer idAtraccion) {
+	public int insertAtraccionIncluida(Promocion promocion, Atraccion atraccion) {
 		try {
-			String sql = "INSERT INTO promociones-atracciones VALUES (?, ?)";
+			String sql = "INSERT INTO \"promocion-atraccion\" VALUES (?, ?)";
 
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 
 			statement.setInt(1, promocion.getId_promocion());
 
-			statement.setInt(2, idAtraccion);
+			statement.setInt(2, atraccion.getId_atraccion());
 
 			int rows = statement.executeUpdate();
 			return rows;
