@@ -64,7 +64,7 @@ public class AtraccionService {
 		Atraccion atraccion = new Atraccion(id, "", "", 0, 0, 0, null);
 
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
-		atraccionDAO.delete(atraccion);
+		atraccionDAO.softDelete(atraccion);
 	}
 
 	public Atraccion buscar(Integer id) {

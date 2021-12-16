@@ -15,5 +15,7 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 	
 	public abstract Usuario findPorNombre(String nombre);
 
+	public abstract int softDelete(Usuario usuario);
+
 
 }

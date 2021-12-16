@@ -57,7 +57,7 @@ public class UsuarioService {
 		Usuario usuario = new Usuario(id, "", "", null, 0, 0, false);
 
 		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
-		usuarioDAO.delete(usuario);
+		usuarioDAO.softDelete(usuario);
 	}
 
 	public Usuario buscar(Integer id) {

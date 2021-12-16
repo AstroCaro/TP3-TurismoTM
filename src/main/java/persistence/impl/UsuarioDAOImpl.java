@@ -3,7 +3,10 @@ package persistence.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
 
 import persistence.commons.ConnectionProvider;
 import persistence.commons.DAOFactory;
@@ -70,6 +73,28 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			statement.setDouble(5, usuario.getTiempo_disponible());
 			statement.setBoolean(6, usuario.getAdmin());
 			statement.setInt(7, usuario.getId_usuario());
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	@Override
+	public int softDelete(Usuario usuario) {
+	
+		try {
+			LocalDate date = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			
+			String sql = "UPDATE usuarios SET deleted_at = ? WHERE id_usuario = ?;";
+
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, date.format(formatter));
+			statement.setInt(2, usuario.getId_usuario());
+		
 			int rows = statement.executeUpdate();
 
 			return rows;
