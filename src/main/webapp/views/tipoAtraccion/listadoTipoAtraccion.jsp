@@ -44,23 +44,23 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${tipo atraccion}" var="tipoAtraccion">
+							<c:forEach items="${tipoAtraccion}" var="tipoAtraccion">
 							  <c:if test="${empty tipoatraccion.deleted_at}">			
 								<tr>
 									<td>
-										<c:out value="${tipoatraccion.id_TipoAtraccion}"></c:out>
+										<c:out value="${tipoAtraccion.idTipoAtraccion}"></c:out>
 									</td>
 									<td>
-										<c:out value="${tipoatraccion.tipoAtraccion}"></c:out>
+										<c:out value="${tipoAtraccion.tipoAtraccion}"></c:out>
 									</td>
 									<td>
 										<a
-											href="/TurismoTMTP3/tipoAtraccion/edit.do?id_TipoAtraccion=${tipoatraccion.id_tipoAtraccion}"
+											href="/TurismoTMTP3/tipoAtraccion/edit.do?id_TipoAtraccion=${tipoAtraccion.idTipoAtraccion}"
 											class="btn btn-secondary rounded" role="button">
 											<i class="fas fa-pencil-alt"></i>
 										</a>
 										<a
-											href="/TurismoTMTP3/tipoAtraccion/delete.do?id_TipoAtraccion=${tipoatraccion.id_tipoAtraccion}"
+											href="/TurismoTMTP3/tipoAtraccion/delete.do?id_TipoAtraccion=${tipoAtraccion.idTipoAtraccion}"
 											class="btn btn-danger rounded" role="button">
 											<i class="fas fa-trash-alt"></i>
 										</a>

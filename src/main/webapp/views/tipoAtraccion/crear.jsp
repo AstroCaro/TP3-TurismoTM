@@ -15,7 +15,7 @@
 	src="../assets/js/datatables/datatables.min.js"></script>
 <script type="text/javascript" src="../assets/js/datatables/spanish.js"></script>
 <jsp:include page="/partials/head_admin.jsp"></jsp:include>
-<title>Crear Atracción</title>
+<title>Crear Tipo de Atracción</title>
 </head>
 <body class="fondo">
 	<jsp:include page="/partials/nav_lateral_admin.jsp"></jsp:include>
@@ -23,19 +23,13 @@
 		<jsp:include page="/partials/nav_top_admin.jsp"></jsp:include>
 		<div class="contenido">
 			<div class="container">
-				<h1>Nueva Atracción</h1>
+				<h1>Nuevo Tipo de  Atracción</h1>
 			</div>
 		</div>
 		<div class="container">
 
-			<c:if test="${atraccion != null && !atraccion.isValid()}">
-				<div class="alert alert-danger">
-					<p>Se encontraron errores al crear la atracción.</p>
-				</div>
-			</c:if>
-
-			<form action="/TurismoTMTP3/atracciones/crear.do" method="post">
-				<jsp:include page="/views/atracciones/form.jsp"></jsp:include>
+			<form action="/TurismoTMTP3/tipoAtraccion/crear.do" method="post">
+				<jsp:include page="/views/tipoAtraccion/form.jsp"></jsp:include>
 			</form>
 		</div>
 	

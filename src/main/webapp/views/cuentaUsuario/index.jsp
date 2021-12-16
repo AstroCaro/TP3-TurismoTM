@@ -250,40 +250,62 @@
 		<!-- <span class="navbar-text small text-truncate mt-1 text-end order-1 order-md-last">always show</span> -->
 	</nav>
 	<main>
-		<section id="inicio">
-			<div class="info-usuario">
+		<section id="inicio" class="row">
+			<div class="info-usuario ">
 				<div>
 					<p>
 						Bienvenido,
 						<c:out value="${usuario.nombre}" />
 					</p>
 				</div>
-				<div class="perfil">
-					<div class="perfil-imagen">
-						<img src="assets/img/usuario/gandalf.jpg" alt="">
+				<div class="perfil row">
+					<div class="col-3">
+						<div class="perfil-imagen">
+							<img src="assets/img/usuario/gandalf.jpg" alt="">
+						</div>
+						<a href="logout">
+							<div class="perfil-logout">
+								<div class="icon">
+									<i class='bx bx-log-out'></i>
+								</div>
+							</div>
+						</a>
+						<a href="#">
+							<div class="perfil-editar">
+								<div class="icon">
+									<i class='bx bx-pencil'></i>
+								</div>
+							</div>
+						</a>
 					</div>
-					<a href="logout">
-						<div class="perfil-logout">
-							<div class="icon">
-								<i class='bx bx-log-out'></i>
+					<div class="perfil-resumen col-9">
+						<div class="perfil-presupuesto">
+							<div class="card mb-3" style="max-width: 540px;">
+								<div class="row g-0">
+									<div class="col-md-8">
+										<h5 class="card-title">Presupuesto</h5>
+										<div class="card-body" style="display:ruby">
+											<img alt="" src="assets/img/usuario/coins.png">
+											<h2 class="card-text">${usuario.presupuesto}</h2>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</a>
-					<a href="#">
-						<div class="perfil-editar">
-							<div class="icon">
-								<i class='bx bx-pencil'></i>
+						<div class="perfil-tiempo">
+							<div class="card mb-3" style="max-width: 540px;">
+								<div class="row g-0">
+									<div class="col-md-8">
+										<h5 class="card-title">Tiempo Disponible</h5>
+										<div class="card-body" style="display:ruby">
+											<img alt="" src="assets/img/usuario/reloj.png">
+											<h2 class="card-text">${usuario.tiempo_disponible}</h2>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-					</a>
-				</div>
-				<div class="perfil-resumen">
-				
-				
-				<div class="perfil-presupuesto">
-				</div>
-				<div class="perfil-tiempo">
-				</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -540,7 +562,8 @@
 										</h5>
 									</a>
 									<p class="card-text">
-										<c:out value="${fn:substring(oferta.descripcion,0,120)}"></c:out>...
+										<c:out value="${fn:substring(oferta.descripcion,0,120)}"></c:out>
+										...
 										<c:if test="${oferta.esPromocion()}">
 											<ul class="card-text">
 												<c:forEach items="${oferta.atracciones}" var="atraccion">
