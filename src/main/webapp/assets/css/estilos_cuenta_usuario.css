@@ -320,10 +320,11 @@ section {
 	background-repeat: no-repeat;
 	background-size: 100%;
 	object-fit: cover;
-	height: 300px;
+	height: 400px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 }
 
 #inicio .info-usuario {
@@ -369,6 +370,9 @@ section {
 	object-fit: cover;
 }
 
+#inicio > card {
+	background-color: #bf3f3f;
+}
 .accordion-item {
 	border: none;
 }
