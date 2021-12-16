@@ -15,7 +15,7 @@ public class TipoAtraccionDAOImpl implements TipoAtraccionDAO {
 	@Override
 	public ArrayList<TipoAtraccion> findAll() {
 		try {
-			String sql = "SELECT id_tipoatraccion, tipo_atraccion FROM \"tipo atraccion\";";
+			String sql = "SELECT id_tipoatraccion, tipo_atraccion FROM \"tipo atraccion\" WHERE deleted_at IS NULL;";
 			Connection conn = ConnectionProvider.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			ResultSet resultados = statement.executeQuery();

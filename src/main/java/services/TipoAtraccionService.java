@@ -16,7 +16,7 @@ public class TipoAtraccionService {
 	public TipoAtraccion create(String tipoAtraccion, String deleted_at) {
 		
 
-		TipoAtraccion tipoDeAtraccion = new TipoAtraccion(tipoAtraccion, deleted_at);
+		TipoAtraccion tipoDeAtraccion = new TipoAtraccion(tipoAtraccion);
 
 			TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccionDAO();
 			tipoAtraccionDAO.insert(tipoDeAtraccion);

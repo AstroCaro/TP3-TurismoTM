@@ -7,15 +7,15 @@ public class TipoAtraccion {
 	public String tipoAtraccion;
 	public String deleted_at;
 
-	public TipoAtraccion(Integer idTipoAtraccion, String tipoAtraccion, String deleted_at) {
+	public TipoAtraccion(Integer idTipoAtraccion, String tipoAtraccion) {
 		this.idTipoAtraccion = idTipoAtraccion;
 		this.tipoAtraccion = tipoAtraccion;
-		this.deleted_at=deleted_at;
+		
 	}
-	public TipoAtraccion(String tipoAtraccion, String deleted_at) {
+	public TipoAtraccion(String tipoAtraccion) {
 		this.idTipoAtraccion = null;
 		this.tipoAtraccion = tipoAtraccion;
-		this.deleted_at=deleted_at;
+	
 	}
 
 	public String getDeleted_at() {
