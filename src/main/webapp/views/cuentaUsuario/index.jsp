@@ -262,7 +262,7 @@
 					<div class="perfil-imagen">
 						<img src="assets/img/usuario/gandalf.jpg" alt="">
 					</div>
-					<a href="">
+					<a href="logout">
 						<div class="perfil-logout">
 							<div class="icon">
 								<i class='bx bx-log-out'></i>
@@ -277,7 +277,14 @@
 						</div>
 					</a>
 				</div>
-				<div class="perfil-resumen"></div>
+				<div class="perfil-resumen">
+				
+				
+				<div class="perfil-presupuesto">
+				</div>
+				<div class="perfil-tiempo">
+				</div>
+				</div>
 			</div>
 		</section>
 		<section class="row pt-5">
@@ -533,7 +540,7 @@
 										</h5>
 									</a>
 									<p class="card-text">
-										<c:out value="${oferta.descripcion}"></c:out>
+										<c:out value="${fn:substring(oferta.descripcion,0,120)}"></c:out>...
 										<c:if test="${oferta.esPromocion()}">
 											<ul class="card-text">
 												<c:forEach items="${oferta.atracciones}" var="atraccion">
