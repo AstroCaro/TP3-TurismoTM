@@ -19,6 +19,8 @@ public interface PromocionDAO extends GenericDAO<Promocion> {
 	public abstract int update(Promocion promocion);
 
 	public abstract int delete(Promocion promocion);
+	
+	public abstract int softDelete(Promocion promocion);
 
 	public abstract ArrayList<Atraccion> listarAtraccionesIncluidas(Integer idPromocion);
 

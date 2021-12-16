@@ -3,6 +3,8 @@ package persistence.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import persistence.commons.ConnectionProvider;
@@ -211,4 +213,25 @@ public class PromocionDAOImpl implements PromocionDAO {
 		}
 	}
 
+	@Override
+	public int softDelete(Promocion promocion) {
+
+		try {
+			LocalDate date = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+			String sql = "UPDATE promociones SET deleted_at = ? WHERE id_promocion = ?;";
+
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, date.format(formatter));
+			statement.setInt(2, promocion.getId_promocion());
+
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
 }

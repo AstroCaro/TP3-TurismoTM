@@ -72,7 +72,7 @@ public class PromocionService {
 		
 		
 	}
-
+	
 	public Promocion buscar(Integer id) {
 		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 		return promocionDAO.find(id);

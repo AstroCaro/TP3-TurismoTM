@@ -13,9 +13,11 @@ public interface AtraccionDAO extends GenericDAO<Atraccion> {
 
 	public abstract int updateCupo(Atraccion t);
 	
-	public int insert(Atraccion atraccion);
+	public abstract int insert(Atraccion atraccion);
 	
-	public int update(Atraccion atraccion);
+	public abstract int update(Atraccion atraccion);
 
-	public int delete(Atraccion atraccion);
+	public abstract int delete(Atraccion atraccion);
+
+	public abstract int softDelete(Atraccion atraccion);
 }
