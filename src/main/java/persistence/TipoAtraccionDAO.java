@@ -9,4 +9,6 @@ public interface TipoAtraccionDAO extends GenericDAO<TipoAtraccion> {
 
 	public abstract TipoAtraccion find(Integer id_tipoatraccion);
 
+	public abstract int insert(TipoAtraccion tipoDeAtraccion);
+
 }

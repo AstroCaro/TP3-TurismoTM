@@ -82,4 +82,26 @@ public class TipoAtraccionDAOImpl implements TipoAtraccionDAO {
 		}
 	}
 
+	@Override
+	public int insert(TipoAtraccion tipoDeAtraccion) {
+		try {
+			String sql = "INSERT INTO tipo atraccion (tipo_atraccion, deleted_at) VALUES (?, ?)";
+
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+			statement.setString(1, tipoDeAtraccion.getTipoAtraccion());
+			statement.setString(2, tipoDeAtraccion.getDeleted_at());
+			
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+		
+	}
+
+	
+
 }

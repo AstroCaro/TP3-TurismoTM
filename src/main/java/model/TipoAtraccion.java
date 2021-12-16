@@ -5,10 +5,25 @@ import java.util.Objects;
 public class TipoAtraccion {
 	public Integer idTipoAtraccion;
 	public String tipoAtraccion;
+	public String deleted_at;
 
-	public TipoAtraccion(Integer idTipoAtraccion, String tipoAtraccion) {
+	public TipoAtraccion(Integer idTipoAtraccion, String tipoAtraccion, String deleted_at) {
 		this.idTipoAtraccion = idTipoAtraccion;
 		this.tipoAtraccion = tipoAtraccion;
+		this.deleted_at=deleted_at;
+	}
+	public TipoAtraccion(String tipoAtraccion, String deleted_at) {
+		this.idTipoAtraccion = null;
+		this.tipoAtraccion = tipoAtraccion;
+		this.deleted_at=deleted_at;
+	}
+
+	public String getDeleted_at() {
+		return deleted_at;
+	}
+
+	public void setDeleted_at(String deleted_at) {
+		this.deleted_at = deleted_at;
 	}
 
 	public Integer getIdTipoAtraccion() {
@@ -44,5 +59,10 @@ public class TipoAtraccion {
 		return Objects.equals(idTipoAtraccion, other.idTipoAtraccion)
 				&& Objects.equals(tipoAtraccion, other.tipoAtraccion);
 	}
+	public boolean isValid() {
+		String errors = null;
+		return errors.isEmpty();
+	}
+	
 
 }
