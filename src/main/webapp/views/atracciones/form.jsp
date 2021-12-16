@@ -6,6 +6,11 @@
 			value="${atraccion.nombre}">
 	</div>
 	<div class="mb-3">
+		<label for="descripcion" class="col-form-label">Descripcion:</label> <input
+			type="text" class="form-control" id="descripcion" name="descripcion" required
+			value="${atraccion.descripcion}">
+	</div>
+	<div class="mb-3">
 		<label for="tipoAtraccion" class="col-form-label">Tipo de
 			Atraccion:</label> <select class="form-control" name="tipoAtraccion"
 			id="tipoAtraccion" required>

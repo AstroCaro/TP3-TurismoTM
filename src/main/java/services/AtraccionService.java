@@ -13,11 +13,11 @@ public class AtraccionService {
 	}
 
 	public Atraccion create(String nombre, String descripcion, Integer costo, Double tiempo, Integer cuposDisponibles,
-			Integer idTipoAtraccion) {
+			Integer idTipoAtraccion, String deleted_at) {
 		
 		TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(idTipoAtraccion);
 
-		Atraccion atraccion = new Atraccion(-1, nombre, descripcion, costo, tiempo, cuposDisponibles, tipoAtraccion);
+		Atraccion atraccion = new Atraccion(-1, nombre, descripcion, costo, tiempo, cuposDisponibles, tipoAtraccion, deleted_at);
 
 		if (atraccion.isValid()) {
 			AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
@@ -37,6 +37,7 @@ public class AtraccionService {
 		Atraccion atraccion = atraccionDAO.find(id);
 
 		atraccion.setNombre(nombre);
+		atraccion.setDescripcion(descripcion);
 		atraccion.setCosto(costo);
 		atraccion.setTiempo(tiempo);
 		atraccion.setCuposDisponibles(cuposDisponibles);
@@ -61,7 +62,8 @@ public class AtraccionService {
 	
 
 	public void delete(Integer id) {
-		Atraccion atraccion = new Atraccion(id, "", "", 0, 0, 0, null);
+		Atraccion atraccion = new Atraccion(id, "", "", 0, 0, 0, null,"");
+	
 
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		atraccionDAO.softDelete(atraccion);
