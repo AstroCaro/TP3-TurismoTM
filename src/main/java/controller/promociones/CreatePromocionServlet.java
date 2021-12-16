@@ -45,11 +45,13 @@ public class CreatePromocionServlet extends HttpServlet {
 		Integer costo = Integer.parseInt(req.getParameter("costo"));
 
 		Integer idAtraccionGratis = 0;
+		
 		if (req.getParameter("atraccionGratis") == null) {
 			idAtraccionGratis = 0;
 		} else {
 			idAtraccionGratis = Integer.parseInt(req.getParameter("atraccionGratis"));
 		}
+		
 		Double descuento = Double.parseDouble(req.getParameter("descuento"));
 		System.out.println(nombre + " " + descripcion + " " + tipoPromocion + " " + idTipoAtraccion + " " + costo + " "
 				+ descuento + " " + idAtraccionGratis + " " + atraccionesIncluidas);
