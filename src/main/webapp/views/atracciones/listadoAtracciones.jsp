@@ -48,8 +48,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${atracciones}" var="atraccion">
-								<c:if test="${not atraccion.deleted_at}">							
+							<c:forEach items="${atracciones}" var="atraccion">							
 								<tr>
 									<td>
 										<c:out value="${atraccion.id_atraccion}"></c:out>
@@ -87,7 +86,6 @@
 										</a>
 									</td>
 								</tr>
-									</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
