@@ -4,32 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="assets/css/bootstrap/bootstrap.css">
-<script defer src="assets/js/bootstrap/bootstrap.js"
-	type="text/javascript"></script>
-<link rel="stylesheet" type="text/css"
-	href="assets/css/datatables/datatables.css">
+<jsp:include page="/partials/head.jsp"></jsp:include>
 <script defer src="assets/js/puntos-rojos.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css"
 	href="assets/css/estilos-inicio.css">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'
-	rel='stylesheet'>
-<link rel="stylesheet" href="assets/css/estilos_cuenta_usuario.css">
-<script src="https://kit.fontawesome.com/7cc28fa7fa.js"
-	crossorigin="anonymous"></script>
 
 <title>Turismo en la Tierra Media - Inicio</title>
 </head>
 <body>
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 	<div id="inicio" class="container-fluid mt-5">
-		<div class="row d-flex justify-content-center">
+		<div class="row d-flex justify-content-center mt-5">
 			<div class="col-3 d-flex justify-content-center">
 				<img src="assets/img/aventura.jpg" alt="aventura"
 					class="img-circular">
@@ -43,13 +28,13 @@
 			</div>
 		</div>
 		<div class="row d-flex justify-content-center">
-			<div class="col-3 d-flex justify-content-center">
+			<div class="col-3 d-flex justify-content-center tipo-atraccion">
 				<h2>Aventura</h2>
 			</div>
-			<div class="col-3 d-flex justify-content-center">
+			<div class="col-3 d-flex justify-content-center tipo-atraccion">
 				<h2>Degustación</h2>
 			</div>
-			<div class="col-3 d-flex justify-content-center">
+			<div class="col-3 d-flex justify-content-center tipo-atraccion">
 				<h2>Paisaje</h2>
 			</div>
 		</div>
@@ -85,28 +70,29 @@
 									</p>
 								</div>
 							</div>
+									</div>
+						</c:forEach>
 					</div>
-					</c:forEach>
+					<button class="carousel-control-prev" type="button"
+						data-bs-target="#carruselAtracciones" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-bs-target="#carruselAtracciones" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
 				</div>
-				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carruselAtracciones" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button"
-					data-bs-target="#carruselAtracciones" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
 			</div>
-		</div>
-		<div class="col-8">
-			<div id="container-mapa">
-				<img src="assets/img/mapa.png" alt="mapa" id="img-mapa"> <a
-					href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
-					class="punto-rojo" style="left: 33%; top: 35%;"> <img
-					src="assets/img/etiquetas/Moria.png" class="etiqueta-atraccion">
-				</a>
+			<div class="col-8 d-flex">
+				<div id="container-mapa">
+					<img src="assets/img/mapa.png" alt="mapa" id="img-mapa"> <a
+						href="/TurismoTMTP3/atracciones/verAtraccion.do?id_atraccion=1"
+						class="punto-rojo" style="left: 33%; top: 35%;"> <img
+						src="assets/img/etiquetas/Moria.png" class="etiqueta-atraccion">
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

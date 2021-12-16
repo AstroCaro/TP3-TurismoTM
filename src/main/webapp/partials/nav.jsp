@@ -16,7 +16,7 @@
 				id="navbarSupportedContent">
 				<ul class="navbar-nav nav-fill w-100">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="inicio">INICIO</a></li>
+						aria-current="page" href="${pageContext.request.contextPath}/inicio">INICIO</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="#carruselAtracciones">ATRACCIONES</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">PROMOCIONES</a>
