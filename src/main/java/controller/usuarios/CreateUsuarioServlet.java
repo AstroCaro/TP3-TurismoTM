@@ -38,10 +38,11 @@ public class CreateUsuarioServlet extends HttpServlet {
 		Integer presupuesto = Integer.parseInt(req.getParameter("presupuesto"));
 		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
 		Double tiempo_disponible = Double.parseDouble(req.getParameter("tiempo_disponible"));
+		String deleted_at =("nombre");
 
 		Boolean admin = req.getParameter("admin") != null ? true : false;
 		
-		Usuario usuario = usuarioService.create(nombre, password, preferencia, presupuesto, tiempo_disponible, admin);
+		Usuario usuario = usuarioService.create(nombre, password, preferencia, presupuesto, tiempo_disponible, admin, deleted_at);
 
 		
 		if (usuario.isValid()) {

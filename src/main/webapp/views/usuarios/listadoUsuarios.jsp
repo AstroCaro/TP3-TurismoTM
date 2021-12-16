@@ -50,6 +50,9 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${usuarios}" var="usuario">
+							<c:if test="${empty usuario.deleted_at}">">	
+							
+							
 								<tr>
 									<td>
 										<c:out value="${usuario.id_usuario}"></c:out>
@@ -87,6 +90,7 @@
 										</a>
 									</td>
 								</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
