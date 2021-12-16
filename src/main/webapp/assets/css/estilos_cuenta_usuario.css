@@ -47,7 +47,7 @@ nav {
 	background: #ffffff;
 }
 
-.navbar-brand {
+.navbar-brand, .tipo-atraccion {
 	font-family: "ringbearer", sans-serif;
 }
 
@@ -314,7 +314,7 @@ section {
 	padding: 0rem 7rem;
 }
 
-#inicio {
+#inicio, #footer {
 	margin-top: 4.7rem;
 	background-image: url(../img/usuario/blue-background.jpg);
 	background-repeat: no-repeat;

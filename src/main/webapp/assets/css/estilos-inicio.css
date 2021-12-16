@@ -28,6 +28,8 @@
 
 .img-circular {
 	border-radius: 50%;
-	height: 100;
-	width: auto;
+	max-height: 200px;
+	max-width: 200px;
+	height: auto;
+	width: 100%;
 }

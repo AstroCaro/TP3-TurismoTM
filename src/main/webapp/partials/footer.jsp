@@ -1,8 +1,10 @@
-<div class="container fluid mt-5">
-	<div class="row d-flex">
+<div class="container-fluid mt-5" id="footer">
+	<div class="row d-flex justify-content-between">
 		<div class="col-3">
 			<ul class="nav flex-column">
-				<div class="nav-link font-weight-bold">Nuestras redes</div>
+				<li class="nav-item">
+					<div class="nav-link font-weight-bold">Nuestras redes</div>
+				</li>
 				<li class="nav-item">
 					<div class="nav-link">
 						<a href="https://www.facebook.com" target="_blank"> <i
@@ -37,8 +39,6 @@
 	</div>
 	<div class="row">
 		<div class="col-12 nav-link d-flex justify-content-center">
-			Grupo NULL © 2021 - Todos los
-			derechos reservados
-		</div>
+			Grupo NULL © 2021 - Todos los derechos reservados</div>
 	</div>
 </div>
