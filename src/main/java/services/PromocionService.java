@@ -19,7 +19,7 @@ public class PromocionService {
 		return DAOFactory.getPromocionDAO().findAll();
 	}
 
-	public Promocion create(String nombre, String descripcion, String tipoPromocion, Integer idTipoAtraccion, Integer costo, Double descuento, Integer idAtraccionGratis, ArrayList<String> nombreAtracciones) {
+	public Promocion create(String nombre, String descripcion, String tipoPromocion, Integer idTipoAtraccion, Integer costo, Double descuento, Integer idAtraccionGratis, ArrayList<Integer> idAtracciones) {
 
 		TipoAtraccionDAO tipoAtraccionDAO = DAOFactory.getTipoAtraccionDAO();
 		TipoAtraccion tipoAtraccion = tipoAtraccionDAO.find(idTipoAtraccion);
@@ -27,8 +27,8 @@ public class PromocionService {
 		AtraccionDAO atraccionDAO = DAOFactory.getAtraccionDAO();
 		ArrayList<Atraccion> atraccionesIncluidas = new ArrayList<Atraccion>();
 		
-		for(String nombreAtraccion: nombreAtracciones) {
-			atraccionesIncluidas.add(atraccionDAO.findPorNombre(nombreAtraccion));
+		for(Integer idAtraccion: idAtracciones) {
+			atraccionesIncluidas.add(atraccionDAO.find(idAtraccion));
 		}
 		
 		Promocion promocion = null ;
@@ -38,7 +38,8 @@ public class PromocionService {
 				promocion = new PromocionAbsoluta(-1, nombre, descripcion, tipoAtraccion, costo, atraccionesIncluidas);
 				break;
 			case "Promocion AxB":
-				promocion = new PromocionAxB(-1, nombre, descripcion, tipoAtraccion, atraccionesIncluidas);
+				Atraccion atraccionGratis = atraccionDAO.find(idAtraccionGratis);
+				promocion = new PromocionAxB(-1, nombre, descripcion, tipoAtraccion, atraccionesIncluidas, atraccionGratis);
 				break;
 			case "Promocion Porcentual":
 				promocion = new PromocionPorcentual(-1, nombre, descripcion, tipoAtraccion, descuento, atraccionesIncluidas);

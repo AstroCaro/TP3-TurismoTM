@@ -13,6 +13,7 @@
 	src="../assets/js/datatables/datatables.min.js"></script>
 <script type="text/javascript" src="../assets/js/datatables/spanish.js"></script>
 <jsp:include page="/partials/head_admin.jsp"></jsp:include>
+<jsp:include page="/partials/head_admin_promociones.jsp"></jsp:include>
 <title>Listado de Promociones</title>
 </head>
 <body class="fondo">
