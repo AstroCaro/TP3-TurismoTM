@@ -90,4 +90,29 @@ public class PromocionService {
 		return promocionDAO.find(id);
 
 	}
+
+	public void delete(Integer id) {
+		Promocion promocion = new PromocionAbsoluta(id, "", "", null, 0, null);
+
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		promocionDAO.softDelete(promocion);
+	}
+
+	public Promocion update(Integer id_promocion, String nombre, String descripcion, Integer idTipoAtraccion) {
+
+		TipoAtraccion tipoAtraccion = DAOFactory.getTipoAtraccionDAO().find(idTipoAtraccion);
+
+		PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+		Promocion promocion = promocionDAO.find(id_promocion);
+
+		promocion.setNombre(nombre);
+		promocion.setDescripcion(descripcion);
+		promocion.setTipoAtraccion(tipoAtraccion);
+
+		if (promocion.isValid()) {
+			promocionDAO.update(promocion);
+		}
+
+		return promocion;
+	}
 }
