@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import services.AtraccionService;
 
-@WebServlet("/atracciones/delete.do")
+@WebServlet("/tipoAtraccion/delete.do")
 public class DeleteAttractionServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -3023326053838554752L;
